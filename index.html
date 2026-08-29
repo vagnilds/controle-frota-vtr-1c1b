@@ -2023,48 +2023,6 @@
         </div>
         <div id="tableCardBodyContent" class="collapsible-content">
 
-            <div class="table-filters-bar">
-                <div class="filter-group">
-                    <span class="filter-label">📅 Mês/Ano:</span>
-                    <div class="custom-month-dropdown" id="monthDropdownContainerTable">
-                        <button type="button" id="monthDropdownBtnTable" class="month-dropdown-btn" onclick="toggleMonthDropdown(event, true)" title="Filtrar por Mês ou Ano">
-                            <span id="monthDropdownBtnLabelTable">Todos os Meses</span>
-                            <span class="month-dropdown-arrow">▼</span>
-                        </button>
-                        <div id="monthDropdownMenuTable" class="month-dropdown-menu" style="display: none;"></div>
-                        <input type="hidden" id="filterMonthTable" value="ALL" onchange="syncFilter('table')">
-                    </div>
-                </div>
-
-                <div class="filter-group" id="filterCiaContainerTable">
-                    <label for="filterCiaTable" class="filter-label">🏛️ Unidade / Setor:</label>
-                    <select id="filterCiaTable" class="filter-select" onchange="syncFilter('table')">
-                        <option value="ALL">Todas as Unidades (Geral)</option>
-                    </select>
-                </div>
-
-                <div class="filter-group" id="filterPelotaoContainerTable" style="display: none;">
-                    <label for="filterPelotaoTable" class="filter-label">🛡️ Pelotão:</label>
-                    <select id="filterPelotaoTable" class="filter-select" onchange="syncFilter('table')">
-                        <option value="ALL">Todos os Pelotões</option>
-                    </select>
-                </div>
-
-                <div class="filter-group">
-                    <label for="filterVehicleTable" class="filter-label">🚓 Status / Vtr:</label>
-                    <select id="filterVehicleTable" class="filter-select" onchange="syncFilter('table')">
-                        <option value="ALL">Todas as Viaturas</option>
-                    </select>
-                </div>
-
-                <div class="baseline-btn-group">
-                    <button type="button" class="btn btn-edit-sector btn-3d btn-sm" onclick="openTableAdminOptions()" title="Opções de Edição da Tabela (Requer Senha ADM)">
-                        ✏️ Editar
-                    </button>
-                </div>
-            </div>
-
-            <!-- Barra Opcional de Colunas Ocultas / Restaurar Todas -->
             <div id="hiddenColumnsBar" class="hidden-columns-bar" style="display: none;">
                 <span>👁️ <strong>Colunas ocultas:</strong></span>
                 <div id="hiddenColumnsPills" style="display: inline-flex; gap: 6px; flex-wrap: wrap;"></div>
@@ -2138,9 +2096,9 @@
                                 </div>
                                 <span class="th-collapsed-indicator">Local</span>
                             </th>
-                            <th class="col-th-data" data-col="data" style="min-width: 220px;" title="Coluna Data Forms / Registro">
+                            <th class="col-th-data" data-col="data" style="min-width: 220px;" title="Coluna Data / Observações">
                                 <div class="th-content">
-                                    <span class="th-title">Data Forms / Registro</span>
+                                    <span class="th-title">Data / Observações</span>
                                     <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('data')" title="Esconder coluna Data">
                                         <span class="col-toggle-icon">◀</span>
                                     </button>
@@ -2162,7 +2120,51 @@
                 </table>
             </div>
 
-<!-- Painel Visível para Acrescentar Nova Viatura -->
+<div class="table-filters-bar">
+                <div class="filter-group">
+                    <span class="filter-label">📅 Mês/Ano:</span>
+                    <div class="custom-month-dropdown" id="monthDropdownContainerTable">
+                        <button type="button" id="monthDropdownBtnTable" class="month-dropdown-btn" onclick="toggleMonthDropdown(event, true)" title="Filtrar por Mês ou Ano">
+                            <span id="monthDropdownBtnLabelTable">Todos os Meses</span>
+                            <span class="month-dropdown-arrow">▼</span>
+                        </button>
+                        <div id="monthDropdownMenuTable" class="month-dropdown-menu" style="display: none;"></div>
+                        <input type="hidden" id="filterMonthTable" value="ALL" onchange="syncFilter('table')">
+                    </div>
+                </div>
+
+                <div class="filter-group" id="filterCiaContainerTable">
+                    <label for="filterCiaTable" class="filter-label">🏛️ Unidade / Setor:</label>
+                    <select id="filterCiaTable" class="filter-select" onchange="syncFilter('table')">
+                        <option value="ALL">Todas as Unidades (Geral)</option>
+                    </select>
+                </div>
+
+                <div class="filter-group" id="filterPelotaoContainerTable" style="display: none;">
+                    <label for="filterPelotaoTable" class="filter-label">🛡️ Pelotão:</label>
+                    <select id="filterPelotaoTable" class="filter-select" onchange="syncFilter('table')">
+                        <option value="ALL">Todos os Pelotões</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filterVehicleTable" class="filter-label">🚓 Status / Vtr:</label>
+                    <select id="filterVehicleTable" class="filter-select" onchange="syncFilter('table')">
+                        <option value="ALL">Todas as Viaturas</option>
+                    </select>
+                </div>
+
+                <div class="baseline-btn-group">
+                    <button type="button" class="btn btn-edit-sector btn-3d btn-sm" onclick="openTableAdminOptions()" title="Opções de Edição da Tabela (Requer Senha ADM)">
+                        ✏️ Editar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Barra Opcional de Colunas Ocultas / Restaurar Todas -->
+            
+
+            <!-- Painel Visível para Acrescentar Nova Viatura -->
             <div class="quick-add-panel" id="quickAddPanel">
                 <div class="quick-add-header">
                     <span>➕ Acrescentar Nova Viatura / Baixa à Tabela</span>
@@ -3981,15 +3983,15 @@
         }
     }
 
-    const defaultDataset = [];
+    const defaultDataset = [{"id": "T-1100", "vehicle": "T-1100", "cia": "1ª Cia", "model": "TRAIL BLAZER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1103", "vehicle": "T-1103", "cia": "1ª Cia", "model": "DUSTER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1104", "vehicle": "T-1104", "cia": "1ª Cia", "model": "DUSTER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1105", "vehicle": "T-1105", "cia": "1ª Cia", "model": "DUSTER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1106", "vehicle": "T-1106", "cia": "1ª Cia", "model": "DUSTER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1107", "vehicle": "T-1107", "cia": "1ª Cia", "model": "DUSTER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1109", "vehicle": "T-1109", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1110", "vehicle": "T-1110", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1112", "vehicle": "T-1112", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1114", "vehicle": "T-1114", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1115", "vehicle": "T-1115", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1116", "vehicle": "T-1116", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1118", "vehicle": "T-1118", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1119", "vehicle": "T-1119", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1120", "vehicle": "T-1120", "cia": "1ª Cia", "model": "DUSTER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1124", "vehicle": "T-1124", "cia": "1ª Cia", "model": "DUSTER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1125", "vehicle": "T-1125", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1126", "vehicle": "T-1126", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1127", "vehicle": "T-1127", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1130", "vehicle": "T-1130", "cia": "1ª Cia", "model": "TRAIL BLAZER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1135", "vehicle": "T-1135", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1136", "vehicle": "T-1136", "cia": "1ª Cia", "model": "RANGER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1137", "vehicle": "T-1137", "cia": "1ª Cia", "model": "RANGER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1147", "vehicle": "T-1147", "cia": "1ª Cia", "model": "S-10", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "3-106", "vehicle": "3-106", "cia": "1ª Cia", "model": "S-10", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "26-24", "vehicle": "26-24", "cia": "1ª Cia", "model": "MASTER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "13-167", "vehicle": "13-167", "cia": "1ª Cia", "model": "XT-660", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "13-26", "vehicle": "13-26", "cia": "1ª Cia", "model": "CARGO", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}];
     const todayStr = new Date().toISOString().slice(0,10);
     document.getElementById('vehicleDate').value = todayStr;
     document.getElementById('qaDate').value = todayStr;
     document.getElementById('qeDate').value = todayStr;
 
     let records = JSON.parse(localStorage.getItem('batalhao_vtr_records') || 'null');
-    if (!records) {
-        records = [];
+    if (!records || !Array.isArray(records) || records.length === 0) {
+        records = [{"id": "T-1100", "vehicle": "T-1100", "cia": "1ª Cia", "model": "TRAIL BLAZER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1103", "vehicle": "T-1103", "cia": "1ª Cia", "model": "DUSTER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1104", "vehicle": "T-1104", "cia": "1ª Cia", "model": "DUSTER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1105", "vehicle": "T-1105", "cia": "1ª Cia", "model": "DUSTER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1106", "vehicle": "T-1106", "cia": "1ª Cia", "model": "DUSTER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1107", "vehicle": "T-1107", "cia": "1ª Cia", "model": "DUSTER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1109", "vehicle": "T-1109", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1110", "vehicle": "T-1110", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1112", "vehicle": "T-1112", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1114", "vehicle": "T-1114", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1115", "vehicle": "T-1115", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1116", "vehicle": "T-1116", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1118", "vehicle": "T-1118", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1119", "vehicle": "T-1119", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1120", "vehicle": "T-1120", "cia": "1ª Cia", "model": "DUSTER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1124", "vehicle": "T-1124", "cia": "1ª Cia", "model": "DUSTER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1125", "vehicle": "T-1125", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1126", "vehicle": "T-1126", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1127", "vehicle": "T-1127", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1130", "vehicle": "T-1130", "cia": "1ª Cia", "model": "TRAIL BLAZER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1135", "vehicle": "T-1135", "cia": "1ª Cia", "model": "SPIN", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1136", "vehicle": "T-1136", "cia": "1ª Cia", "model": "RANGER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1137", "vehicle": "T-1137", "cia": "1ª Cia", "model": "RANGER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "T-1147", "vehicle": "T-1147", "cia": "1ª Cia", "model": "S-10", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "3-106", "vehicle": "3-106", "cia": "1ª Cia", "model": "S-10", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "26-24", "vehicle": "26-24", "cia": "1ª Cia", "model": "MASTER", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "13-167", "vehicle": "13-167", "cia": "1ª Cia", "model": "XT-660", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}, {"id": "13-26", "vehicle": "13-26", "cia": "1ª Cia", "model": "CARGO", "pelotao": "ADM", "status": "OPERANDO", "obs": "", "destino": "BASE", "date": "", "data_forms": ""}];
         localStorage.setItem('batalhao_vtr_records', JSON.stringify(records));
     }
 
@@ -4187,6 +4189,30 @@ Digite a senha de administrador para ${actionDescription || 'continuar'}:`);
 
     function onDatabaseActionsOverlayClick(e) {
         if (e.target.id === 'databaseActionsModal') closeDatabaseActionsModal();
+    }
+
+    
+    let selectedRowActionVehicle = '';
+
+    async function handleRowActionClick(vehicleId) {
+        const ok = await requestAdminPassword("gerenciar a viatura " + vehicleId);
+        if (!ok) return;
+
+        selectedRowActionVehicle = vehicleId;
+        const prefixEl = document.getElementById('rowActionVehiclePrefix');
+        if (prefixEl) prefixEl.textContent = vehicleId;
+
+        const modal = document.getElementById('rowActionModal');
+        if (modal) modal.style.display = 'flex';
+    }
+
+    function closeRowActionModal() {
+        const modal = document.getElementById('rowActionModal');
+        if (modal) modal.style.display = 'none';
+    }
+
+    function onRowActionOverlayClick(e) {
+        if (e.target.id === 'rowActionModal') closeRowActionModal();
     }
 
     async function openTableAdminOptions() {
@@ -5929,13 +5955,12 @@ async function toggleSection(contentId, btnEl) {
                     <td class="col-td-data ${isHidData}">
                         <div style="display: flex; gap: 6px; align-items: center; min-width: 240px;">
                             <input type="date" class="inline-input" style="width: 125px; font-size: 0.8rem; padding: 4px 6px;" value="${formattedDate}" onchange="updateInlineField('${r.vehicle}', 'date', this.value)">
-                            <input type="text" class="inline-input" style="flex: 1; min-width: 110px; font-size: 0.8rem; padding: 4px 6px;" value="${r.data_forms || ''}" placeholder="Forms..." onchange="updateInlineField('${r.vehicle}', 'data_forms', this.value)">
+                            <input type="text" class="inline-input" style="flex: 1; min-width: 110px; font-size: 0.8rem; padding: 4px 6px;" value="${r.data_forms || ''}" placeholder="Observações..." onchange="updateInlineField('${r.vehicle}', 'data_forms', this.value)">
                         </div>
                     </td>
                     <td class="col-td-acoes ${isHidAcoes}" style="text-align: center;">
                         <div class="actions-cell">
-                            <button class="btn btn-edit btn-3d btn-sm" onclick="openEditModal('${r.vehicle}')" title="Abrir Formulário Completo">✏️ Mais</button>
-                            <button class="btn btn-danger btn-3d btn-sm" onclick="deleteRecord('${r.vehicle}')" title="Excluir Viatura">Excluir</button>
+                            <button type="button" class="btn btn-edit-sector btn-3d btn-sm" onclick="handleRowActionClick('${r.vehicle}')" title="Opções da Viatura (Requer Senha ADM)">✏️ Editar</button>
                         </div>
                     </td>
                 `;
@@ -6228,6 +6253,28 @@ async function toggleSection(contentId, btnEl) {
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-outline btn-3d" onclick="closeTableEditOptionsModal()">Fechar</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal de Ações da Linha da Viatura (Botão Editar na Tabela) -->
+<div id="rowActionModal" class="modal-overlay" onclick="onRowActionOverlayClick(event)">
+    <div class="modal-card" style="max-width: 450px;" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <div class="modal-title"><span>✏️ Opções da Viatura:</span> <span id="rowActionVehiclePrefix" style="color: var(--primary); font-weight: 800; text-decoration: underline;">--</span></div>
+            <button type="button" class="modal-close" onclick="closeRowActionModal()" title="Fechar">✖</button>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 12px 0;">
+            <button type="button" class="btn btn-outline btn-3d" style="width: 100%; justify-content: flex-start; padding: 12px 16px; font-size: 0.95rem; border-color: #3b82f6; color: #1d4ed8; background-color: #eff6ff;" onclick="closeRowActionModal(); openEditModal(selectedRowActionVehicle);">
+                ✏️ Mais (Formulário Completo de Edição)
+            </button>
+            <button type="button" class="btn btn-danger btn-3d" style="width: 100%; justify-content: flex-start; padding: 12px 16px; font-size: 0.95rem;" onclick="closeRowActionModal(); deleteRecord(selectedRowActionVehicle);">
+                🗑️ Excluir Viatura da Lista
+            </button>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline btn-3d" onclick="closeRowActionModal()">Fechar</button>
         </div>
     </div>
 </div>
