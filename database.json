@@ -1,0 +1,439 @@
+{
+  "appTitle": "🚓 CONTROLE DE VIATURAS - FROTA 1ª CIA DO 1º BPTRAN",
+  "lastStatusUpdate": "29/08/2026 12:00:00",
+  "customCias": [
+    "Batalhão",
+    "1ª Cia",
+    "2ª Cia",
+    "3ª Cia",
+    "4ª Cia",
+    "CTT"
+  ],
+  "customModels": [
+    "BASE MÓVEL",
+    "CARGO",
+    "DUSTER",
+    "GUINCHO",
+    "RANGER",
+    "S-10",
+    "SPIN",
+    "TRAIL BLAZER",
+    "XT-660",
+    "MASTER",
+    "OUTRO"
+  ],
+  "customPelotoes": [
+    "1º PEL",
+    "2º PEL",
+    "3º PEL",
+    "4º PEL",
+    "5º PEL",
+    "6º PEL",
+    "7º PEL",
+    "8º PEL",
+    "DEJEM",
+    "DELEGADA",
+    "ADM"
+  ],
+  "customStatuses": [
+    "OPERANDO",
+    "BAIXADA",
+    "DESCARGA",
+    "ADM"
+  ],
+  "customLocais": [
+    "ADM",
+    "BASE",
+    "CONCESSIONÁRIA",
+    "CPTRAN",
+    "OFICINA",
+    "PÁTIO",
+    "EAP",
+    "OUTRO"
+  ],
+  "customQuickReasons": [
+    {
+      "key": "ARREFECIMENTO",
+      "label": "Arrefecimento"
+    },
+    {
+      "key": "ARRANQUE",
+      "label": "Arranque"
+    },
+    {
+      "key": "BATERIA",
+      "label": "Bateria"
+    },
+    {
+      "key": "CÂMBIO",
+      "label": "Câmbio"
+    },
+    {
+      "key": "EMBREAGEM",
+      "label": "Embreagem"
+    },
+    {
+      "key": "LUMINOSOS",
+      "label": "Luminosos"
+    },
+    {
+      "key": "MOTOR",
+      "label": "Motor"
+    },
+    {
+      "key": "PNEU",
+      "label": "Pneu"
+    },
+    {
+      "key": "RÁDIO",
+      "label": "Rádio"
+    },
+    {
+      "key": "SONORO",
+      "label": "Sonoro"
+    },
+    {
+      "key": "DESCARGA",
+      "label": "Descarga"
+    }
+  ],
+  "records": [
+    {
+      "id": "T-1100",
+      "vehicle": "T-1100",
+      "cia": "1ª Cia",
+      "model": "TRAIL BLAZER",
+      "pelotao": "ADM",
+      "status": "OPERANDO",
+      "obs": "",
+      "destino": "BASE",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    },
+    {
+      "id": "T-1103",
+      "vehicle": "T-1103",
+      "cia": "1ª Cia",
+      "model": "DUSTER",
+      "pelotao": "1º PEL",
+      "status": "OPERANDO",
+      "obs": "RÁDIO",
+      "destino": "BASE",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    },
+    {
+      "id": "T-1104",
+      "vehicle": "T-1104",
+      "cia": "1ª Cia",
+      "model": "DUSTER",
+      "pelotao": "1º PEL",
+      "status": "BAIXADA",
+      "obs": "ARREFECIMENTO, RÁDIO",
+      "destino": "CPTRAN",
+      "date": "2026-08-29",
+      "data_forms": "07/07/2026 E 29/07"
+    },
+    {
+      "id": "T-1105",
+      "vehicle": "T-1105",
+      "cia": "1ª Cia",
+      "model": "DUSTER",
+      "pelotao": "1º PEL",
+      "status": "BAIXADA",
+      "obs": "MOTOR, ARRANQUE",
+      "destino": "CPTRAN",
+      "date": "2026-08-29",
+      "data_forms": "11/03/2026 E 29/07"
+    },
+    {
+      "id": "T-1106",
+      "vehicle": "T-1106",
+      "cia": "1ª Cia",
+      "model": "DUSTER",
+      "pelotao": "2º PEL",
+      "status": "OPERANDO",
+      "obs": "ARREFECIMENTO, RÁDIO",
+      "destino": "BASE",
+      "date": "2026-08-29",
+      "data_forms": "03/07/2026 E 29/07"
+    },
+    {
+      "id": "T-1107",
+      "vehicle": "T-1107",
+      "cia": "1ª Cia",
+      "model": "DUSTER",
+      "pelotao": "2º PEL",
+      "status": "OPERANDO",
+      "obs": "RÁDIO",
+      "destino": "BASE",
+      "date": "2026-08-29",
+      "data_forms": "05/07"
+    },
+    {
+      "id": "T-1109",
+      "vehicle": "T-1109",
+      "cia": "1ª Cia",
+      "model": "SPIN",
+      "pelotao": "2º PEL",
+      "status": "BAIXADA",
+      "obs": "CÂMBIO",
+      "destino": "CPTRAN",
+      "date": "2026-08-29",
+      "data_forms": "11/05"
+    },
+    {
+      "id": "T-1110",
+      "vehicle": "T-1110",
+      "cia": "1ª Cia",
+      "model": "SPIN",
+      "pelotao": "3º PEL",
+      "status": "DESCARGA",
+      "obs": "DESCARGA",
+      "destino": "CPTRAN",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    },
+    {
+      "id": "T-1112",
+      "vehicle": "T-1112",
+      "cia": "1ª Cia",
+      "model": "SPIN",
+      "pelotao": "3º PEL",
+      "status": "OPERANDO",
+      "obs": "PNEU",
+      "destino": "BASE",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    },
+    {
+      "id": "T-1114",
+      "vehicle": "T-1114",
+      "cia": "1ª Cia",
+      "model": "SPIN",
+      "pelotao": "3º PEL",
+      "status": "BAIXADA",
+      "obs": "ARREFECIMENTO",
+      "destino": "CPTRAN",
+      "date": "2026-08-29",
+      "data_forms": "15/07"
+    },
+    {
+      "id": "T-1115",
+      "vehicle": "T-1115",
+      "cia": "1ª Cia",
+      "model": "SPIN",
+      "pelotao": "4º PEL",
+      "status": "OPERANDO",
+      "obs": "",
+      "destino": "BASE",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    },
+    {
+      "id": "T-1116",
+      "vehicle": "T-1116",
+      "cia": "1ª Cia",
+      "model": "SPIN",
+      "pelotao": "4º PEL",
+      "status": "BAIXADA",
+      "obs": "LUMINOSO, SONORO",
+      "destino": "EAP",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    },
+    {
+      "id": "T-1118",
+      "vehicle": "T-1118",
+      "cia": "1ª Cia",
+      "model": "SPIN",
+      "pelotao": "4º PEL",
+      "status": "BAIXADA",
+      "obs": "SONORO, EMBREAGEM",
+      "destino": "CPTRAN",
+      "date": "2026-08-29",
+      "data_forms": "31/07"
+    },
+    {
+      "id": "T-1119",
+      "vehicle": "T-1119",
+      "cia": "1ª Cia",
+      "model": "SPIN",
+      "pelotao": "5º PEL",
+      "status": "BAIXADA",
+      "obs": "ARREFECIMENTO",
+      "destino": "CPTRAN",
+      "date": "2026-08-29",
+      "data_forms": "21/07"
+    },
+    {
+      "id": "T-1120",
+      "vehicle": "T-1120",
+      "cia": "1ª Cia",
+      "model": "DUSTER",
+      "pelotao": "5º PEL",
+      "status": "BAIXADA",
+      "obs": "ARRANQUE",
+      "destino": "BASE",
+      "date": "2026-08-29",
+      "data_forms": "11/03"
+    },
+    {
+      "id": "T-1124",
+      "vehicle": "T-1124",
+      "cia": "1ª Cia",
+      "model": "DUSTER",
+      "pelotao": "5º PEL",
+      "status": "OPERANDO",
+      "obs": "",
+      "destino": "BASE",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    },
+    {
+      "id": "T-1125",
+      "vehicle": "T-1125",
+      "cia": "1ª Cia",
+      "model": "SPIN",
+      "pelotao": "6º PEL",
+      "status": "BAIXADA",
+      "obs": "ARREFECIMENTO",
+      "destino": "CPTRAN",
+      "date": "2026-08-29",
+      "data_forms": "19/07"
+    },
+    {
+      "id": "T-1126",
+      "vehicle": "T-1126",
+      "cia": "1ª Cia",
+      "model": "SPIN",
+      "pelotao": "6º PEL",
+      "status": "OPERANDO",
+      "obs": "",
+      "destino": "BASE",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    },
+    {
+      "id": "T-1127",
+      "vehicle": "T-1127",
+      "cia": "1ª Cia",
+      "model": "SPIN",
+      "pelotao": "6º PEL",
+      "status": "OPERANDO",
+      "obs": "",
+      "destino": "BASE",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    },
+    {
+      "id": "T-1130",
+      "vehicle": "T-1130",
+      "cia": "1ª Cia",
+      "model": "TRAIL BLAZER",
+      "pelotao": "7º PEL",
+      "status": "OPERANDO",
+      "obs": "RÁDIO",
+      "destino": "BASE",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    },
+    {
+      "id": "T-1135",
+      "vehicle": "T-1135",
+      "cia": "1ª Cia",
+      "model": "SPIN",
+      "pelotao": "7º PEL",
+      "status": "OPERANDO",
+      "obs": "",
+      "destino": "BASE",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    },
+    {
+      "id": "T-1136",
+      "vehicle": "T-1136",
+      "cia": "1ª Cia",
+      "model": "RANGER",
+      "pelotao": "8º PEL",
+      "status": "OPERANDO",
+      "obs": "",
+      "destino": "BASE",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    },
+    {
+      "id": "T-1137",
+      "vehicle": "T-1137",
+      "cia": "1ª Cia",
+      "model": "RANGER",
+      "pelotao": "8º PEL",
+      "status": "OPERANDO",
+      "obs": "",
+      "destino": "BASE",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    },
+    {
+      "id": "T-1147",
+      "vehicle": "T-1147",
+      "cia": "1ª Cia",
+      "model": "S-10",
+      "pelotao": "ADM",
+      "status": "OPERANDO",
+      "obs": "",
+      "destino": "BASE",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    },
+    {
+      "id": "3-106",
+      "vehicle": "3-106",
+      "cia": "1ª Cia",
+      "model": "S-10",
+      "pelotao": "ADM",
+      "status": "OPERANDO",
+      "obs": "",
+      "destino": "BASE",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    },
+    {
+      "id": "26-24",
+      "vehicle": "26-24",
+      "cia": "1ª Cia",
+      "model": "MASTER",
+      "pelotao": "ADM",
+      "status": "OPERANDO",
+      "obs": "HIDRÁULICO",
+      "destino": "BASE",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    },
+    {
+      "id": "13-167",
+      "vehicle": "13-167",
+      "cia": "1ª Cia",
+      "model": "XT-660",
+      "pelotao": "ADM",
+      "status": "ADM",
+      "obs": "ADM",
+      "destino": "ADM",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    },
+    {
+      "id": "13-26",
+      "vehicle": "13-26",
+      "cia": "1ª Cia",
+      "model": "CARGO",
+      "pelotao": "ADM",
+      "status": "ADM",
+      "obs": "ADM",
+      "destino": "ADM",
+      "date": "2026-08-29",
+      "data_forms": "29/08/2026"
+    }
+  ],
+  "updatedAt": "2026-08-29T15:21:43.589Z"
+}

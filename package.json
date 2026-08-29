@@ -1,0 +1,16 @@
+{
+  "name": "controle-frota-vtr-render",
+  "version": "1.0.0",
+  "description": "Sistema de Controle de Frota de Viaturas (VTR) - 1º BPTran - Servidor Online para Render",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
