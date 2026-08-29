@@ -1833,6 +1833,32 @@
             border-color: #0284c7;
         }
 
+    
+        /* Botões de Edição dos Setores e Linhas */
+        .btn-edit-sector, .btn-edit {
+            background-color: #fef9c3 !important;
+            color: #854d0e !important;
+            border: 1px solid #fde047 !important;
+            font-weight: 700 !important;
+        }
+        .btn-edit-sector:hover, .btn-edit:hover {
+            background-color: #fef08a !important;
+            border-color: #eab308 !important;
+            color: #713f12 !important;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 6px rgba(234, 179, 8, 0.25);
+        }
+        [data-theme="dark"] .btn-edit-sector, [data-theme="dark"] .btn-edit {
+            background-color: #78350f44 !important;
+            color: #fde047 !important;
+            border-color: #ca8a04 !important;
+        }
+        [data-theme="dark"] .btn-edit-sector:hover, [data-theme="dark"] .btn-edit:hover {
+            background-color: #78350f77 !important;
+            border-color: #eab308 !important;
+            color: #fef08a !important;
+        }
+
     </style>
 </head>
 <body>
@@ -1989,14 +2015,154 @@
                 </div>
 
                 <div class="baseline-btn-group">
-                    <button class="btn btn-outline btn-3d btn-baseline" title="Definir a lista atual como a nova Base Original" onclick="saveAsOriginalBaseline()" style="border-color: #3b82f6; color: #1d4ed8; background-color: #eff6ff;">📌 Aplicar como Original</button>
-                    <button class="btn btn-danger btn-3d btn-baseline" title="Restaurar a frota para o último estado salvo em Aplicar como Original" onclick="clearAllData()">Restaurar Originais</button>
+                    <button type="button" class="btn btn-edit-sector btn-3d btn-sm" onclick="openTableAdminOptions()" title="Opções de Edição da Tabela (Requer Senha ADM)">
+                        ✏️ Editar
+                    </button>
                 </div>
             </div>
         </div>
         <div id="tableCardBodyContent" class="collapsible-content">
 
-            <!-- Painel Visível para Acrescentar Nova Viatura -->
+            <div class="table-filters-bar">
+                <div class="filter-group">
+                    <span class="filter-label">📅 Mês/Ano:</span>
+                    <div class="custom-month-dropdown" id="monthDropdownContainerTable">
+                        <button type="button" id="monthDropdownBtnTable" class="month-dropdown-btn" onclick="toggleMonthDropdown(event, true)" title="Filtrar por Mês ou Ano">
+                            <span id="monthDropdownBtnLabelTable">Todos os Meses</span>
+                            <span class="month-dropdown-arrow">▼</span>
+                        </button>
+                        <div id="monthDropdownMenuTable" class="month-dropdown-menu" style="display: none;"></div>
+                        <input type="hidden" id="filterMonthTable" value="ALL" onchange="syncFilter('table')">
+                    </div>
+                </div>
+
+                <div class="filter-group" id="filterCiaContainerTable">
+                    <label for="filterCiaTable" class="filter-label">🏛️ Unidade / Setor:</label>
+                    <select id="filterCiaTable" class="filter-select" onchange="syncFilter('table')">
+                        <option value="ALL">Todas as Unidades (Geral)</option>
+                    </select>
+                </div>
+
+                <div class="filter-group" id="filterPelotaoContainerTable" style="display: none;">
+                    <label for="filterPelotaoTable" class="filter-label">🛡️ Pelotão:</label>
+                    <select id="filterPelotaoTable" class="filter-select" onchange="syncFilter('table')">
+                        <option value="ALL">Todos os Pelotões</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filterVehicleTable" class="filter-label">🚓 Status / Vtr:</label>
+                    <select id="filterVehicleTable" class="filter-select" onchange="syncFilter('table')">
+                        <option value="ALL">Todas as Viaturas</option>
+                    </select>
+                </div>
+
+                <div class="baseline-btn-group">
+                    <button type="button" class="btn btn-edit-sector btn-3d btn-sm" onclick="openTableAdminOptions()" title="Opções de Edição da Tabela (Requer Senha ADM)">
+                        ✏️ Editar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Barra Opcional de Colunas Ocultas / Restaurar Todas -->
+            <div id="hiddenColumnsBar" class="hidden-columns-bar" style="display: none;">
+                <span>👁️ <strong>Colunas ocultas:</strong></span>
+                <div id="hiddenColumnsPills" style="display: inline-flex; gap: 6px; flex-wrap: wrap;"></div>
+                <button type="button" class="btn btn-outline btn-3d btn-sm" onclick="restoreAllColumns()" style="padding: 2px 8px; font-size: 0.74rem; margin-left: auto;">Mostrar todas</button>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr id="tableHeaderRow">
+                            <th class="col-th-prefixo" data-col="prefixo" style="width: 95px;" title="Coluna Prefixo">
+                                <div class="th-content">
+                                    <span class="th-title">Prefixo</span>
+                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('prefixo')" title="Esconder coluna Prefixo">
+                                        <span class="col-toggle-icon">◀</span>
+                                    </button>
+                                </div>
+                                <span class="th-collapsed-indicator">Prefixo</span>
+                            </th>
+                            <th class="col-th-cia" data-col="cia" style="width: 125px;" title="Coluna Companhia">
+                                <div class="th-content">
+                                    <span class="th-title">Companhia</span>
+                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('cia')" title="Esconder coluna Companhia">
+                                        <span class="col-toggle-icon">◀</span>
+                                    </button>
+                                </div>
+                                <span class="th-collapsed-indicator">Companhia</span>
+                            </th>
+                            <th class="col-th-modelo" data-col="modelo" style="width: 150px;" title="Coluna Modelo">
+                                <div class="th-content">
+                                    <span class="th-title">Modelo</span>
+                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('modelo')" title="Esconder coluna Modelo">
+                                        <span class="col-toggle-icon">◀</span>
+                                    </button>
+                                </div>
+                                <span class="th-collapsed-indicator">Modelo</span>
+                            </th>
+                            <th class="col-th-pelotao" data-col="pelotao" style="width: 110px;" title="Coluna Pelotão">
+                                <div class="th-content">
+                                    <span class="th-title">Pelotão</span>
+                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('pelotao')" title="Esconder coluna Pelotão">
+                                        <span class="col-toggle-icon">◀</span>
+                                    </button>
+                                </div>
+                                <span class="th-collapsed-indicator">Pelotão</span>
+                            </th>
+                            <th class="col-th-status" data-col="status" style="width: 135px;" title="Coluna Status (Operação)">
+                                <div class="th-content">
+                                    <span class="th-title">Status (Operação)</span>
+                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('status')" title="Esconder coluna Status">
+                                        <span class="col-toggle-icon">◀</span>
+                                    </button>
+                                </div>
+                                <span class="th-collapsed-indicator">Status</span>
+                            </th>
+                            <th class="col-th-obs" data-col="obs" style="min-width: 190px;" title="Coluna Motivo da Baixa / Defeitos">
+                                <div class="th-content">
+                                    <span class="th-title">Motivo da Baixa / Defeitos</span>
+                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('obs')" title="Esconder coluna Motivo">
+                                        <span class="col-toggle-icon">◀</span>
+                                    </button>
+                                </div>
+                                <span class="th-collapsed-indicator">Motivo</span>
+                            </th>
+                            <th class="col-th-destino" data-col="destino" style="width: 140px;" title="Coluna Local Onde Se Encontra">
+                                <div class="th-content">
+                                    <span class="th-title">Local Onde Se Encontra</span>
+                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('destino')" title="Esconder coluna Local">
+                                        <span class="col-toggle-icon">◀</span>
+                                    </button>
+                                </div>
+                                <span class="th-collapsed-indicator">Local</span>
+                            </th>
+                            <th class="col-th-data" data-col="data" style="min-width: 220px;" title="Coluna Data Forms / Registro">
+                                <div class="th-content">
+                                    <span class="th-title">Data Forms / Registro</span>
+                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('data')" title="Esconder coluna Data">
+                                        <span class="col-toggle-icon">◀</span>
+                                    </button>
+                                </div>
+                                <span class="th-collapsed-indicator">Data</span>
+                            </th>
+                            <th class="col-th-acoes" data-col="acoes" style="width: 155px; text-align: center;" title="Coluna Ações">
+                                <div class="th-content" style="justify-content: center;">
+                                    <span class="th-title">Ações</span>
+                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('acoes')" title="Esconder coluna Ações">
+                                        <span class="col-toggle-icon">◀</span>
+                                    </button>
+                                </div>
+                                <span class="th-collapsed-indicator">Ações</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+
+<!-- Painel Visível para Acrescentar Nova Viatura -->
             <div class="quick-add-panel" id="quickAddPanel">
                 <div class="quick-add-header">
                     <span>➕ Acrescentar Nova Viatura / Baixa à Tabela</span>
@@ -2112,143 +2278,7 @@
             </div>
 
             <!-- Barra de Filtros da Tabela -->
-            <div class="table-filters-bar">
-                <div class="filter-group">
-                    <span class="filter-label">📅 Mês/Ano:</span>
-                    <div class="custom-month-dropdown" id="monthDropdownContainerTable">
-                        <button type="button" id="monthDropdownBtnTable" class="month-dropdown-btn" onclick="toggleMonthDropdown(event, true)" title="Filtrar por Mês ou Ano">
-                            <span id="monthDropdownBtnLabelTable">Todos os Meses</span>
-                            <span class="month-dropdown-arrow">▼</span>
-                        </button>
-                        <div id="monthDropdownMenuTable" class="month-dropdown-menu" style="display: none;"></div>
-                        <input type="hidden" id="filterMonthTable" value="ALL" onchange="syncFilter('table')">
-                    </div>
-                </div>
-
-                <div class="filter-group" id="filterCiaContainerTable">
-                    <label for="filterCiaTable" class="filter-label">🏛️ Unidade / Setor:</label>
-                    <select id="filterCiaTable" class="filter-select" onchange="syncFilter('table')">
-                        <option value="ALL">Todas as Unidades (Geral)</option>
-                    </select>
-                </div>
-
-                <div class="filter-group" id="filterPelotaoContainerTable" style="display: none;">
-                    <label for="filterPelotaoTable" class="filter-label">🛡️ Pelotão:</label>
-                    <select id="filterPelotaoTable" class="filter-select" onchange="syncFilter('table')">
-                        <option value="ALL">Todos os Pelotões</option>
-                    </select>
-                </div>
-
-                <div class="filter-group">
-                    <label for="filterVehicleTable" class="filter-label">🚓 Status / Vtr:</label>
-                    <select id="filterVehicleTable" class="filter-select" onchange="syncFilter('table')">
-                        <option value="ALL">Todas as Viaturas</option>
-                    </select>
-                </div>
-
-                <div class="baseline-btn-group">
-                    <button class="btn btn-outline btn-3d btn-baseline" title="Definir a lista atual como a nova Base Original" onclick="saveAsOriginalBaseline()" style="border-color: #3b82f6; color: #1d4ed8; background-color: #eff6ff;">📌 Aplicar como Original</button>
-                    <button class="btn btn-danger btn-3d btn-baseline" title="Restaurar a frota para o último estado salvo em Aplicar como Original" onclick="clearAllData()">Restaurar Originais</button>
-                </div>
-            </div>
-
-            <!-- Barra Opcional de Colunas Ocultas / Restaurar Todas -->
-            <div id="hiddenColumnsBar" class="hidden-columns-bar" style="display: none;">
-                <span>👁️ <strong>Colunas ocultas:</strong></span>
-                <div id="hiddenColumnsPills" style="display: inline-flex; gap: 6px; flex-wrap: wrap;"></div>
-                <button type="button" class="btn btn-outline btn-3d btn-sm" onclick="restoreAllColumns()" style="padding: 2px 8px; font-size: 0.74rem; margin-left: auto;">Mostrar todas</button>
-            </div>
-
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr id="tableHeaderRow">
-                            <th class="col-th-prefixo" data-col="prefixo" style="width: 95px;" title="Coluna Prefixo">
-                                <div class="th-content">
-                                    <span class="th-title">Prefixo</span>
-                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('prefixo')" title="Esconder coluna Prefixo">
-                                        <span class="col-toggle-icon">◀</span>
-                                    </button>
-                                </div>
-                                <span class="th-collapsed-indicator">Prefixo</span>
-                            </th>
-                            <th class="col-th-cia" data-col="cia" style="width: 125px;" title="Coluna Companhia">
-                                <div class="th-content">
-                                    <span class="th-title">Companhia</span>
-                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('cia')" title="Esconder coluna Companhia">
-                                        <span class="col-toggle-icon">◀</span>
-                                    </button>
-                                </div>
-                                <span class="th-collapsed-indicator">Companhia</span>
-                            </th>
-                            <th class="col-th-modelo" data-col="modelo" style="width: 150px;" title="Coluna Modelo">
-                                <div class="th-content">
-                                    <span class="th-title">Modelo</span>
-                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('modelo')" title="Esconder coluna Modelo">
-                                        <span class="col-toggle-icon">◀</span>
-                                    </button>
-                                </div>
-                                <span class="th-collapsed-indicator">Modelo</span>
-                            </th>
-                            <th class="col-th-pelotao" data-col="pelotao" style="width: 110px;" title="Coluna Pelotão">
-                                <div class="th-content">
-                                    <span class="th-title">Pelotão</span>
-                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('pelotao')" title="Esconder coluna Pelotão">
-                                        <span class="col-toggle-icon">◀</span>
-                                    </button>
-                                </div>
-                                <span class="th-collapsed-indicator">Pelotão</span>
-                            </th>
-                            <th class="col-th-status" data-col="status" style="width: 135px;" title="Coluna Status (Operação)">
-                                <div class="th-content">
-                                    <span class="th-title">Status (Operação)</span>
-                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('status')" title="Esconder coluna Status">
-                                        <span class="col-toggle-icon">◀</span>
-                                    </button>
-                                </div>
-                                <span class="th-collapsed-indicator">Status</span>
-                            </th>
-                            <th class="col-th-obs" data-col="obs" style="min-width: 190px;" title="Coluna Motivo da Baixa / Defeitos">
-                                <div class="th-content">
-                                    <span class="th-title">Motivo da Baixa / Defeitos</span>
-                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('obs')" title="Esconder coluna Motivo">
-                                        <span class="col-toggle-icon">◀</span>
-                                    </button>
-                                </div>
-                                <span class="th-collapsed-indicator">Motivo</span>
-                            </th>
-                            <th class="col-th-destino" data-col="destino" style="width: 140px;" title="Coluna Local Onde Se Encontra">
-                                <div class="th-content">
-                                    <span class="th-title">Local Onde Se Encontra</span>
-                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('destino')" title="Esconder coluna Local">
-                                        <span class="col-toggle-icon">◀</span>
-                                    </button>
-                                </div>
-                                <span class="th-collapsed-indicator">Local</span>
-                            </th>
-                            <th class="col-th-data" data-col="data" style="min-width: 220px;" title="Coluna Data Forms / Registro">
-                                <div class="th-content">
-                                    <span class="th-title">Data Forms / Registro</span>
-                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('data')" title="Esconder coluna Data">
-                                        <span class="col-toggle-icon">◀</span>
-                                    </button>
-                                </div>
-                                <span class="th-collapsed-indicator">Data</span>
-                            </th>
-                            <th class="col-th-acoes" data-col="acoes" style="width: 155px; text-align: center;" title="Coluna Ações">
-                                <div class="th-content" style="justify-content: center;">
-                                    <span class="th-title">Ações</span>
-                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('acoes')" title="Esconder coluna Ações">
-                                        <span class="col-toggle-icon">◀</span>
-                                    </button>
-                                </div>
-                                <span class="th-collapsed-indicator">Ações</span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody"></tbody>
-                </table>
-            </div>
+            
         </div>
     </div>
 
@@ -2343,52 +2373,35 @@
     </div>
 
     <!-- Barra de Comandos e Ações Principais -->
+        <!-- Barra de Comandos e Ações Principais -->
     <div class="card" style="padding: 20px;">
         <div class="card-header" style="margin-bottom: 12px;">
             <div class="card-title">⚙️ Comandos & Ações do Banco de Dados</div>
-            <button type="button" class="btn-collapse" onclick="toggleSection('footerActionsContent', this)" title="Ocultar / Expandir Ações">▲</button>
+            <button type="button" class="btn-collapse" onclick="toggleSection('footerActionsContent', this)" title="Expandir Setor (Requer Senha ADM)" aria-expanded="false">▼</button>
         </div>
-        <div id="footerActionsContent" class="collapsible-content">
-        <div style="display: flex; flex-direction: column; gap: 16px; align-items: center; justify-content: center;">
-            <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: center;">
-                <button class="btn btn-online btn-3d" title="Sincronizar dados agora na nuvem online" onclick="loadDataFromOnline(false)">
-                    ☁️ Sincronizar Online
+        <div id="footerActionsContent" class="collapsible-content collapsed">
+            <div style="display: flex; gap: 14px; flex-wrap: wrap; align-items: center; justify-content: center; padding: 10px 0;">
+                <button type="button" class="btn btn-online btn-3d" title="Configurar e Testar Conexão do Servidor" onclick="openServerConfigModal()">
+                    🌐 Servidor
                 </button>
-                <button class="btn btn-outline btn-3d" title="Configurar e Testar Conexão do Servidor" onclick="openServerConfigModal()">
-                    🌐 Conexão Servidor
+                <button type="button" class="btn btn-outline btn-3d" title="Gerenciamento do Banco de Dados (Importar, Exportar, Definir padrão, Limpar)" onclick="openDatabaseActionsModal()">
+                    💾 Banco de dados
                 </button>
-                <button class="btn btn-merge btn-3d" title="Importar dados de Planilha Online (Google Sheets), Excel (.xlsx), CSV ou JSON" onclick="openMergeModal()">
-                    📥 Importar / Conectar Planilha
-                </button>
-                <button class="btn btn-outline btn-3d" title="Exportar Backup JSON Completo" onclick="exportJSON()">
-                    📤 Exportar banco de dados
-                </button>
-                <button class="btn btn-outline btn-3d" title="Substituir Banco de Dados por um Arquivo Pronto" onclick="triggerImport()">
-                    🔄 Substituir por Arquivo
-                </button>
-            </div>
-
-            <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: center;">
-                <button class="btn btn-outline btn-3d" title="Alterar Nome do Painel" onclick="editAppTitle()">
+                <button type="button" class="btn btn-outline btn-3d" title="Alterar Nome do Painel (Requer Senha)" onclick="editAppTitle()">
                     ✏️ Editar Título
                 </button>
-                <button class="btn btn-outline btn-3d" title="Gerenciar Cias, Pelotões, Status, Locais e Modelos" onclick="openConfigModal()">
+                <button type="button" class="btn btn-outline btn-3d" title="Gerenciar Cias, Pelotões, Status, Locais e Modelos (Requer Senha)" onclick="openConfigModal()">
                     ⚙️ Cias, Pelotões, Status
                 </button>
-                <button class="btn btn-excel btn-3d" title="Exportar tabela atual para Excel (.xlsx)" onclick="exportExcel()">
+                <button type="button" class="btn btn-excel btn-3d" title="Exportar tabela atual para Excel (.xlsx)" onclick="exportExcel()">
                     📊 Exportar Excel
-                </button>
-                <button class="btn btn-danger-solid btn-3d" title="ATENÇÃO: Apaga completamente todo o banco de dados e restaura o painel para o estado inicial" onclick="factoryResetDatabase()">
-                    ⚠️ Limpar banco de dados
                 </button>
                 <input type="file" id="importInput" accept=".json,.xlsx,.xls,.csv" style="display:none" onchange="importAnyFile(event, true)">
             </div>
         </div>
-        </div>
     </div>
 
-    <!-- Rodapé -->
-    <footer style="text-align: center; margin-top: 10px; padding: 16px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; font-weight: 500;">
+<footer style="text-align: center; margin-top: 10px; padding: 16px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; font-weight: 500;">
         Criado por: Sd Vagner - Telemática
     </footer>
 </div>
@@ -3890,7 +3903,9 @@
         });
     }
 
-    function openConfigModal() {
+    async function openConfigModal() {
+        const ok = await requestAdminPassword("gerenciar Companhias, Pelotões, Status e Modelos");
+        if (!ok) return;
         renderManageLists();
         document.getElementById('configModal').style.display = 'flex';
     }
@@ -4075,9 +4090,132 @@
         showToast(`💾 <strong>${vehicleId}</strong>: Campo <em>${fieldName}</em> salvo online!`);
     }
 
-    function toggleSection(contentId, btnEl) {
+    
+    // =========================================================================
+    // 🔐 SEGURANÇA & SENHA DE GERENCIAMENTO (PATRULHEIRO1)
+    // =========================================================================
+    const ADMIN_PASSWORD = "PATRULHEIRO1";
+    let adminPasswordResolveCallback = null;
+
+    function requestAdminPassword(actionDescription = "") {
+        return new Promise((resolve) => {
+            const modal = document.getElementById('adminPasswordModal');
+            const input = document.getElementById('adminPasswordInput');
+            const err = document.getElementById('adminPasswordError');
+            const desc = document.getElementById('adminPasswordDesc');
+
+            if (desc) {
+                desc.textContent = actionDescription 
+                    ? `Para ${actionDescription}, digite a senha de administrador:`
+                    : 'Para prosseguir com esta ação, digite a senha de administrador:';
+            }
+            if (err) err.style.display = 'none';
+            if (input) input.value = '';
+
+            adminPasswordResolveCallback = resolve;
+            if (modal) {
+                modal.style.display = 'flex';
+                setTimeout(() => { if (input) input.focus(); }, 150);
+            } else {
+                const pass = prompt(`🔐 Ação protegida por senha.
+Digite a senha de administrador para ${actionDescription || 'continuar'}:`);
+                if (pass === null) {
+                    resolve(false);
+                } else if (pass.trim() === ADMIN_PASSWORD) {
+                    resolve(true);
+                } else {
+                    alert("❌ Senha incorreta! Ação cancelada.");
+                    resolve(false);
+                }
+            }
+        });
+    }
+
+    function submitAdminPassword() {
+        const input = document.getElementById('adminPasswordInput');
+        const err = document.getElementById('adminPasswordError');
+        const modal = document.getElementById('adminPasswordModal');
+
+        const entered = (input && input.value) ? input.value.trim() : '';
+        if (entered === ADMIN_PASSWORD) {
+            if (err) err.style.display = 'none';
+            if (modal) modal.style.display = 'none';
+            if (adminPasswordResolveCallback) {
+                const cb = adminPasswordResolveCallback;
+                adminPasswordResolveCallback = null;
+                cb(true);
+            }
+        } else {
+            if (err) err.style.display = 'block';
+            if (input) {
+                input.value = '';
+                input.focus();
+            }
+        }
+    }
+
+    function closeAdminPasswordModal(result = false) {
+        const modal = document.getElementById('adminPasswordModal');
+        const err = document.getElementById('adminPasswordError');
+        if (err) err.style.display = 'none';
+        if (modal) modal.style.display = 'none';
+        if (adminPasswordResolveCallback) {
+            const cb = adminPasswordResolveCallback;
+            adminPasswordResolveCallback = null;
+            cb(result);
+        }
+    }
+
+    function onAdminPasswordOverlayClick(e) {
+        if (e.target.id === 'adminPasswordModal') {
+            closeAdminPasswordModal(false);
+        }
+    }
+
+    // =========================================================================
+    // 💾 MODAIS DE AÇÕES UNIFICADAS DO BANCO DE DADOS & EDIÇÃO
+    // =========================================================================
+    function openDatabaseActionsModal() {
+        const modal = document.getElementById('databaseActionsModal');
+        if (modal) modal.style.display = 'flex';
+    }
+
+    function closeDatabaseActionsModal() {
+        const modal = document.getElementById('databaseActionsModal');
+        if (modal) modal.style.display = 'none';
+    }
+
+    function onDatabaseActionsOverlayClick(e) {
+        if (e.target.id === 'databaseActionsModal') closeDatabaseActionsModal();
+    }
+
+    async function openTableAdminOptions() {
+        const ok = await requestAdminPassword("acessar as opções de edição da tabela");
+        if (!ok) return;
+        const modal = document.getElementById('tableEditOptionsModal');
+        if (modal) modal.style.display = 'flex';
+    }
+
+    function closeTableEditOptionsModal() {
+        const modal = document.getElementById('tableEditOptionsModal');
+        if (modal) modal.style.display = 'none';
+    }
+
+    function onTableEditOptionsOverlayClick(e) {
+        if (e.target.id === 'tableEditOptionsModal') closeTableEditOptionsModal();
+    }
+
+
+async function toggleSection(contentId, btnEl) {
         const el = document.getElementById(contentId);
         if (!el) return;
+
+        // Se for o setor de Comandos & Ações do Banco de Dados e estiver fechado, exigir senha de ADM para abrir
+        if (contentId === 'footerActionsContent' && el.classList.contains('collapsed')) {
+            const ok = await requestAdminPassword("expandir o setor de Comandos & Ações do Banco de Dados");
+            if (!ok) return;
+        }
+
         const isCollapsed = el.classList.toggle('collapsed');
         if (btnEl) {
             btnEl.textContent = isCollapsed ? '▼' : '▲';
@@ -4734,7 +4872,9 @@
         localStorage.setItem('batalhao_vtr_records', JSON.stringify(records));
     }
 
-    function saveAsOriginalBaseline() {
+    async function saveAsOriginalBaseline() {
+        const ok = await requestAdminPassword("definir a base original da frota");
+        if (!ok) return;
         if (confirm('Deseja definir o estado atual de todas as viaturas como a nova BASE ORIGINAL para restaurações futuras?')) {
             const currentSnapshot = JSON.parse(JSON.stringify(records));
             localStorage.setItem('batalhao_vtr_custom_original_dataset', JSON.stringify(currentSnapshot));
@@ -4824,8 +4964,10 @@
         showToast(`📤 Banco de dados exportado como <strong>${finalName}</strong> (Placas, Patrimônios e Rádios inclusos)!`);
     }
 
-    function triggerImport() {
-        if (confirm('Atenção: A substituição irá SOBRESCREVER o banco de dados atual pelo arquivo selecionado (.xlsx, .csv, .json).\n\nPara apenas mesclar/incorporar mantendo as viaturas atuais, use o botão "📥 Importar / Conectar Planilha".\n\nDeseja continuar?')) {
+    async function triggerImport() {
+        const ok = await requestAdminPassword("definir padrão e substituir o banco de dados");
+        if (!ok) return;
+        if (confirm('Atenção: A substituição irá SOBRESCREVER o banco de dados atual pelo arquivo selecionado (.xlsx, .csv, .json).\n\nPara apenas mesclar/incorporar mantendo as viaturas atuais, use a opção "📥 Importar / Conectar Planilha".\n\nDeseja continuar?')) {
             document.getElementById('importInput').click();
         }
     }
@@ -6015,5 +6157,80 @@
     loadDataFromOnline(false);
     startAutoSync();
 </script>
+
+<!-- Modal de Autenticação de Senha do Administrador -->
+<div id="adminPasswordModal" class="modal-overlay" onclick="onAdminPasswordOverlayClick(event)">
+    <div class="modal-card" style="max-width: 440px;" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <div class="modal-title"><span>🔐 Alteração permitida apenas pelo administrador</span></div>
+            <button type="button" class="modal-close" onclick="closeAdminPasswordModal(false)" title="Fechar">✖</button>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: 10px 0;">
+            <p id="adminPasswordDesc" style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.4;">
+                Para prosseguir com esta ação, digite a senha de administrador:
+            </p>
+            <input type="password" id="adminPasswordInput" placeholder="Senha do Administrador" style="font-size: 1rem; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; width: 100%; box-sizing: border-box;" onkeydown="if(event.key==='Enter') submitAdminPassword()">
+            <div id="adminPasswordError" style="display: none; color: #ef4444; font-size: 0.85rem; font-weight: 700;">
+                ❌ Senha incorreta! Tente novamente.
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline btn-3d" onclick="closeAdminPasswordModal(false)">Cancelar</button>
+            <button type="button" class="btn btn-primary btn-3d" onclick="submitAdminPassword()">Confirmar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Gerenciamento do Banco de Dados -->
+<div id="databaseActionsModal" class="modal-overlay" onclick="onDatabaseActionsOverlayClick(event)">
+    <div class="modal-card" style="max-width: 480px;" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <div class="modal-title"><span>💾 Banco de Dados</span></div>
+            <button type="button" class="modal-close" onclick="closeDatabaseActionsModal()" title="Fechar">✖</button>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 10px 0;">
+            <button type="button" class="btn btn-merge btn-3d" style="width: 100%; justify-content: flex-start; padding: 12px 16px; font-size: 0.92rem;" onclick="closeDatabaseActionsModal(); openMergeModal();">
+                📥 Importar / Conectar Planilha
+            </button>
+            <button type="button" class="btn btn-outline btn-3d" style="width: 100%; justify-content: flex-start; padding: 12px 16px; font-size: 0.92rem;" onclick="closeDatabaseActionsModal(); exportJSON();">
+                📤 Exportar Backup do Banco de Dados (.json)
+            </button>
+            <button type="button" class="btn btn-outline btn-3d" style="width: 100%; justify-content: flex-start; padding: 12px 16px; font-size: 0.92rem;" onclick="closeDatabaseActionsModal(); triggerImport();">
+                📌 Definir padrão
+            </button>
+            <button type="button" class="btn btn-danger-solid btn-3d" style="width: 100%; justify-content: flex-start; padding: 12px 16px; font-size: 0.92rem;" onclick="closeDatabaseActionsModal(); factoryResetDatabase();">
+                ⚠️ Limpar Banco de Dados (Reset Geral - Requer Senha)
+            </button>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline btn-3d" onclick="closeDatabaseActionsModal()">Fechar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Opções de Edição da Tabela (Botão Editar) -->
+<div id="tableEditOptionsModal" class="modal-overlay" onclick="onTableEditOptionsOverlayClick(event)">
+    <div class="modal-card" style="max-width: 480px;" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <div class="modal-title"><span>✏️ Opções da Tabela de Viaturas</span></div>
+            <button type="button" class="modal-close" onclick="closeTableEditOptionsModal()" title="Fechar">✖</button>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 10px 0;">
+            <button type="button" class="btn btn-outline btn-3d" style="width: 100%; justify-content: flex-start; padding: 12px 16px; font-size: 0.92rem; border-color: #3b82f6; color: #1d4ed8; background-color: #eff6ff;" onclick="closeTableEditOptionsModal(); saveAsOriginalBaseline();">
+                📌 Aplicar como Original (Salvar Estado Atual)
+            </button>
+            <button type="button" class="btn btn-danger btn-3d" style="width: 100%; justify-content: flex-start; padding: 12px 16px; font-size: 0.92rem;" onclick="closeTableEditOptionsModal(); clearAllData();">
+                🔄 Restaurar Originais (Voltar ao Padrão)
+            </button>
+            <button type="button" class="btn btn-excel btn-3d" style="width: 100%; justify-content: flex-start; padding: 12px 16px; font-size: 0.92rem;" onclick="closeTableEditOptionsModal(); exportExcel();">
+                📊 Exportar Tabela para Excel (.xlsx)
+            </button>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline btn-3d" onclick="closeTableEditOptionsModal()">Fechar</button>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
