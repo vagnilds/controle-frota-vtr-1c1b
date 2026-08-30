@@ -3464,9 +3464,9 @@
         document.getElementById('pageTitle').textContent = appTitle.replace(/<[^>]*>?/gm, '') + ' - Painel da Frota';
     }
 
-    async function editAppTitle() {
+    function editAppTitle() {
         const currentClean = appTitle.replace(/^[^a-zA-Z0-9À-ÿ_ ]+/g, '').trim();
-        const newTitle = await adminPrompt('Digite o novo nome para o sistema de controle:', currentClean);
+        const newTitle = prompt('Digite o novo nome para o sistema de controle:', currentClean);
         if (newTitle && newTitle.trim()) {
             appTitle = '🚓 ' + newTitle.trim();
             localStorage.setItem('batalhao_vtr_app_title', appTitle);
@@ -3515,8 +3515,8 @@
     }
     localStorage.setItem('batalhao_vtr_custom_cias', JSON.stringify(customCias));
 
-    async function addNewCiaPrompt() {
-        const name = await adminPrompt('Digite o nome da nova Companhia / Setor (ex: CTT, SEÇÃO ADM, 1ª Cia):');
+    function addNewCiaPrompt() {
+        const name = prompt('Digite o nome da nova Companhia / Setor (ex: CTT, SEÇÃO ADM, 1ª Cia):');
         if (!name || !name.trim()) return;
         const clean = name.trim();
         if (clean.includes('5') || clean.includes('5ª')) {
@@ -3536,12 +3536,12 @@
         showToast(`🏛️ Companhia <strong>${clean}</strong> acrescentada com sucesso!`);
     }
 
-    async function removeCia(cia) {
+    function removeCia(cia) {
         if (customCias.length <= 1) {
             alert('Você deve manter ao menos uma Companhia cadastrada.');
             return;
         }
-        if (await adminConfirm(`Deseja remover "${cia}" da lista de Companhias?`)) {
+        if (confirm(`Deseja remover "${cia}" da lista de Companhias?`)) {
             customCias = customCias.filter(c => c !== cia);
             localStorage.setItem('batalhao_vtr_custom_cias', JSON.stringify(customCias));
             populateAllCiaSelects();
@@ -3612,8 +3612,8 @@
         localStorage.setItem('batalhao_vtr_custom_models', JSON.stringify(customModels));
     }
 
-    async function addNewModelPrompt() {
-        const name = await adminPrompt('Digite o nome do novo Modelo de Viatura (ex: COROLLA, HILUX, AMAROK, TIGGO):');
+    function addNewModelPrompt() {
+        const name = prompt('Digite o nome do novo Modelo de Viatura (ex: COROLLA, HILUX, AMAROK, TIGGO):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (customModels.includes(clean)) {
@@ -3630,12 +3630,12 @@
         showToast(`🚗 Modelo <strong>${clean}</strong> acrescentado com sucesso!`);
     }
 
-    async function removeModel(model) {
+    function removeModel(model) {
         if (customModels.length <= 1) {
             alert('Você deve manter ao menos um modelo cadastrado.');
             return;
         }
-        if (await adminConfirm(`Deseja remover o modelo "${model}" da lista de opções?`)) {
+        if (confirm(`Deseja remover o modelo "${model}" da lista de opções?`)) {
             customModels = customModels.filter(m => m !== model);
             customModels = sortModelsList(customModels);
             localStorage.setItem('batalhao_vtr_custom_models', JSON.stringify(customModels));
@@ -3730,8 +3730,8 @@
         }
     }
 
-    async function addNewQuickReasonPrompt() {
-        const name = await adminPrompt('Digite o nome do novo Motivo Rápido (ex: FREIO, SUSPENSÃO, FUNILARIA):');
+    function addNewQuickReasonPrompt() {
+        const name = prompt('Digite o nome do novo Motivo Rápido (ex: FREIO, SUSPENSÃO, FUNILARIA, AR-CONDICIONADO, VISTORIA):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (customQuickReasons.some(r => r.key === clean)) {
@@ -3799,8 +3799,8 @@
         localStorage.setItem('batalhao_vtr_custom_locais', JSON.stringify(customLocais));
     }
 
-    async function addNewPelotaoPrompt() {
-        const name = await adminPrompt('Digite o nome do novo Pelotão / Setor (ex: 9º PEL, CANIL, SEÇÃO ADM):');
+    function addNewPelotaoPrompt() {
+        const name = prompt('Digite o nome do novo Pelotão / Setor (ex: 9º PEL, CANIL, SEÇÃO ADM):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (clean.includes('CIA')) {
@@ -3829,12 +3829,12 @@
         showToast(`🛡️ Pelotão <strong>${clean}</strong> acrescentado com sucesso!`);
     }
 
-    async function removePelotao(pel) {
+    function removePelotao(pel) {
         if (customPelotoes.length <= 1) {
             alert('Você deve manter ao menos um pelotão cadastrado.');
             return;
         }
-        if (await adminConfirm(`Deseja remover "${pel}" da lista de pelotões?`)) {
+        if (confirm(`Deseja remover "${pel}" da lista de pelotões?`)) {
             customPelotoes = customPelotoes.filter(p => p !== pel);
             localStorage.setItem('batalhao_vtr_custom_pelotoes', JSON.stringify(customPelotoes));
             populateAllPelotaoSelects();
@@ -3854,8 +3854,8 @@
         removePelotao(selected);
     }
 
-    async function addNewStatusPrompt() {
-        const name = await adminPrompt('Digite o nome do novo Status Operacional (ex: AGUARDANDO PEÇA, RESERVA):');
+    function addNewStatusPrompt() {
+        const name = prompt('Digite o nome do novo Status Operacional (ex: AGUARDANDO PEÇA, RESERVA, SINISTRADA):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (clean === 'LUMINOSO') {
@@ -3875,12 +3875,12 @@
         showToast(`🚥 Status <strong>${clean}</strong> acrescentado com sucesso!`);
     }
 
-    async function removeStatus(st) {
+    function removeStatus(st) {
         if (customStatuses.length <= 1) {
             alert('Você deve manter ao menos um status cadastrado.');
             return;
         }
-        if (await adminConfirm(`Deseja remover o status "${st}" da lista de opções?`)) {
+        if (confirm(`Deseja remover o status "${st}" da lista de opções?`)) {
             customStatuses = customStatuses.filter(s => s !== st);
             localStorage.setItem('batalhao_vtr_custom_statuses', JSON.stringify(customStatuses));
             populateAllStatusSelects();
@@ -3900,8 +3900,8 @@
         removeStatus(selected);
     }
 
-    async function addNewLocalPrompt() {
-        const name = await adminPrompt('Digite o nome do novo Local / Destino (ex: OFICINA CENTRAL, CONCESSIONÁRIA, EAP):');
+    function addNewLocalPrompt() {
+        const name = prompt('Digite o nome do novo Local / Destino (ex: OFICINA CENTRAL, CONCESSIONÁRIA ZONA LESTE, EAP):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (customLocais.includes(clean)) {
@@ -3924,12 +3924,12 @@
         showToast(`📍 Local <strong>${clean}</strong> acrescentado com sucesso!`);
     }
 
-    async function removeLocal(loc) {
+    function removeLocal(loc) {
         if (customLocais.length <= 1) {
             alert('Você deve manter ao menos um local cadastrado.');
             return;
         }
-        if (await adminConfirm(`Deseja remover o local "${loc}" da lista de opções?`)) {
+        if (confirm(`Deseja remover o local "${loc}" da lista de opções?`)) {
             customLocais = customLocais.filter(l => l !== loc);
             localStorage.setItem('batalhao_vtr_custom_locais', JSON.stringify(customLocais));
             populateAllLocalSelects();
@@ -4227,16 +4227,6 @@
     let doughnutChartInstance = null;
     let toastTimer = null;
 
-    
-    // Substitui alert nativo para usar Toast e Diálogo amigável (sem cabeçalho de URL do navegador)
-    window.alert = function(msg) {
-        if (typeof showToast === 'function') {
-            showToast(msg);
-        } else if (typeof adminAlert === 'function') {
-            adminAlert(msg);
-        }
-    };
-
     function showToast(msg) {
         const toast = document.getElementById('toastNotification');
         document.getElementById('toastMsg').innerHTML = msg;
@@ -4304,9 +4294,12 @@
 
     
     
-    
     let activeReasonMenu = null;
     let activeReasonVehicle = null;
+
+    
+    
+    
     let activeReasonBtn = null;
 
     function openInlineReasonMenu(vehicleId, btnEl, event) {
@@ -4321,13 +4314,13 @@
             return;
         }
 
-        // Fecha qualquer menu aberto anteriormente
+        // Fecha qualquer menu que estivesse aberto anteriormente
         closeInlineReasonMenu();
 
         activeReasonVehicle = vehicleId;
         activeReasonBtn = btnEl;
 
-        // Muda ícone de '+' para '-'
+        // Altera ícone de '+' para '-'
         if (btnEl) {
             btnEl.textContent = '➖';
             btnEl.title = 'Fechar menu';
@@ -4350,8 +4343,12 @@
             <div class="inline-reason-menu-header" style="font-size: 0.72rem; border: none; padding-top: 2px;">Clique para acrescentar:</div>
         `;
 
-        // Motivos rápidos de customQuickReasons
-        customQuickReasons.forEach(r => {
+        // Motivos rápidos
+        const reasonsList = (typeof customQuickReasons !== 'undefined' && Array.isArray(customQuickReasons) && customQuickReasons.length > 0)
+            ? customQuickReasons
+            : defaultQuickReasons;
+
+        reasonsList.forEach(r => {
             html += `
                 <button type="button" class="inline-reason-item" onclick="executeInlineReasonChoice('${vehicleId}', '${r.key}')">
                     <span>➕</span> <span>${r.label}</span>
@@ -4362,7 +4359,7 @@
         menu.innerHTML = html;
         document.body.appendChild(menu);
 
-        // Posicionar o menu abaixo do botão
+        // Posicionar menu abaixo do botão
         const rect = btnEl.getBoundingClientRect();
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
@@ -4446,127 +4443,6 @@
     window.addEventListener('scroll', () => {
         if (activeReasonMenu) closeInlineReasonMenu();
     }, { passive: true });
-
-    // =========================================================================
-    // 👮 SISTEMA UNIVERSAL DE DIÁLOGOS (Administrador diz:)
-    // =========================================================================
-    let adminDialogResolve = null;
-
-    function adminAlert(message) {
-        return new Promise((resolve) => {
-            const modal = document.getElementById('adminDialogModal');
-            const msgEl = document.getElementById('adminDialogMessage');
-            const inputEl = document.getElementById('adminDialogInput');
-            const cancelBtn = document.getElementById('adminDialogCancelBtn');
-            const confirmBtn = document.getElementById('adminDialogConfirmBtn');
-
-            if (msgEl) msgEl.textContent = message;
-            if (inputEl) inputEl.style.display = 'none';
-            if (cancelBtn) cancelBtn.style.display = 'none';
-            if (confirmBtn) {
-                confirmBtn.textContent = 'OK';
-                confirmBtn.className = 'btn btn-primary btn-3d';
-            }
-
-            adminDialogResolve = resolve;
-            if (modal) {
-                modal.style.display = 'flex';
-                setTimeout(() => { if (confirmBtn) confirmBtn.focus(); }, 100);
-            } else {
-                resolve(true);
-            }
-        });
-    }
-
-    function adminConfirm(message) {
-        return new Promise((resolve) => {
-            const modal = document.getElementById('adminDialogModal');
-            const msgEl = document.getElementById('adminDialogMessage');
-            const inputEl = document.getElementById('adminDialogInput');
-            const cancelBtn = document.getElementById('adminDialogCancelBtn');
-            const confirmBtn = document.getElementById('adminDialogConfirmBtn');
-
-            if (msgEl) msgEl.textContent = message;
-            if (inputEl) inputEl.style.display = 'none';
-            if (cancelBtn) {
-                cancelBtn.style.display = 'inline-flex';
-                cancelBtn.textContent = 'Cancelar';
-            }
-            if (confirmBtn) {
-                confirmBtn.textContent = 'Confirmar';
-                confirmBtn.className = 'btn btn-primary btn-3d';
-            }
-
-            adminDialogResolve = resolve;
-            if (modal) {
-                modal.style.display = 'flex';
-                setTimeout(() => { if (confirmBtn) confirmBtn.focus(); }, 100);
-            } else {
-                resolve(false);
-            }
-        });
-    }
-
-    function adminPrompt(message, defaultValue = '') {
-        return new Promise((resolve) => {
-            const modal = document.getElementById('adminDialogModal');
-            const msgEl = document.getElementById('adminDialogMessage');
-            const inputEl = document.getElementById('adminDialogInput');
-            const cancelBtn = document.getElementById('adminDialogCancelBtn');
-            const confirmBtn = document.getElementById('adminDialogConfirmBtn');
-
-            if (msgEl) msgEl.textContent = message;
-            if (inputEl) {
-                inputEl.style.display = 'block';
-                inputEl.value = defaultValue || '';
-            }
-            if (cancelBtn) {
-                cancelBtn.style.display = 'inline-flex';
-                cancelBtn.textContent = 'Cancelar';
-            }
-            if (confirmBtn) {
-                confirmBtn.textContent = 'OK';
-                confirmBtn.className = 'btn btn-primary btn-3d';
-            }
-
-            adminDialogResolve = resolve;
-            if (modal) {
-                modal.style.display = 'flex';
-                setTimeout(() => { if (inputEl) { inputEl.focus(); inputEl.select(); } }, 150);
-            } else {
-                resolve(null);
-            }
-        });
-    }
-
-    function confirmAdminDialog() {
-        const modal = document.getElementById('adminDialogModal');
-        const inputEl = document.getElementById('adminDialogInput');
-        const val = (inputEl && inputEl.style.display !== 'none') ? inputEl.value : true;
-
-        if (modal) modal.style.display = 'none';
-        if (adminDialogResolve) {
-            const cb = adminDialogResolve;
-            adminDialogResolve = null;
-            cb(val);
-        }
-    }
-
-    function closeAdminDialog(result = false) {
-        const modal = document.getElementById('adminDialogModal');
-        if (modal) modal.style.display = 'none';
-        if (adminDialogResolve) {
-            const cb = adminDialogResolve;
-            adminDialogResolve = null;
-            cb(result);
-        }
-    }
-
-    function onAdminDialogOverlayClick(e) {
-        if (e.target.id === 'adminDialogModal') {
-            closeAdminDialog(false);
-        }
-    }
 
     function clearInlineField(vehicleId, fieldName, inputElementId) {
         const inputEl = document.getElementById(inputElementId);
@@ -5025,7 +4901,7 @@ async function toggleSection(contentId, btnEl) {
         renderDashboard();
     }
 
-    async function exportExcel() {
+    function exportExcel() {
         const filterVal = document.getElementById('filterVehicle').value;
         const filterMonth = document.getElementById('filterMonth').value;
         const filterCia = document.getElementById('filterCia').value;
@@ -5054,7 +4930,7 @@ async function toggleSection(contentId, btnEl) {
 
         if (typeof XLSX !== 'undefined') {
             const defaultExcelName = `Controle_de_Viaturas_Batalhao_${new Date().toISOString().slice(0,10)}`;
-            const userExcelName = await adminPrompt('Digite o nome do arquivo para a planilha Excel (.xlsx):', defaultExcelName);
+            const userExcelName = prompt('Digite o nome do arquivo para a planilha Excel (.xlsx):', defaultExcelName);
             if (userExcelName === null) return;
 
             let finalExcelName = userExcelName.trim() || defaultExcelName;
@@ -5096,10 +4972,10 @@ async function toggleSection(contentId, btnEl) {
         }
     }
 
-    async function factoryResetDatabase() {
-        const confirm1 = await adminConfirm("⚠️ ATENÇÃO: Deseja realmente APAGAR TODO O BANCO DE DADOS?\n\nEsta ação excluirá permanentemente todas as viaturas tanto localmente quanto na nuvem Online.");
+    function factoryResetDatabase() {
+        const confirm1 = confirm("⚠️ ATENÇÃO: Deseja realmente APAGAR TODO O BANCO DE DADOS?\n\nEsta ação excluirá permanentemente todas as viaturas tanto localmente quanto na nuvem Online.");
         if (!confirm1) return;
-        const confirm2 = await adminConfirm("🚨 Confirmação Final: Tem certeza absoluta? Essa ação não poderá ser desfeita!");
+        const confirm2 = confirm("🚨 Confirmação Final: Tem certeza absoluta? Essa ação não poderá ser desfeita!");
         if (!confirm2) return;
 
         Object.keys(localStorage).forEach(key => {
@@ -5135,14 +5011,14 @@ async function toggleSection(contentId, btnEl) {
         showToast("⚠️ <strong>Banco de dados zerado com sucesso!</strong> O painel está novo.");
     }
 
-    async function renameCurrentVehicle() {
+    function renameCurrentVehicle() {
         const selected = document.getElementById('vehicleSelect').value;
         if (!selected) {
             alert('Nenhuma viatura selecionada para renomear.');
             return;
         }
 
-        const newName = await adminPrompt(`Digite o novo prefixo para a viatura "${selected}":`, selected);
+        const newName = prompt(`Digite o novo prefixo para a viatura "${selected}":`, selected);
         if (!newName || !newName.trim()) return;
 
         const cleanNewName = newName.trim().toUpperCase();
@@ -5419,20 +5295,20 @@ async function toggleSection(contentId, btnEl) {
     async function saveAsOriginalBaseline() {
         const ok = await requestAdminPassword("definir a base original da frota");
         if (!ok) return;
-        if (await adminConfirm('Deseja definir o estado atual de todas as viaturas como a nova BASE ORIGINAL para restaurações futuras?')) {
+        if (confirm('Deseja definir o estado atual de todas as viaturas como a nova BASE ORIGINAL para restaurações futuras?')) {
             const currentSnapshot = JSON.parse(JSON.stringify(records));
             localStorage.setItem('batalhao_vtr_custom_original_dataset', JSON.stringify(currentSnapshot));
             showToast('📌 Estado atual da frota definido como <strong>Base Original</strong>!');
         }
     }
 
-    async function clearAllData() {
+    function clearAllData() {
         const hasCustomOriginal = localStorage.getItem('batalhao_vtr_custom_original_dataset');
         const msg = hasCustomOriginal 
             ? 'Atenção: deseja restaurar a frota para o último estado salvo em "Aplicar como Original"?' 
             : 'Atenção: deseja restaurar a frota para a base inicial limpa?';
 
-        if (await adminConfirm(msg)) {
+        if (confirm(msg)) {
             if (hasCustomOriginal) {
                 records = JSON.parse(localStorage.getItem('batalhao_vtr_custom_original_dataset'));
             } else {
@@ -5447,8 +5323,8 @@ async function toggleSection(contentId, btnEl) {
         }
     }
 
-    async function deleteRecord(id) {
-        if (await adminConfirm(`Deseja excluir o registro da viatura ${id}?`)) {
+    function deleteRecord(id) {
+        if (confirm(`Deseja excluir o registro da viatura ${id}?`)) {
             records = records.filter(r => r.vehicle !== id);
             saveRecords();
             populateMonthSelect();
@@ -5459,7 +5335,7 @@ async function toggleSection(contentId, btnEl) {
         }
     }
 
-    async function exportJSON() {
+    function exportJSON() {
         const payload = {
             appTitle: appTitle,
             lastStatusUpdate: localStorage.getItem('batalhao_vtr_last_status_update') || '',
@@ -5490,7 +5366,7 @@ async function toggleSection(contentId, btnEl) {
         };
 
         const defaultName = `Controle_de_Viaturas_Batalhao_${new Date().toISOString().slice(0,10)}`;
-        const userFileName = await adminPrompt('Digite o nome do arquivo para exportar o banco de dados (.json):', defaultName);
+        const userFileName = prompt('Digite o nome do arquivo para exportar o banco de dados (.json):', defaultName);
         if (userFileName === null) return;
 
         let finalName = userFileName.trim();
@@ -5511,7 +5387,7 @@ async function toggleSection(contentId, btnEl) {
     async function triggerImport() {
         const ok = await requestAdminPassword("definir padrão e substituir o banco de dados");
         if (!ok) return;
-        if (await adminConfirm('Atenção: A substituição irá SOBRESCREVER o banco de dados atual pelo arquivo selecionado (.xlsx, .csv, .json).\n\nPara apenas mesclar/incorporar mantendo as viaturas atuais, use a opção "📥 Importar / Conectar Planilha".\n\nDeseja continuar?')) {
+        if (confirm('Atenção: A substituição irá SOBRESCREVER o banco de dados atual pelo arquivo selecionado (.xlsx, .csv, .json).\n\nPara apenas mesclar/incorporar mantendo as viaturas atuais, use a opção "📥 Importar / Conectar Planilha".\n\nDeseja continuar?')) {
             document.getElementById('importInput').click();
         }
     }
@@ -6799,25 +6675,6 @@ async function toggleSection(contentId, btnEl) {
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-outline btn-3d" onclick="closeRowActionModal()">Fechar</button>
-        </div>
-    </div>
-</div>
-
-
-<!-- Modal Universal: Administrador diz -->
-<div id="adminDialogModal" class="modal-overlay" onclick="onAdminDialogOverlayClick(event)">
-    <div class="modal-card" style="max-width: 440px;" onclick="event.stopPropagation()">
-        <div class="modal-header">
-            <div class="modal-title"><span>👮 Administrador diz:</span></div>
-            <button type="button" class="modal-close" onclick="closeAdminDialog(false)" title="Fechar">✖</button>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 12px; padding: 12px 0;">
-            <p id="adminDialogMessage" style="font-size: 0.92rem; color: var(--text-main); line-height: 1.45; white-space: pre-wrap; word-break: break-word;"></p>
-            <input type="text" id="adminDialogInput" style="display: none; font-size: 1rem; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; width: 100%; box-sizing: border-box;" onkeydown="if(event.key==='Enter') confirmAdminDialog()">
-        </div>
-        <div class="modal-footer">
-            <button type="button" id="adminDialogCancelBtn" class="btn btn-outline btn-3d" onclick="closeAdminDialog(false)" style="display: none;">Cancelar</button>
-            <button type="button" id="adminDialogConfirmBtn" class="btn btn-primary btn-3d" onclick="confirmAdminDialog()">OK</button>
         </div>
     </div>
 </div>
