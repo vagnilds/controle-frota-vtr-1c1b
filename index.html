@@ -1018,7 +1018,7 @@
             outline: none;
             transition: all 0.2s;
             width: 100%;
-            min-width: 125px;
+            min-width: 95px;
         }
 
         .inline-select.status-operando {
@@ -2033,7 +2033,7 @@
                 <table>
                     <thead>
                         <tr id="tableHeaderRow">
-                            <th class="col-th-prefixo" data-col="prefixo" style="width: 95px;" title="Coluna Prefixo">
+                            <th class="col-th-prefixo" data-col="prefixo" style="width: 90px;" title="Coluna Prefixo">
                                 <div class="th-content">
                                     <span class="th-title">Prefixo</span>
                                     <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('prefixo')" title="Esconder coluna Prefixo">
@@ -2042,7 +2042,7 @@
                                 </div>
                                 <span class="th-collapsed-indicator">Prefixo</span>
                             </th>
-                            <th class="col-th-cia" data-col="cia" style="width: 125px;" title="Coluna Companhia">
+                            <th class="col-th-cia" data-col="cia" style="width: 110px;" title="Coluna Companhia">
                                 <div class="th-content">
                                     <span class="th-title">Companhia</span>
                                     <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('cia')" title="Esconder coluna Companhia">
@@ -2051,7 +2051,7 @@
                                 </div>
                                 <span class="th-collapsed-indicator">Companhia</span>
                             </th>
-                            <th class="col-th-modelo" data-col="modelo" style="width: 150px;" title="Coluna Modelo">
+                            <th class="col-th-modelo" data-col="modelo" style="width: 130px;" title="Coluna Modelo">
                                 <div class="th-content">
                                     <span class="th-title">Modelo</span>
                                     <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('modelo')" title="Esconder coluna Modelo">
@@ -2060,7 +2060,7 @@
                                 </div>
                                 <span class="th-collapsed-indicator">Modelo</span>
                             </th>
-                            <th class="col-th-pelotao" data-col="pelotao" style="width: 110px;" title="Coluna Pelotão">
+                            <th class="col-th-pelotao" data-col="pelotao" style="width: 95px;" title="Coluna Pelotão">
                                 <div class="th-content">
                                     <span class="th-title">Pelotão</span>
                                     <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('pelotao')" title="Esconder coluna Pelotão">
@@ -2069,34 +2069,34 @@
                                 </div>
                                 <span class="th-collapsed-indicator">Pelotão</span>
                             </th>
-                            <th class="col-th-status" data-col="status" style="width: 135px;" title="Coluna Status (Operação)">
+                            <th class="col-th-status" data-col="status" style="width: 105px;" title="Coluna Status">
                                 <div class="th-content">
-                                    <span class="th-title">Status (Operação)</span>
+                                    <span class="th-title">Status</span>
                                     <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('status')" title="Esconder coluna Status">
                                         <span class="col-toggle-icon">◀</span>
                                     </button>
                                 </div>
                                 <span class="th-collapsed-indicator">Status</span>
                             </th>
-                            <th class="col-th-obs" data-col="obs" style="min-width: 190px;" title="Coluna Motivo da Baixa / Defeitos">
+                            <th class="col-th-destino" data-col="destino" style="width: 115px;" title="Coluna QTH da VTR">
                                 <div class="th-content">
-                                    <span class="th-title">Motivo da Baixa / Defeitos</span>
-                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('obs')" title="Esconder coluna Motivo">
+                                    <span class="th-title">QTH da VTR</span>
+                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('destino')" title="Esconder coluna QTH da VTR">
+                                        <span class="col-toggle-icon">◀</span>
+                                    </button>
+                                </div>
+                                <span class="th-collapsed-indicator">QTH</span>
+                            </th>
+                            <th class="col-th-obs" data-col="obs" style="min-width: 250px;" title="Coluna Motivo da Baixa / Observações">
+                                <div class="th-content">
+                                    <span class="th-title">Motivo / Observações</span>
+                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('obs')" title="Esconder coluna Motivo / Observações">
                                         <span class="col-toggle-icon">◀</span>
                                     </button>
                                 </div>
                                 <span class="th-collapsed-indicator">Motivo</span>
                             </th>
-                            <th class="col-th-destino" data-col="destino" style="width: 140px;" title="Coluna Local Onde Se Encontra">
-                                <div class="th-content">
-                                    <span class="th-title">Local Onde Se Encontra</span>
-                                    <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('destino')" title="Esconder coluna Local">
-                                        <span class="col-toggle-icon">◀</span>
-                                    </button>
-                                </div>
-                                <span class="th-collapsed-indicator">Local</span>
-                            </th>
-                            <th class="col-th-data" data-col="data" style="min-width: 220px;" title="Coluna Data / Observações">
+                            <th class="col-th-data" data-col="data" style="width: 220px;" title="Coluna Data / Observações">
                                 <div class="th-content">
                                     <span class="th-title">Data / Observações</span>
                                     <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('data')" title="Esconder coluna Data">
@@ -2105,7 +2105,7 @@
                                 </div>
                                 <span class="th-collapsed-indicator">Data</span>
                             </th>
-                            <th class="col-th-acoes" data-col="acoes" style="width: 155px; text-align: center;" title="Coluna Ações">
+                            <th class="col-th-acoes" data-col="acoes" style="width: 95px; text-align: center;" title="Coluna Ações">
                                 <div class="th-content" style="justify-content: center;">
                                     <span class="th-title">Ações</span>
                                     <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('acoes')" title="Esconder coluna Ações">
@@ -2205,7 +2205,7 @@
                         <input type="text" id="qaObs" placeholder="Ex: Arrefecimento, Motor, Rádio, Luminosos...">
                     </div>
                     <div class="quick-add-field">
-                        <label for="qaDestino">Local (Destino) <span class="label-btn-add" onclick="addNewLocalPrompt()">+ Criar</span></label>
+                        <label for="qaDestino">QTH da VTR (Destino) <span class="label-btn-add" onclick="addNewLocalPrompt()">+ Criar</span></label>
                         <select id="qaDestino"></select>
                     </div>
                     <div class="quick-add-field">
@@ -2262,7 +2262,7 @@
                         <input type="text" id="qeObs" placeholder="Ex: Arrefecimento, Motor, Rádio, Luminosos...">
                     </div>
                     <div class="quick-edit-field">
-                        <label for="qeDestino">Local (Destino) <span class="label-btn-add" onclick="addNewLocalPrompt()">+ Criar</span></label>
+                        <label for="qeDestino">QTH da VTR (Destino) <span class="label-btn-add" onclick="addNewLocalPrompt()">+ Criar</span></label>
                         <select id="qeDestino"></select>
                     </div>
                     <div class="quick-edit-field">
@@ -2347,7 +2347,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="vehicleLocation">Local Onde Se Encontra (Destino) *</label>
+                        <label for="vehicleLocation">QTH da VTR (Destino) *</label>
                         <select id="vehicleLocation" required></select>
                         <div style="display: flex; flex-direction: column; gap: 4px; margin-top: 4px;">
                             <button type="button" class="btn btn-outline btn-3d btn-sm" style="font-size: 0.8rem; justify-content: center;" onclick="addNewLocalPrompt()">➕ Adicionar Local</button>
@@ -2420,7 +2420,7 @@
                 <div class="form-group"><label for="modalModel">Modelo <span class="label-btn-add" onclick="addNewModelPrompt()">+ Criar</span></label><select id="modalModel"></select></div>
                 <div class="form-group"><label for="modalPelotao">Pelotão <span class="label-btn-add" onclick="addNewPelotaoPrompt()">+ Criar</span></label><select id="modalPelotao"></select></div>
                 <div class="form-group"><label for="modalStatus">Situação Operacional (Status) * <span class="label-btn-add" onclick="addNewStatusPrompt()">+ Criar</span></label><select id="modalStatus" required onchange="onModalStatusChange()"></select></div>
-                <div class="form-group"><label for="modalLocation">Local Onde Se Encontra (Destino) * <span class="label-btn-add" onclick="addNewLocalPrompt()">+ Criar</span></label><select id="modalLocation" required></select></div>
+                <div class="form-group"><label for="modalLocation">QTH da VTR (Destino) * <span class="label-btn-add" onclick="addNewLocalPrompt()">+ Criar</span></label><select id="modalLocation" required></select></div>
                 <div class="form-group"><label for="modalDate">Data do Registro *</label><input type="date" id="modalDate" required></div>
                 <div class="form-group full"><label for="modalObs">Motivo da Baixa / Observações</label><input type="text" id="modalObs" placeholder="Ex: Sistema de Arrefecimento, Motor, Arranque, Embreagem, Câmbio, Rádio, Luminosos"></div>
                 <div class="form-group full"><label for="modalDataForms">Referência Forms / Texto</label><input type="text" id="modalDataForms" placeholder="Ex: 29/07 ou 07/07/2026 E 29/07"></div>
@@ -3058,9 +3058,9 @@
         'cia': 'Companhia',
         'modelo': 'Modelo',
         'pelotao': 'Pelotão',
-        'status': 'Status (Operação)',
+        'status': 'Status',
         'obs': 'Motivo da Baixa / Defeitos',
-        'destino': 'Local Onde Se Encontra',
+        'destino': 'QTH da VTR',
         'data': 'Data Forms / Registro',
         'acoes': 'Ações'
     };
@@ -4560,7 +4560,7 @@ async function toggleSection(contentId, btnEl) {
                     "Pelotão": r.pelotao || '-',
                     "Situação Operacional": r.status || 'OPERANDO',
                     "Motivo da Baixa / Observações": r.obs || '-',
-                    "Local Onde Se Encontra (Destino)": r.destino || '-',
+                    "QTH da VTR (Destino)": r.destino || '-',
                     "Referência Forms": r.data_forms || '-'
                 };
             });
@@ -5925,41 +5925,41 @@ async function toggleSection(contentId, btnEl) {
                         </div>
                     </td>
                     <td class="col-td-cia ${isHidCia}">
-                        <select class="inline-input" style="width: 100%; min-width: 110px; padding: 5px 6px; font-weight: 700; color: var(--primary);" onchange="updateInlineField('${r.vehicle}', 'cia', this.value)">
+                        <select class="inline-input" style="width: 100%; min-width: 100px; padding: 4px 6px; font-weight: 700; color: var(--primary);" onchange="updateInlineField('${r.vehicle}', 'cia', this.value)">
                             ${ciaOptionsHtml}
                         </select>
                     </td>
                     <td class="col-td-modelo ${isHidModelo}">
-                        <select class="inline-input" style="width: 100%; min-width: 155px; padding: 5px 6px; font-weight: 600;" onchange="updateInlineField('${r.vehicle}', 'model', this.value)">
+                        <select class="inline-input" style="width: 100%; min-width: 125px; padding: 4px 6px; font-weight: 600;" onchange="updateInlineField('${r.vehicle}', 'model', this.value)">
                             ${modelOptionsHtml}
                         </select>
                     </td>
                     <td class="col-td-pelotao ${isHidPelotao}">
-                        <select class="inline-input" style="width: 100%; min-width: 100px; padding: 5px 6px; font-weight: 500;" onchange="updateInlineField('${r.vehicle}', 'pelotao', this.value)">
+                        <select class="inline-input" style="width: 100%; min-width: 90px; padding: 4px 6px; font-weight: 500;" onchange="updateInlineField('${r.vehicle}', 'pelotao', this.value)">
                             ${pelOptionsHtml}
                         </select>
                     </td>
                     <td class="col-td-status ${isHidStatus}">
-                        <select id="inline-status-${r.vehicle}" class="inline-select ${statusClass}" onchange="updateInlineField('${r.vehicle}', 'status', this.value)">
+                        <select id="inline-status-${r.vehicle}" class="inline-select ${statusClass}" style="width: 100%; min-width: 95px; padding: 4px 6px; font-size: 0.8rem;" onchange="updateInlineField('${r.vehicle}', 'status', this.value)">
                             ${statusOptionsHtml}
                         </select>
                     </td>
-                    <td class="col-td-obs ${isHidObs}">
-                        <input type="text" class="inline-input" style="width: 100%; min-width: 210px;" value="${r.obs || ''}" placeholder="Motivo / Defeitos..." onchange="updateInlineField('${r.vehicle}', 'obs', this.value)">
-                    </td>
                     <td class="col-td-destino ${isHidDestino}">
-                        <select class="inline-input" style="width: 100%; min-width: 140px; padding: 5px 6px; font-weight: 500;" onchange="updateInlineField('${r.vehicle}', 'destino', this.value)">
+                        <select class="inline-input" style="width: 100%; min-width: 105px; padding: 4px 6px; font-weight: 500;" onchange="updateInlineField('${r.vehicle}', 'destino', this.value)">
                             ${localOptionsHtml}
                         </select>
                     </td>
+                    <td class="col-td-obs ${isHidObs}" title="${r.obs ? 'Observação: ' + r.obs : 'Nenhuma observação'}">
+                        <input type="text" class="inline-input" style="width: 100%; min-width: 220px;" value="${r.obs || ''}" title="${r.obs ? 'Observação: ' + r.obs : 'Motivo da baixa / Observações...'}" placeholder="Motivo / Observações..." oninput="this.title = this.value ? 'Observação: ' + this.value : 'Motivo da baixa / Observações...'; this.parentElement.title = this.title;" onchange="updateInlineField('${r.vehicle}', 'obs', this.value)">
+                    </td>
                     <td class="col-td-data ${isHidData}">
-                        <div style="display: flex; gap: 6px; align-items: center; min-width: 240px;">
-                            <input type="date" class="inline-input" style="width: 125px; font-size: 0.8rem; padding: 4px 6px;" value="${formattedDate}" onchange="updateInlineField('${r.vehicle}', 'date', this.value)">
-                            <input type="text" class="inline-input" style="flex: 1; min-width: 110px; font-size: 0.8rem; padding: 4px 6px;" value="${r.data_forms || ''}" placeholder="Observações..." onchange="updateInlineField('${r.vehicle}', 'data_forms', this.value)">
+                        <div style="display: flex; gap: 6px; align-items: center; min-width: 215px;">
+                            <input type="date" class="inline-input" style="width: 110px; font-size: 0.8rem; padding: 4px 6px;" value="${formattedDate}" onchange="updateInlineField('${r.vehicle}', 'date', this.value)">
+                            <input type="text" class="inline-input" style="flex: 1; min-width: 95px; font-size: 0.8rem; padding: 4px 6px;" value="${r.data_forms || ''}" title="${r.data_forms ? 'Observações: ' + r.data_forms : 'Observações...'}" placeholder="Observações..." oninput="this.title = this.value ? 'Observações: ' + this.value : 'Observações...';" onchange="updateInlineField('${r.vehicle}', 'data_forms', this.value)">
                         </div>
                     </td>
-                    <td class="col-td-acoes ${isHidAcoes}" style="text-align: center;">
-                        <div class="actions-cell">
+                    <td class="col-td-acoes ${isHidAcoes}" style="text-align: center; width: 95px;">
+                        <div class="actions-cell" style="justify-content: center;">
                             <button type="button" class="btn btn-edit-sector btn-3d btn-sm" onclick="handleRowActionClick('${r.vehicle}')" title="Opções da Viatura (Requer Senha ADM)">✏️ Editar</button>
                         </div>
                     </td>
