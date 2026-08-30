@@ -1863,6 +1863,66 @@
             color: #fef08a !important;
         }
 
+    
+        /* Container de Input com Botão de Limpar (X Vermelho em Quadrado Azul Claro) */
+        .input-clearable-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .input-clearable-wrapper .inline-input {
+            width: 100%;
+            padding-right: 28px !important;
+            box-sizing: border-box;
+        }
+
+        .btn-clear-input {
+            position: absolute;
+            right: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background-color: #e0f2fe !important;
+            border: 1px solid #bae6fd !important;
+            border-radius: 4px !important;
+            color: #ef4444 !important;
+            font-size: 11px !important;
+            font-weight: 900 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            line-height: 1 !important;
+            padding: 0 !important;
+            transition: all 0.15s ease !important;
+            user-select: none !important;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+            z-index: 2;
+        }
+
+        .btn-clear-input:hover {
+            background-color: #bae6fd !important;
+            border-color: #7dd3fc !important;
+            color: #dc2626 !important;
+            transform: translateY(-50%) scale(1.1) !important;
+            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.25) !important;
+        }
+
+        [data-theme="dark"] .btn-clear-input {
+            background-color: #0c4a6e !important;
+            border-color: #0284c7 !important;
+            color: #f87171 !important;
+        }
+
+        [data-theme="dark"] .btn-clear-input:hover {
+            background-color: #075985 !important;
+            border-color: #38bdf8 !important;
+            color: #ef4444 !important;
+        }
+
     </style>
 </head>
 <body>
@@ -2037,7 +2097,7 @@
                 <table>
                     <thead>
                         <tr id="tableHeaderRow">
-                            <th class="col-th-prefixo" data-col="prefixo" style="width: 90px;" title="Coluna Prefixo">
+                            <th class="col-th-prefixo" data-col="prefixo" style="width: 105px; min-width: 100px;" title="Coluna Prefixo">
                                 <div class="th-content">
                                     <span class="th-title">Prefixo</span>
                                     <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('prefixo')" title="Esconder coluna Prefixo">
@@ -2046,7 +2106,7 @@
                                 </div>
                                 <span class="th-collapsed-indicator">Prefixo</span>
                             </th>
-                            <th class="col-th-cia" data-col="cia" style="width: 110px;" title="Coluna Companhia">
+                            <th class="col-th-cia" data-col="cia" style="width: 135px; min-width: 130px;" title="Coluna Companhia">
                                 <div class="th-content">
                                     <span class="th-title">Companhia</span>
                                     <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('cia')" title="Esconder coluna Companhia">
@@ -2055,7 +2115,7 @@
                                 </div>
                                 <span class="th-collapsed-indicator">Companhia</span>
                             </th>
-                            <th class="col-th-modelo" data-col="modelo" style="width: 130px;" title="Coluna Modelo">
+                            <th class="col-th-modelo" data-col="modelo" style="width: 170px; min-width: 165px;" title="Coluna Modelo">
                                 <div class="th-content">
                                     <span class="th-title">Modelo</span>
                                     <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('modelo')" title="Esconder coluna Modelo">
@@ -2064,7 +2124,7 @@
                                 </div>
                                 <span class="th-collapsed-indicator">Modelo</span>
                             </th>
-                            <th class="col-th-pelotao" data-col="pelotao" style="width: 95px;" title="Coluna Pelotão">
+                            <th class="col-th-pelotao" data-col="pelotao" style="width: 120px; min-width: 115px;" title="Coluna Pelotão">
                                 <div class="th-content">
                                     <span class="th-title">Pelotão</span>
                                     <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('pelotao')" title="Esconder coluna Pelotão">
@@ -2073,7 +2133,7 @@
                                 </div>
                                 <span class="th-collapsed-indicator">Pelotão</span>
                             </th>
-                            <th class="col-th-status" data-col="status" style="width: 140px; min-width: 135px;" title="Coluna Status">
+                            <th class="col-th-status" data-col="status" style="width: 145px; min-width: 140px;" title="Coluna Status">
                                 <div class="th-content">
                                     <span class="th-title">Status</span>
                                     <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('status')" title="Esconder coluna Status">
@@ -2082,7 +2142,7 @@
                                 </div>
                                 <span class="th-collapsed-indicator">Status</span>
                             </th>
-                            <th class="col-th-destino" data-col="destino" style="width: 115px;" title="Coluna QTH da VTR">
+                            <th class="col-th-destino" data-col="destino" style="width: 165px; min-width: 160px;" title="Coluna QTH da VTR">
                                 <div class="th-content">
                                     <span class="th-title">QTH da VTR</span>
                                     <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('destino')" title="Esconder coluna QTH da VTR">
@@ -2100,7 +2160,7 @@
                                 </div>
                                 <span class="th-collapsed-indicator">Motivo</span>
                             </th>
-                            <th class="col-th-data" data-col="data" style="width: 220px;" title="Coluna Data / Observações">
+                            <th class="col-th-data" data-col="data" style="width: 285px; min-width: 280px;" title="Coluna Data / Observações">
                                 <div class="th-content">
                                     <span class="th-title">Data / Observações</span>
                                     <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('data')" title="Esconder coluna Data">
@@ -2109,7 +2169,7 @@
                                 </div>
                                 <span class="th-collapsed-indicator">Data</span>
                             </th>
-                            <th class="col-th-acoes" data-col="acoes" style="width: 95px; text-align: center;" title="Coluna Ações">
+                            <th class="col-th-acoes" data-col="acoes" style="width: 105px; min-width: 100px; text-align: center;" title="Coluna Ações">
                                 <div class="th-content" style="justify-content: center;">
                                     <span class="th-title">Ações</span>
                                     <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('acoes')" title="Esconder coluna Ações">
@@ -4108,6 +4168,20 @@
         showToast(`🎉 Viatura <strong>${prefixo}</strong> (${cia}) salva online com sucesso!`);
     }
 
+    
+    function clearInlineField(vehicleId, fieldName, inputElementId) {
+        const inputEl = document.getElementById(inputElementId);
+        if (inputEl) {
+            inputEl.value = '';
+            inputEl.title = fieldName === 'obs' ? 'Motivo da baixa / Observações...' : 'Observações...';
+            if (inputEl.closest('td')) {
+                inputEl.closest('td').title = 'Nenhuma observação';
+            }
+        }
+        updateInlineField(vehicleId, fieldName, '');
+        showToast(`🧹 Campo limpo para a viatura <strong>${vehicleId}</strong>!`);
+    }
+
     function updateInlineField(vehicleId, fieldName, value) {
         const v = records.find(r => r.vehicle === vehicleId);
         if (!v) return;
@@ -5970,40 +6044,46 @@ async function toggleSection(contentId, btnEl) {
                         </div>
                     </td>
                     <td class="col-td-cia ${isHidCia}">
-                        <select class="inline-input" style="width: 100%; min-width: 100px; padding: 4px 6px; font-weight: 700; color: var(--primary);" onchange="updateInlineField('${r.vehicle}', 'cia', this.value)">
+                        <select class="inline-input" style="width: 100%; min-width: 120px; padding: 4px 6px; font-weight: 700; color: var(--primary);" onchange="updateInlineField('${r.vehicle}', 'cia', this.value)">
                             ${ciaOptionsHtml}
                         </select>
                     </td>
                     <td class="col-td-modelo ${isHidModelo}">
-                        <select class="inline-input" style="width: 100%; min-width: 125px; padding: 4px 6px; font-weight: 600;" onchange="updateInlineField('${r.vehicle}', 'model', this.value)">
+                        <select class="inline-input" style="width: 100%; min-width: 155px; padding: 4px 6px; font-weight: 600;" onchange="updateInlineField('${r.vehicle}', 'model', this.value)">
                             ${modelOptionsHtml}
                         </select>
                     </td>
                     <td class="col-td-pelotao ${isHidPelotao}">
-                        <select class="inline-input" style="width: 100%; min-width: 90px; padding: 4px 6px; font-weight: 500;" onchange="updateInlineField('${r.vehicle}', 'pelotao', this.value)">
+                        <select class="inline-input" style="width: 100%; min-width: 105px; padding: 4px 6px; font-weight: 500;" onchange="updateInlineField('${r.vehicle}', 'pelotao', this.value)">
                             ${pelOptionsHtml}
                         </select>
                     </td>
-                    <td class="col-td-status ${isHidStatus}" style="width: 140px; min-width: 135px;">
-                        <select id="inline-status-${r.vehicle}" class="inline-select ${statusClass}" style="width: 100%; min-width: 125px; font-size: 0.82rem; padding: 4px 6px;" onchange="updateInlineField('${r.vehicle}', 'status', this.value)">
+                    <td class="col-td-status ${isHidStatus}" style="width: 145px; min-width: 140px;">
+                        <select id="inline-status-${r.vehicle}" class="inline-select ${statusClass}" style="width: 100%; min-width: 130px; font-size: 0.82rem; padding: 4px 6px;" onchange="updateInlineField('${r.vehicle}', 'status', this.value)">
                             ${statusOptionsHtml}
                         </select>
                     </td>
                     <td class="col-td-destino ${isHidDestino}">
-                        <select class="inline-input" style="width: 100%; min-width: 105px; padding: 4px 6px; font-weight: 500;" onchange="updateInlineField('${r.vehicle}', 'destino', this.value)">
+                        <select class="inline-input" style="width: 100%; min-width: 150px; padding: 4px 6px; font-weight: 500;" onchange="updateInlineField('${r.vehicle}', 'destino', this.value)">
                             ${localOptionsHtml}
                         </select>
                     </td>
                     <td class="col-td-obs ${isHidObs}" title="${r.obs ? 'Observação: ' + r.obs : 'Nenhuma observação'}">
-                        <input type="text" class="inline-input" style="width: 100%; min-width: 220px;" value="${r.obs || ''}" title="${r.obs ? 'Observação: ' + r.obs : 'Motivo da baixa / Observações...'}" placeholder="Motivo / Observações..." oninput="this.title = this.value ? 'Observação: ' + this.value : 'Motivo da baixa / Observações...'; this.parentElement.title = this.title;" onchange="updateInlineField('${r.vehicle}', 'obs', this.value)">
-                    </td>
-                    <td class="col-td-data ${isHidData}">
-                        <div style="display: flex; gap: 6px; align-items: center; min-width: 215px;">
-                            <input type="date" class="inline-input" style="width: 110px; font-size: 0.8rem; padding: 4px 6px;" value="${formattedDate}" onchange="updateInlineField('${r.vehicle}', 'date', this.value)">
-                            <input type="text" class="inline-input" style="flex: 1; min-width: 95px; font-size: 0.8rem; padding: 4px 6px;" value="${r.data_forms || ''}" title="${r.data_forms ? 'Observações: ' + r.data_forms : 'Observações...'}" placeholder="Observações..." oninput="this.title = this.value ? 'Observações: ' + this.value : 'Observações...';" onchange="updateInlineField('${r.vehicle}', 'data_forms', this.value)">
+                        <div class="input-clearable-wrapper">
+                            <input type="text" id="inline-obs-${r.vehicle}" class="inline-input" style="width: 100%; min-width: 220px;" value="${r.obs || ''}" title="${r.obs ? 'Observação: ' + r.obs : 'Motivo da baixa / Observações...'}" placeholder="Motivo / Observações..." oninput="this.title = this.value ? 'Observação: ' + this.value : 'Motivo da baixa / Observações...'; this.closest('td').title = this.title;" onchange="updateInlineField('${r.vehicle}', 'obs', this.value)">
+                            <button type="button" class="btn-clear-input" onclick="clearInlineField('${r.vehicle}', 'obs', 'inline-obs-${r.vehicle}')" title="Limpar">✖</button>
                         </div>
                     </td>
-                    <td class="col-td-acoes ${isHidAcoes}" style="text-align: center; width: 95px;">
+                    <td class="col-td-data ${isHidData}">
+                        <div style="display: flex; gap: 6px; align-items: center; min-width: 265px;">
+                            <input type="date" class="inline-input" style="width: 115px; font-size: 0.8rem; padding: 4px 6px;" value="${formattedDate}" onchange="updateInlineField('${r.vehicle}', 'date', this.value)">
+                            <div class="input-clearable-wrapper" style="flex: 1; min-width: 135px;">
+                                <input type="text" id="inline-dataforms-${r.vehicle}" class="inline-input" style="width: 100%; font-size: 0.8rem; padding: 4px 6px;" value="${r.data_forms || ''}" title="${r.data_forms ? 'Observações: ' + r.data_forms : 'Observações...'}" placeholder="Observações..." oninput="this.title = this.value ? 'Observações: ' + this.value : 'Observações...';" onchange="updateInlineField('${r.vehicle}', 'data_forms', this.value)">
+                                <button type="button" class="btn-clear-input" onclick="clearInlineField('${r.vehicle}', 'data_forms', 'inline-dataforms-${r.vehicle}')" title="Limpar">✖</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="col-td-acoes ${isHidAcoes}" style="text-align: center; width: 105px;">
                         <div class="actions-cell" style="justify-content: center;">
                             <button type="button" class="btn btn-edit-sector btn-3d btn-sm" onclick="handleRowActionClick('${r.vehicle}')" title="Opções da Viatura (Requer Senha ADM)">✏️ Editar</button>
                         </div>
