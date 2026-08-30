@@ -3536,12 +3536,12 @@
         showToast(`🏛️ Companhia <strong>${clean}</strong> acrescentada com sucesso!`);
     }
 
-    function removeCia(cia) {
+    async function removeCia(cia) {
         if (customCias.length <= 1) {
             alert('Você deve manter ao menos uma Companhia cadastrada.');
             return;
         }
-        if (confirm(`Deseja remover "${cia}" da lista de Companhias?`)) {
+        if (await adminConfirm(`Deseja remover "${cia}" da lista de Companhias?`)) {
             customCias = customCias.filter(c => c !== cia);
             localStorage.setItem('batalhao_vtr_custom_cias', JSON.stringify(customCias));
             populateAllCiaSelects();
@@ -3630,12 +3630,12 @@
         showToast(`🚗 Modelo <strong>${clean}</strong> acrescentado com sucesso!`);
     }
 
-    function removeModel(model) {
+    async function removeModel(model) {
         if (customModels.length <= 1) {
             alert('Você deve manter ao menos um modelo cadastrado.');
             return;
         }
-        if (confirm(`Deseja remover o modelo "${model}" da lista de opções?`)) {
+        if (await adminConfirm(`Deseja remover o modelo "${model}" da lista de opções?`)) {
             customModels = customModels.filter(m => m !== model);
             customModels = sortModelsList(customModels);
             localStorage.setItem('batalhao_vtr_custom_models', JSON.stringify(customModels));
@@ -3829,12 +3829,12 @@
         showToast(`🛡️ Pelotão <strong>${clean}</strong> acrescentado com sucesso!`);
     }
 
-    function removePelotao(pel) {
+    async function removePelotao(pel) {
         if (customPelotoes.length <= 1) {
             alert('Você deve manter ao menos um pelotão cadastrado.');
             return;
         }
-        if (confirm(`Deseja remover "${pel}" da lista de pelotões?`)) {
+        if (await adminConfirm(`Deseja remover "${pel}" da lista de pelotões?`)) {
             customPelotoes = customPelotoes.filter(p => p !== pel);
             localStorage.setItem('batalhao_vtr_custom_pelotoes', JSON.stringify(customPelotoes));
             populateAllPelotaoSelects();
@@ -3875,12 +3875,12 @@
         showToast(`🚥 Status <strong>${clean}</strong> acrescentado com sucesso!`);
     }
 
-    function removeStatus(st) {
+    async function removeStatus(st) {
         if (customStatuses.length <= 1) {
             alert('Você deve manter ao menos um status cadastrado.');
             return;
         }
-        if (confirm(`Deseja remover o status "${st}" da lista de opções?`)) {
+        if (await adminConfirm(`Deseja remover o status "${st}" da lista de opções?`)) {
             customStatuses = customStatuses.filter(s => s !== st);
             localStorage.setItem('batalhao_vtr_custom_statuses', JSON.stringify(customStatuses));
             populateAllStatusSelects();
@@ -3924,12 +3924,12 @@
         showToast(`📍 Local <strong>${clean}</strong> acrescentado com sucesso!`);
     }
 
-    function removeLocal(loc) {
+    async function removeLocal(loc) {
         if (customLocais.length <= 1) {
             alert('Você deve manter ao menos um local cadastrado.');
             return;
         }
-        if (confirm(`Deseja remover o local "${loc}" da lista de opções?`)) {
+        if (await adminConfirm(`Deseja remover o local "${loc}" da lista de opções?`)) {
             customLocais = customLocais.filter(l => l !== loc);
             localStorage.setItem('batalhao_vtr_custom_locais', JSON.stringify(customLocais));
             populateAllLocalSelects();
@@ -4226,6 +4226,16 @@
     let barChartEletricaInstance = null;
     let doughnutChartInstance = null;
     let toastTimer = null;
+
+    
+    // Substitui alert nativo para usar Toast e Diálogo amigável (sem cabeçalho de URL do navegador)
+    window.alert = function(msg) {
+        if (typeof showToast === 'function') {
+            showToast(msg);
+        } else if (typeof adminAlert === 'function') {
+            adminAlert(msg);
+        }
+    };
 
     function showToast(msg) {
         const toast = document.getElementById('toastNotification');
@@ -5015,7 +5025,7 @@ async function toggleSection(contentId, btnEl) {
         renderDashboard();
     }
 
-    function exportExcel() {
+    async function exportExcel() {
         const filterVal = document.getElementById('filterVehicle').value;
         const filterMonth = document.getElementById('filterMonth').value;
         const filterCia = document.getElementById('filterCia').value;
@@ -5044,7 +5054,7 @@ async function toggleSection(contentId, btnEl) {
 
         if (typeof XLSX !== 'undefined') {
             const defaultExcelName = `Controle_de_Viaturas_Batalhao_${new Date().toISOString().slice(0,10)}`;
-            const userExcelName = prompt('Digite o nome do arquivo para a planilha Excel (.xlsx):', defaultExcelName);
+            const userExcelName = await adminPrompt('Digite o nome do arquivo para a planilha Excel (.xlsx):', defaultExcelName);
             if (userExcelName === null) return;
 
             let finalExcelName = userExcelName.trim() || defaultExcelName;
@@ -5125,14 +5135,14 @@ async function toggleSection(contentId, btnEl) {
         showToast("⚠️ <strong>Banco de dados zerado com sucesso!</strong> O painel está novo.");
     }
 
-    function renameCurrentVehicle() {
+    async function renameCurrentVehicle() {
         const selected = document.getElementById('vehicleSelect').value;
         if (!selected) {
             alert('Nenhuma viatura selecionada para renomear.');
             return;
         }
 
-        const newName = prompt(`Digite o novo prefixo para a viatura "${selected}":`, selected);
+        const newName = await adminPrompt(`Digite o novo prefixo para a viatura "${selected}":`, selected);
         if (!newName || !newName.trim()) return;
 
         const cleanNewName = newName.trim().toUpperCase();
@@ -5449,7 +5459,7 @@ async function toggleSection(contentId, btnEl) {
         }
     }
 
-    function exportJSON() {
+    async function exportJSON() {
         const payload = {
             appTitle: appTitle,
             lastStatusUpdate: localStorage.getItem('batalhao_vtr_last_status_update') || '',
@@ -5480,7 +5490,7 @@ async function toggleSection(contentId, btnEl) {
         };
 
         const defaultName = `Controle_de_Viaturas_Batalhao_${new Date().toISOString().slice(0,10)}`;
-        const userFileName = prompt('Digite o nome do arquivo para exportar o banco de dados (.json):', defaultName);
+        const userFileName = await adminPrompt('Digite o nome do arquivo para exportar o banco de dados (.json):', defaultName);
         if (userFileName === null) return;
 
         let finalName = userFileName.trim();
