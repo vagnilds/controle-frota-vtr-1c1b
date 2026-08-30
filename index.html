@@ -1009,7 +1009,7 @@
         }
 
         .inline-select {
-            padding: 6px 8px;
+            padding: 4px 6px;
             border-radius: 6px;
             font-size: 0.82rem;
             font-weight: 700;
@@ -1018,7 +1018,11 @@
             outline: none;
             transition: all 0.2s;
             width: 100%;
-            min-width: 95px;
+            min-width: 120px;
+            text-align: center;
+            text-align-last: center;
+            box-sizing: border-box;
+            white-space: nowrap;
         }
 
         .inline-select.status-operando {
@@ -2069,7 +2073,7 @@
                                 </div>
                                 <span class="th-collapsed-indicator">Pelotão</span>
                             </th>
-                            <th class="col-th-status" data-col="status" style="width: 105px;" title="Coluna Status">
+                            <th class="col-th-status" data-col="status" style="width: 130px; min-width: 125px;" title="Coluna Status">
                                 <div class="th-content">
                                     <span class="th-title">Status</span>
                                     <button type="button" class="btn-col-toggle" onclick="toggleColumnVisibility('status')" title="Esconder coluna Status">
@@ -2752,7 +2756,7 @@
         if (txt) txt.textContent = text;
     }
 
-    async function loadDataFromOnline(isBackground = false) {
+    async async function loadDataFromOnline(isBackground = false) {
         if (!isBackground) setCloudStatusBadge('syncing', 'Conectando Online...');
         try {
             const res = await executeApiRequest('GET');
@@ -2773,12 +2777,48 @@
                     isCloudConnected = true;
                     return;
                 }
+
+                // PROTEÇÃO INTELIGENTE CONTRA REDEPLOY DO RENDER / GITHUB:
+                // Se o navegador tem dados locais modificados mais recentes que o banco padrão do deploy no servidor,
+                // preserva os dados locais e reenvia automaticamente para o servidor!
+                const localUpdatedAt = localStorage.getItem('batalhao_vtr_updated_at') || '';
+                const serverUpdatedAt = data.updatedAt || '';
+                const localHasData = records && Array.isArray(records) && records.length > 0;
+
+                if (localHasData && localUpdatedAt && serverUpdatedAt) {
+                    const localTime = new Date(localUpdatedAt).getTime();
+                    const serverTime = new Date(serverUpdatedAt).getTime();
+
+                    if (localTime > serverTime) {
+                        console.log('⚡ Dados locais mais recentes que o servidor (novo deploy detectado). Restaurando banco no servidor...');
+                        lastSyncedHash = generateDataHash({
+                            records: records,
+                            customCias: customCias,
+                            customModels: customModels,
+                            customPelotoes: customPelotoes,
+                            customStatuses: customStatuses,
+                            customLocais: customLocais,
+                            customQuickReasons: customQuickReasons,
+                            appTitle: appTitle,
+                            lastStatusUpdate: localStorage.getItem('batalhao_vtr_last_status_update') || '',
+                            updatedAt: localUpdatedAt
+                        });
+                        syncAllDataToOnline(true);
+                        setCloudStatusBadge('connected', '🟢 Online');
+                        isCloudConnected = true;
+                        return;
+                    }
+                }
+
                 lastSyncedHash = currentHash;
                 isRemoteUpdate = true;
 
                 if (Array.isArray(data.records)) {
                     records = data.records;
                     localStorage.setItem('batalhao_vtr_records', JSON.stringify(records));
+                }
+                if (data.updatedAt) {
+                    localStorage.setItem('batalhao_vtr_updated_at', data.updatedAt);
                 }
                 if (Array.isArray(data.customCias)) {
                     customCias = data.customCias;
@@ -2844,8 +2884,11 @@
         }
     }
 
-    async function syncAllDataToOnline(force = false) {
+    async async function syncAllDataToOnline(force = false) {
         if (isRemoteUpdate && !force) return;
+
+        const now = new Date().toISOString();
+        localStorage.setItem('batalhao_vtr_updated_at', now);
 
         const payload = {
             records: records || [],
@@ -2857,7 +2900,7 @@
             customQuickReasons: customQuickReasons || [],
             appTitle: appTitle || '🚓 CONTROLE DE VIATURAS - BATALHÃO',
             lastStatusUpdate: localStorage.getItem('batalhao_vtr_last_status_update') || '',
-            updatedAt: new Date().toISOString()
+            updatedAt: now
         };
 
         lastSyncedHash = generateDataHash(payload);
@@ -4896,6 +4939,8 @@ async function toggleSection(contentId, btnEl) {
 
     function saveRecords() {
         localStorage.setItem('batalhao_vtr_records', JSON.stringify(records));
+        const now = new Date().toISOString();
+        localStorage.setItem('batalhao_vtr_updated_at', now);
     }
 
     async function saveAsOriginalBaseline() {
@@ -5939,8 +5984,8 @@ async function toggleSection(contentId, btnEl) {
                             ${pelOptionsHtml}
                         </select>
                     </td>
-                    <td class="col-td-status ${isHidStatus}">
-                        <select id="inline-status-${r.vehicle}" class="inline-select ${statusClass}" style="width: 100%; min-width: 95px; padding: 4px 6px; font-size: 0.8rem;" onchange="updateInlineField('${r.vehicle}', 'status', this.value)">
+                    <td class="col-td-status ${isHidStatus}" style="width: 130px; min-width: 125px;">
+                        <select id="inline-status-${r.vehicle}" class="inline-select ${statusClass}" style="width: 100%; min-width: 120px; font-size: 0.82rem; padding: 4px 6px;" onchange="updateInlineField('${r.vehicle}', 'status', this.value)">
                             ${statusOptionsHtml}
                         </select>
                     </td>
