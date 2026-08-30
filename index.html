@@ -1864,111 +1864,10 @@
         }
 
     
-        /* Container de Input com Botão de Limpar (X Vermelho em Quadrado Azul Claro) */
-        .input-clearable-wrapper {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            width: 100%;
-        }
-
-        .input-clearable-wrapper .inline-input {
-            width: 100%;
-            padding-right: 28px !important;
-            box-sizing: border-box;
-        }
-
-        .btn-clear-input {
-            position: absolute;
-            right: 4px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            background-color: #e0f2fe !important;
-            border: 1px solid #bae6fd !important;
-            border-radius: 4px !important;
-            color: #ef4444 !important;
-            font-size: 11px !important;
-            font-weight: 900 !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            cursor: pointer !important;
-            line-height: 1 !important;
-            padding: 0 !important;
-            transition: all 0.15s ease !important;
-            user-select: none !important;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
-            z-index: 2;
-        }
-
-        .btn-clear-input:hover {
-            background-color: #bae6fd !important;
-            border-color: #7dd3fc !important;
-            color: #dc2626 !important;
-            transform: translateY(-50%) scale(1.1) !important;
-            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.25) !important;
-        }
-
-        [data-theme="dark"] .btn-clear-input {
-            background-color: #0c4a6e !important;
-            border-color: #0284c7 !important;
-            color: #f87171 !important;
-        }
-
-        [data-theme="dark"] .btn-clear-input:hover {
-            background-color: #075985 !important;
-            border-color: #38bdf8 !important;
-            color: #ef4444 !important;
-        }
+        
 
     
-        /* Botão + (Plus) no Campo de Motivo / Observações */
-        .btn-reason-plus {
-            position: absolute;
-            right: 4px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 22px;
-            height: 22px;
-            background-color: #e0f2fe !important;
-            border: 1px solid #bae6fd !important;
-            border-radius: 4px !important;
-            color: #0284c7 !important;
-            font-size: 13px !important;
-            font-weight: 900 !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            cursor: pointer !important;
-            line-height: 1 !important;
-            padding: 0 !important;
-            transition: all 0.15s ease !important;
-            user-select: none !important;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
-            z-index: 2;
-        }
-
-        .btn-reason-plus:hover {
-            background-color: #bae6fd !important;
-            border-color: #7dd3fc !important;
-            color: #0369a1 !important;
-            transform: translateY(-50%) scale(1.1) !important;
-            box-shadow: 0 2px 4px rgba(2, 132, 199, 0.25) !important;
-        }
-
-        [data-theme="dark"] .btn-reason-plus {
-            background-color: #0c4a6e !important;
-            border-color: #0284c7 !important;
-            color: #38bdf8 !important;
-        }
-
-        [data-theme="dark"] .btn-reason-plus:hover {
-            background-color: #075985 !important;
-            border-color: #38bdf8 !important;
-            color: #7dd3fc !important;
-        }
+        
 
         /* Menu Flutuante de Motivos Rápidos */
         .inline-reason-menu {
@@ -2060,6 +1959,92 @@
         [data-theme="dark"] .inline-reason-item.item-clear:hover {
             background-color: #7f1d1d66;
             color: #fca5a5;
+        }
+
+    
+        /* Botões de Ação Inline Padronizados (X e +) */
+        .btn-clear-input, .btn-reason-plus {
+            position: absolute;
+            right: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 22px !important;
+            height: 22px !important;
+            background-color: #e0f2fe !important;
+            border: 1px solid #bae6fd !important;
+            border-radius: 4px !important;
+            font-size: 12px !important;
+            font-weight: 900 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            line-height: 1 !important;
+            padding: 0 !important;
+            transition: all 0.15s ease !important;
+            user-select: none !important;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+            z-index: 2;
+        }
+
+        .btn-clear-input {
+            color: #ef4444 !important;
+        }
+
+        .btn-clear-input:hover {
+            background-color: #bae6fd !important;
+            border-color: #7dd3fc !important;
+            color: #dc2626 !important;
+            transform: translateY(-50%) scale(1.08) !important;
+            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.25) !important;
+        }
+
+        .btn-reason-plus {
+            color: #0284c7 !important;
+        }
+
+        .btn-reason-plus:hover {
+            background-color: #bae6fd !important;
+            border-color: #7dd3fc !important;
+            color: #0369a1 !important;
+            transform: translateY(-50%) scale(1.08) !important;
+            box-shadow: 0 2px 4px rgba(2, 132, 199, 0.25) !important;
+        }
+
+        .btn-reason-plus.active {
+            background-color: #0284c7 !important;
+            border-color: #0369a1 !important;
+            color: #ffffff !important;
+        }
+
+        [data-theme="dark"] .btn-clear-input, [data-theme="dark"] .btn-reason-plus {
+            background-color: #0c4a6e !important;
+            border-color: #0284c7 !important;
+        }
+
+        [data-theme="dark"] .btn-clear-input {
+            color: #f87171 !important;
+        }
+
+        [data-theme="dark"] .btn-reason-plus {
+            color: #38bdf8 !important;
+        }
+
+        [data-theme="dark"] .btn-clear-input:hover {
+            background-color: #075985 !important;
+            border-color: #38bdf8 !important;
+            color: #ef4444 !important;
+        }
+
+        [data-theme="dark"] .btn-reason-plus:hover {
+            background-color: #075985 !important;
+            border-color: #38bdf8 !important;
+            color: #7dd3fc !important;
+        }
+
+        [data-theme="dark"] .btn-reason-plus.active {
+            background-color: #0284c7 !important;
+            color: #ffffff !important;
         }
 
     </style>
@@ -3479,9 +3464,9 @@
         document.getElementById('pageTitle').textContent = appTitle.replace(/<[^>]*>?/gm, '') + ' - Painel da Frota';
     }
 
-    function editAppTitle() {
+    async function editAppTitle() {
         const currentClean = appTitle.replace(/^[^a-zA-Z0-9À-ÿ_ ]+/g, '').trim();
-        const newTitle = prompt('Digite o novo nome para o sistema de controle:', currentClean);
+        const newTitle = await adminPrompt('Digite o novo nome para o sistema de controle:', currentClean);
         if (newTitle && newTitle.trim()) {
             appTitle = '🚓 ' + newTitle.trim();
             localStorage.setItem('batalhao_vtr_app_title', appTitle);
@@ -3530,8 +3515,8 @@
     }
     localStorage.setItem('batalhao_vtr_custom_cias', JSON.stringify(customCias));
 
-    function addNewCiaPrompt() {
-        const name = prompt('Digite o nome da nova Companhia / Setor (ex: CTT, SEÇÃO ADM, 1ª Cia):');
+    async function addNewCiaPrompt() {
+        const name = await adminPrompt('Digite o nome da nova Companhia / Setor (ex: CTT, SEÇÃO ADM, 1ª Cia):');
         if (!name || !name.trim()) return;
         const clean = name.trim();
         if (clean.includes('5') || clean.includes('5ª')) {
@@ -3627,8 +3612,8 @@
         localStorage.setItem('batalhao_vtr_custom_models', JSON.stringify(customModels));
     }
 
-    function addNewModelPrompt() {
-        const name = prompt('Digite o nome do novo Modelo de Viatura (ex: COROLLA, HILUX, AMAROK, TIGGO):');
+    async function addNewModelPrompt() {
+        const name = await adminPrompt('Digite o nome do novo Modelo de Viatura (ex: COROLLA, HILUX, AMAROK, TIGGO):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (customModels.includes(clean)) {
@@ -3745,8 +3730,8 @@
         }
     }
 
-    function addNewQuickReasonPrompt() {
-        const name = prompt('Digite o nome do novo Motivo Rápido (ex: FREIO, SUSPENSÃO, FUNILARIA, AR-CONDICIONADO, VISTORIA):');
+    async function addNewQuickReasonPrompt() {
+        const name = await adminPrompt('Digite o nome do novo Motivo Rápido (ex: FREIO, SUSPENSÃO, FUNILARIA):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (customQuickReasons.some(r => r.key === clean)) {
@@ -3814,8 +3799,8 @@
         localStorage.setItem('batalhao_vtr_custom_locais', JSON.stringify(customLocais));
     }
 
-    function addNewPelotaoPrompt() {
-        const name = prompt('Digite o nome do novo Pelotão / Setor (ex: 9º PEL, CANIL, SEÇÃO ADM):');
+    async function addNewPelotaoPrompt() {
+        const name = await adminPrompt('Digite o nome do novo Pelotão / Setor (ex: 9º PEL, CANIL, SEÇÃO ADM):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (clean.includes('CIA')) {
@@ -3869,8 +3854,8 @@
         removePelotao(selected);
     }
 
-    function addNewStatusPrompt() {
-        const name = prompt('Digite o nome do novo Status Operacional (ex: AGUARDANDO PEÇA, RESERVA, SINISTRADA):');
+    async function addNewStatusPrompt() {
+        const name = await adminPrompt('Digite o nome do novo Status Operacional (ex: AGUARDANDO PEÇA, RESERVA):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (clean === 'LUMINOSO') {
@@ -3915,8 +3900,8 @@
         removeStatus(selected);
     }
 
-    function addNewLocalPrompt() {
-        const name = prompt('Digite o nome do novo Local / Destino (ex: OFICINA CENTRAL, CONCESSIONÁRIA ZONA LESTE, EAP):');
+    async function addNewLocalPrompt() {
+        const name = await adminPrompt('Digite o nome do novo Local / Destino (ex: OFICINA CENTRAL, CONCESSIONÁRIA, EAP):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (customLocais.includes(clean)) {
@@ -4309,8 +4294,10 @@
 
     
     
+    
     let activeReasonMenu = null;
     let activeReasonVehicle = null;
+    let activeReasonBtn = null;
 
     function openInlineReasonMenu(vehicleId, btnEl, event) {
         if (event) {
@@ -4318,9 +4305,24 @@
             event.preventDefault();
         }
 
+        // Se já estiver aberto para a mesma viatura, fecha e volta para '+'
+        if (activeReasonVehicle === vehicleId) {
+            closeInlineReasonMenu();
+            return;
+        }
+
+        // Fecha qualquer menu aberto anteriormente
         closeInlineReasonMenu();
 
         activeReasonVehicle = vehicleId;
+        activeReasonBtn = btnEl;
+
+        // Muda ícone de '+' para '-'
+        if (btnEl) {
+            btnEl.textContent = '➖';
+            btnEl.title = 'Fechar menu';
+            btnEl.classList.add('active');
+        }
 
         const menu = document.createElement('div');
         menu.id = 'activeInlineReasonMenu';
@@ -4368,6 +4370,12 @@
     }
 
     function closeInlineReasonMenu() {
+        if (activeReasonBtn) {
+            activeReasonBtn.textContent = '➕';
+            activeReasonBtn.title = 'Adicionar motivo rápido ou Limpar';
+            activeReasonBtn.classList.remove('active');
+            activeReasonBtn = null;
+        }
         if (activeReasonMenu) {
             if (activeReasonMenu.parentNode) {
                 activeReasonMenu.parentNode.removeChild(activeReasonMenu);
@@ -4428,6 +4436,127 @@
     window.addEventListener('scroll', () => {
         if (activeReasonMenu) closeInlineReasonMenu();
     }, { passive: true });
+
+    // =========================================================================
+    // 👮 SISTEMA UNIVERSAL DE DIÁLOGOS (Administrador diz:)
+    // =========================================================================
+    let adminDialogResolve = null;
+
+    function adminAlert(message) {
+        return new Promise((resolve) => {
+            const modal = document.getElementById('adminDialogModal');
+            const msgEl = document.getElementById('adminDialogMessage');
+            const inputEl = document.getElementById('adminDialogInput');
+            const cancelBtn = document.getElementById('adminDialogCancelBtn');
+            const confirmBtn = document.getElementById('adminDialogConfirmBtn');
+
+            if (msgEl) msgEl.textContent = message;
+            if (inputEl) inputEl.style.display = 'none';
+            if (cancelBtn) cancelBtn.style.display = 'none';
+            if (confirmBtn) {
+                confirmBtn.textContent = 'OK';
+                confirmBtn.className = 'btn btn-primary btn-3d';
+            }
+
+            adminDialogResolve = resolve;
+            if (modal) {
+                modal.style.display = 'flex';
+                setTimeout(() => { if (confirmBtn) confirmBtn.focus(); }, 100);
+            } else {
+                resolve(true);
+            }
+        });
+    }
+
+    function adminConfirm(message) {
+        return new Promise((resolve) => {
+            const modal = document.getElementById('adminDialogModal');
+            const msgEl = document.getElementById('adminDialogMessage');
+            const inputEl = document.getElementById('adminDialogInput');
+            const cancelBtn = document.getElementById('adminDialogCancelBtn');
+            const confirmBtn = document.getElementById('adminDialogConfirmBtn');
+
+            if (msgEl) msgEl.textContent = message;
+            if (inputEl) inputEl.style.display = 'none';
+            if (cancelBtn) {
+                cancelBtn.style.display = 'inline-flex';
+                cancelBtn.textContent = 'Cancelar';
+            }
+            if (confirmBtn) {
+                confirmBtn.textContent = 'Confirmar';
+                confirmBtn.className = 'btn btn-primary btn-3d';
+            }
+
+            adminDialogResolve = resolve;
+            if (modal) {
+                modal.style.display = 'flex';
+                setTimeout(() => { if (confirmBtn) confirmBtn.focus(); }, 100);
+            } else {
+                resolve(false);
+            }
+        });
+    }
+
+    function adminPrompt(message, defaultValue = '') {
+        return new Promise((resolve) => {
+            const modal = document.getElementById('adminDialogModal');
+            const msgEl = document.getElementById('adminDialogMessage');
+            const inputEl = document.getElementById('adminDialogInput');
+            const cancelBtn = document.getElementById('adminDialogCancelBtn');
+            const confirmBtn = document.getElementById('adminDialogConfirmBtn');
+
+            if (msgEl) msgEl.textContent = message;
+            if (inputEl) {
+                inputEl.style.display = 'block';
+                inputEl.value = defaultValue || '';
+            }
+            if (cancelBtn) {
+                cancelBtn.style.display = 'inline-flex';
+                cancelBtn.textContent = 'Cancelar';
+            }
+            if (confirmBtn) {
+                confirmBtn.textContent = 'OK';
+                confirmBtn.className = 'btn btn-primary btn-3d';
+            }
+
+            adminDialogResolve = resolve;
+            if (modal) {
+                modal.style.display = 'flex';
+                setTimeout(() => { if (inputEl) { inputEl.focus(); inputEl.select(); } }, 150);
+            } else {
+                resolve(null);
+            }
+        });
+    }
+
+    function confirmAdminDialog() {
+        const modal = document.getElementById('adminDialogModal');
+        const inputEl = document.getElementById('adminDialogInput');
+        const val = (inputEl && inputEl.style.display !== 'none') ? inputEl.value : true;
+
+        if (modal) modal.style.display = 'none';
+        if (adminDialogResolve) {
+            const cb = adminDialogResolve;
+            adminDialogResolve = null;
+            cb(val);
+        }
+    }
+
+    function closeAdminDialog(result = false) {
+        const modal = document.getElementById('adminDialogModal');
+        if (modal) modal.style.display = 'none';
+        if (adminDialogResolve) {
+            const cb = adminDialogResolve;
+            adminDialogResolve = null;
+            cb(result);
+        }
+    }
+
+    function onAdminDialogOverlayClick(e) {
+        if (e.target.id === 'adminDialogModal') {
+            closeAdminDialog(false);
+        }
+    }
 
     function clearInlineField(vehicleId, fieldName, inputElementId) {
         const inputEl = document.getElementById(inputElementId);
@@ -4957,10 +5086,10 @@ async function toggleSection(contentId, btnEl) {
         }
     }
 
-    function factoryResetDatabase() {
-        const confirm1 = confirm("⚠️ ATENÇÃO: Deseja realmente APAGAR TODO O BANCO DE DADOS?\n\nEsta ação excluirá permanentemente todas as viaturas tanto localmente quanto na nuvem Online.");
+    async function factoryResetDatabase() {
+        const confirm1 = await adminConfirm("⚠️ ATENÇÃO: Deseja realmente APAGAR TODO O BANCO DE DADOS?\n\nEsta ação excluirá permanentemente todas as viaturas tanto localmente quanto na nuvem Online.");
         if (!confirm1) return;
-        const confirm2 = confirm("🚨 Confirmação Final: Tem certeza absoluta? Essa ação não poderá ser desfeita!");
+        const confirm2 = await adminConfirm("🚨 Confirmação Final: Tem certeza absoluta? Essa ação não poderá ser desfeita!");
         if (!confirm2) return;
 
         Object.keys(localStorage).forEach(key => {
@@ -5280,20 +5409,20 @@ async function toggleSection(contentId, btnEl) {
     async function saveAsOriginalBaseline() {
         const ok = await requestAdminPassword("definir a base original da frota");
         if (!ok) return;
-        if (confirm('Deseja definir o estado atual de todas as viaturas como a nova BASE ORIGINAL para restaurações futuras?')) {
+        if (await adminConfirm('Deseja definir o estado atual de todas as viaturas como a nova BASE ORIGINAL para restaurações futuras?')) {
             const currentSnapshot = JSON.parse(JSON.stringify(records));
             localStorage.setItem('batalhao_vtr_custom_original_dataset', JSON.stringify(currentSnapshot));
             showToast('📌 Estado atual da frota definido como <strong>Base Original</strong>!');
         }
     }
 
-    function clearAllData() {
+    async function clearAllData() {
         const hasCustomOriginal = localStorage.getItem('batalhao_vtr_custom_original_dataset');
         const msg = hasCustomOriginal 
             ? 'Atenção: deseja restaurar a frota para o último estado salvo em "Aplicar como Original"?' 
             : 'Atenção: deseja restaurar a frota para a base inicial limpa?';
 
-        if (confirm(msg)) {
+        if (await adminConfirm(msg)) {
             if (hasCustomOriginal) {
                 records = JSON.parse(localStorage.getItem('batalhao_vtr_custom_original_dataset'));
             } else {
@@ -5308,8 +5437,8 @@ async function toggleSection(contentId, btnEl) {
         }
     }
 
-    function deleteRecord(id) {
-        if (confirm(`Deseja excluir o registro da viatura ${id}?`)) {
+    async function deleteRecord(id) {
+        if (await adminConfirm(`Deseja excluir o registro da viatura ${id}?`)) {
             records = records.filter(r => r.vehicle !== id);
             saveRecords();
             populateMonthSelect();
@@ -5372,7 +5501,7 @@ async function toggleSection(contentId, btnEl) {
     async function triggerImport() {
         const ok = await requestAdminPassword("definir padrão e substituir o banco de dados");
         if (!ok) return;
-        if (confirm('Atenção: A substituição irá SOBRESCREVER o banco de dados atual pelo arquivo selecionado (.xlsx, .csv, .json).\n\nPara apenas mesclar/incorporar mantendo as viaturas atuais, use a opção "📥 Importar / Conectar Planilha".\n\nDeseja continuar?')) {
+        if (await adminConfirm('Atenção: A substituição irá SOBRESCREVER o banco de dados atual pelo arquivo selecionado (.xlsx, .csv, .json).\n\nPara apenas mesclar/incorporar mantendo as viaturas atuais, use a opção "📥 Importar / Conectar Planilha".\n\nDeseja continuar?')) {
             document.getElementById('importInput').click();
         }
     }
@@ -6572,7 +6701,7 @@ async function toggleSection(contentId, btnEl) {
 <div id="adminPasswordModal" class="modal-overlay" onclick="onAdminPasswordOverlayClick(event)">
     <div class="modal-card" style="max-width: 440px;" onclick="event.stopPropagation()">
         <div class="modal-header">
-            <div class="modal-title"><span>🔐 Alteração permitida apenas pelo administrador</span></div>
+            <div class="modal-title"><span>👮 Administrador diz:</span></div>
             <button type="button" class="modal-close" onclick="closeAdminPasswordModal(false)" title="Fechar">✖</button>
         </div>
         <div style="display: flex; flex-direction: column; gap: 12px; padding: 10px 0;">
@@ -6660,6 +6789,25 @@ async function toggleSection(contentId, btnEl) {
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-outline btn-3d" onclick="closeRowActionModal()">Fechar</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Universal: Administrador diz -->
+<div id="adminDialogModal" class="modal-overlay" onclick="onAdminDialogOverlayClick(event)">
+    <div class="modal-card" style="max-width: 440px;" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <div class="modal-title"><span>👮 Administrador diz:</span></div>
+            <button type="button" class="modal-close" onclick="closeAdminDialog(false)" title="Fechar">✖</button>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: 12px 0;">
+            <p id="adminDialogMessage" style="font-size: 0.92rem; color: var(--text-main); line-height: 1.45; white-space: pre-wrap; word-break: break-word;"></p>
+            <input type="text" id="adminDialogInput" style="display: none; font-size: 1rem; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; width: 100%; box-sizing: border-box;" onkeydown="if(event.key==='Enter') confirmAdminDialog()">
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="adminDialogCancelBtn" class="btn btn-outline btn-3d" onclick="closeAdminDialog(false)" style="display: none;">Cancelar</button>
+            <button type="button" id="adminDialogConfirmBtn" class="btn btn-primary btn-3d" onclick="confirmAdminDialog()">OK</button>
         </div>
     </div>
 </div>
