@@ -1923,6 +1923,145 @@
             color: #ef4444 !important;
         }
 
+    
+        /* Botão + (Plus) no Campo de Motivo / Observações */
+        .btn-reason-plus {
+            position: absolute;
+            right: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 22px;
+            height: 22px;
+            background-color: #e0f2fe !important;
+            border: 1px solid #bae6fd !important;
+            border-radius: 4px !important;
+            color: #0284c7 !important;
+            font-size: 13px !important;
+            font-weight: 900 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            line-height: 1 !important;
+            padding: 0 !important;
+            transition: all 0.15s ease !important;
+            user-select: none !important;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+            z-index: 2;
+        }
+
+        .btn-reason-plus:hover {
+            background-color: #bae6fd !important;
+            border-color: #7dd3fc !important;
+            color: #0369a1 !important;
+            transform: translateY(-50%) scale(1.1) !important;
+            box-shadow: 0 2px 4px rgba(2, 132, 199, 0.25) !important;
+        }
+
+        [data-theme="dark"] .btn-reason-plus {
+            background-color: #0c4a6e !important;
+            border-color: #0284c7 !important;
+            color: #38bdf8 !important;
+        }
+
+        [data-theme="dark"] .btn-reason-plus:hover {
+            background-color: #075985 !important;
+            border-color: #38bdf8 !important;
+            color: #7dd3fc !important;
+        }
+
+        /* Menu Flutuante de Motivos Rápidos */
+        .inline-reason-menu {
+            position: absolute;
+            background: var(--card-bg, #ffffff);
+            border: 1px solid var(--border, #e2e8f0);
+            border-radius: 8px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            z-index: 99999;
+            min-width: 220px;
+            max-width: 280px;
+            padding: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            font-family: inherit;
+        }
+
+        .inline-reason-menu-header {
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--text-muted, #64748b);
+            padding: 4px 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border, #e2e8f0);
+            margin-bottom: 2px;
+        }
+
+        .inline-reason-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--text-main, #0f172a);
+            border-radius: 6px;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            text-align: left;
+            width: 100%;
+            transition: all 0.15s ease;
+        }
+
+        .inline-reason-item:hover {
+            background-color: #eff6ff;
+            color: #1d4ed8;
+        }
+
+        .inline-reason-item.item-clear {
+            color: #ef4444;
+            font-weight: 700;
+            background-color: #fef2f2;
+            border: 1px solid #fee2e2;
+            margin-bottom: 3px;
+        }
+
+        .inline-reason-item.item-clear:hover {
+            background-color: #fee2e2;
+            color: #dc2626;
+            border-color: #fca5a5;
+        }
+
+        .inline-reason-divider {
+            height: 1px;
+            background-color: var(--border, #e2e8f0);
+            margin: 3px 0;
+        }
+
+        [data-theme="dark"] .inline-reason-menu {
+            background: #1e293b;
+            border-color: #334155;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        [data-theme="dark"] .inline-reason-item:hover {
+            background-color: #334155;
+            color: #60a5fa;
+        }
+
+        [data-theme="dark"] .inline-reason-item.item-clear {
+            background-color: #7f1d1d33;
+            border-color: #ef444444;
+            color: #f87171;
+        }
+
+        [data-theme="dark"] .inline-reason-item.item-clear:hover {
+            background-color: #7f1d1d66;
+            color: #fca5a5;
+        }
+
     </style>
 </head>
 <body>
@@ -4169,6 +4308,127 @@
     }
 
     
+    
+    let activeReasonMenu = null;
+    let activeReasonVehicle = null;
+
+    function openInlineReasonMenu(vehicleId, btnEl, event) {
+        if (event) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+
+        closeInlineReasonMenu();
+
+        activeReasonVehicle = vehicleId;
+
+        const menu = document.createElement('div');
+        menu.id = 'activeInlineReasonMenu';
+        menu.className = 'inline-reason-menu';
+
+        // Header
+        let html = `<div class="inline-reason-menu-header">📋 Opções (${vehicleId})</div>`;
+
+        // Opção Limpar
+        html += `
+            <button type="button" class="inline-reason-item item-clear" onclick="executeInlineReasonChoice('${vehicleId}', 'CLEAR')">
+                <span>🧹</span> <span>Limpar Motivo</span>
+            </button>
+            <div class="inline-reason-divider"></div>
+            <div class="inline-reason-menu-header" style="font-size: 0.72rem; border: none; padding-top: 2px;">Clique para acrescentar:</div>
+        `;
+
+        // Motivos rápidos de customQuickReasons
+        customQuickReasons.forEach(r => {
+            html += `
+                <button type="button" class="inline-reason-item" onclick="executeInlineReasonChoice('${vehicleId}', '${r.key}')">
+                    <span>➕</span> <span>${r.label}</span>
+                </button>
+            `;
+        });
+
+        menu.innerHTML = html;
+        document.body.appendChild(menu);
+
+        // Posicionar o menu abaixo do botão
+        const rect = btnEl.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+
+        let top = rect.bottom + scrollTop + 4;
+        let left = rect.right + scrollLeft - 220;
+
+        if (left < 10) left = 10;
+        if (left + 230 > window.innerWidth) left = window.innerWidth - 240;
+
+        menu.style.top = `${top}px`;
+        menu.style.left = `${left}px`;
+
+        activeReasonMenu = menu;
+    }
+
+    function closeInlineReasonMenu() {
+        if (activeReasonMenu) {
+            if (activeReasonMenu.parentNode) {
+                activeReasonMenu.parentNode.removeChild(activeReasonMenu);
+            }
+            activeReasonMenu = null;
+            activeReasonVehicle = null;
+        }
+    }
+
+    function executeInlineReasonChoice(vehicleId, choiceKey) {
+        const inputEl = document.getElementById(`inline-obs-${vehicleId}`);
+        if (!inputEl) {
+            closeInlineReasonMenu();
+            return;
+        }
+
+        if (choiceKey === 'CLEAR') {
+            inputEl.value = '';
+            inputEl.title = 'Motivo da baixa / Observações...';
+            if (inputEl.closest('td')) {
+                inputEl.closest('td').title = 'Nenhuma observação';
+            }
+            updateInlineField(vehicleId, 'obs', '');
+            showToast(`🧹 Motivo limpo para a viatura <strong>${vehicleId}</strong>!`);
+        } else {
+            let current = inputEl.value.trim();
+            let updated = '';
+            if (current) {
+                if (!current.toUpperCase().includes(choiceKey.toUpperCase())) {
+                    updated = current + ', ' + choiceKey;
+                } else {
+                    updated = current;
+                    showToast(`ℹ️ Motivo <strong>${choiceKey}</strong> já consta na viatura ${vehicleId}.`);
+                }
+            } else {
+                updated = choiceKey;
+            }
+
+            inputEl.value = updated;
+            inputEl.title = 'Observação: ' + updated;
+            if (inputEl.closest('td')) {
+                inputEl.closest('td').title = 'Observação: ' + updated;
+            }
+            updateInlineField(vehicleId, 'obs', updated);
+            showToast(`➕ Motivo <strong>${choiceKey}</strong> inserido na viatura ${vehicleId}!`);
+        }
+
+        closeInlineReasonMenu();
+    }
+
+    // Fechar menu ao clicar fora
+    document.addEventListener('click', (e) => {
+        if (activeReasonMenu && !activeReasonMenu.contains(e.target) && !e.target.classList.contains('btn-reason-plus')) {
+            closeInlineReasonMenu();
+        }
+    });
+
+    window.addEventListener('scroll', () => {
+        if (activeReasonMenu) closeInlineReasonMenu();
+    }, { passive: true });
+
     function clearInlineField(vehicleId, fieldName, inputElementId) {
         const inputEl = document.getElementById(inputElementId);
         if (inputEl) {
@@ -6071,7 +6331,7 @@ async function toggleSection(contentId, btnEl) {
                     <td class="col-td-obs ${isHidObs}" title="${r.obs ? 'Observação: ' + r.obs : 'Nenhuma observação'}">
                         <div class="input-clearable-wrapper">
                             <input type="text" id="inline-obs-${r.vehicle}" class="inline-input" style="width: 100%; min-width: 220px;" value="${r.obs || ''}" title="${r.obs ? 'Observação: ' + r.obs : 'Motivo da baixa / Observações...'}" placeholder="Motivo / Observações..." oninput="this.title = this.value ? 'Observação: ' + this.value : 'Motivo da baixa / Observações...'; this.closest('td').title = this.title;" onchange="updateInlineField('${r.vehicle}', 'obs', this.value)">
-                            <button type="button" class="btn-clear-input" onclick="clearInlineField('${r.vehicle}', 'obs', 'inline-obs-${r.vehicle}')" title="Limpar">✖</button>
+                            <button type="button" class="btn-reason-plus" onclick="openInlineReasonMenu('${r.vehicle}', this, event)" title="Adicionar motivo rápido ou Limpar">➕</button>
                         </div>
                     </td>
                     <td class="col-td-data ${isHidData}">
