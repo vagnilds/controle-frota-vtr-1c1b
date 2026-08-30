@@ -1864,10 +1864,111 @@
         }
 
     
-        
+        /* Container de Input com Botão de Limpar (X Vermelho em Quadrado Azul Claro) */
+        .input-clearable-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .input-clearable-wrapper .inline-input {
+            width: 100%;
+            padding-right: 28px !important;
+            box-sizing: border-box;
+        }
+
+        .btn-clear-input {
+            position: absolute;
+            right: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background-color: #e0f2fe !important;
+            border: 1px solid #bae6fd !important;
+            border-radius: 4px !important;
+            color: #ef4444 !important;
+            font-size: 11px !important;
+            font-weight: 900 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            line-height: 1 !important;
+            padding: 0 !important;
+            transition: all 0.15s ease !important;
+            user-select: none !important;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+            z-index: 2;
+        }
+
+        .btn-clear-input:hover {
+            background-color: #bae6fd !important;
+            border-color: #7dd3fc !important;
+            color: #dc2626 !important;
+            transform: translateY(-50%) scale(1.1) !important;
+            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.25) !important;
+        }
+
+        [data-theme="dark"] .btn-clear-input {
+            background-color: #0c4a6e !important;
+            border-color: #0284c7 !important;
+            color: #f87171 !important;
+        }
+
+        [data-theme="dark"] .btn-clear-input:hover {
+            background-color: #075985 !important;
+            border-color: #38bdf8 !important;
+            color: #ef4444 !important;
+        }
 
     
-        
+        /* Botão + (Plus) no Campo de Motivo / Observações */
+        .btn-reason-plus {
+            position: absolute;
+            right: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 22px;
+            height: 22px;
+            background-color: #e0f2fe !important;
+            border: 1px solid #bae6fd !important;
+            border-radius: 4px !important;
+            color: #0284c7 !important;
+            font-size: 13px !important;
+            font-weight: 900 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            line-height: 1 !important;
+            padding: 0 !important;
+            transition: all 0.15s ease !important;
+            user-select: none !important;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+            z-index: 2;
+        }
+
+        .btn-reason-plus:hover {
+            background-color: #bae6fd !important;
+            border-color: #7dd3fc !important;
+            color: #0369a1 !important;
+            transform: translateY(-50%) scale(1.1) !important;
+            box-shadow: 0 2px 4px rgba(2, 132, 199, 0.25) !important;
+        }
+
+        [data-theme="dark"] .btn-reason-plus {
+            background-color: #0c4a6e !important;
+            border-color: #0284c7 !important;
+            color: #38bdf8 !important;
+        }
+
+        [data-theme="dark"] .btn-reason-plus:hover {
+            background-color: #075985 !important;
+            border-color: #38bdf8 !important;
+            color: #7dd3fc !important;
+        }
 
         /* Menu Flutuante de Motivos Rápidos */
         .inline-reason-menu {
@@ -1959,92 +2060,6 @@
         [data-theme="dark"] .inline-reason-item.item-clear:hover {
             background-color: #7f1d1d66;
             color: #fca5a5;
-        }
-
-    
-        /* Botões de Ação Inline Padronizados (X e +) */
-        .btn-clear-input, .btn-reason-plus {
-            position: absolute;
-            right: 4px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 22px !important;
-            height: 22px !important;
-            background-color: #e0f2fe !important;
-            border: 1px solid #bae6fd !important;
-            border-radius: 4px !important;
-            font-size: 12px !important;
-            font-weight: 900 !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            cursor: pointer !important;
-            line-height: 1 !important;
-            padding: 0 !important;
-            transition: all 0.15s ease !important;
-            user-select: none !important;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
-            z-index: 2;
-        }
-
-        .btn-clear-input {
-            color: #ef4444 !important;
-        }
-
-        .btn-clear-input:hover {
-            background-color: #bae6fd !important;
-            border-color: #7dd3fc !important;
-            color: #dc2626 !important;
-            transform: translateY(-50%) scale(1.08) !important;
-            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.25) !important;
-        }
-
-        .btn-reason-plus {
-            color: #0284c7 !important;
-        }
-
-        .btn-reason-plus:hover {
-            background-color: #bae6fd !important;
-            border-color: #7dd3fc !important;
-            color: #0369a1 !important;
-            transform: translateY(-50%) scale(1.08) !important;
-            box-shadow: 0 2px 4px rgba(2, 132, 199, 0.25) !important;
-        }
-
-        .btn-reason-plus.active {
-            background-color: #0284c7 !important;
-            border-color: #0369a1 !important;
-            color: #ffffff !important;
-        }
-
-        [data-theme="dark"] .btn-clear-input, [data-theme="dark"] .btn-reason-plus {
-            background-color: #0c4a6e !important;
-            border-color: #0284c7 !important;
-        }
-
-        [data-theme="dark"] .btn-clear-input {
-            color: #f87171 !important;
-        }
-
-        [data-theme="dark"] .btn-reason-plus {
-            color: #38bdf8 !important;
-        }
-
-        [data-theme="dark"] .btn-clear-input:hover {
-            background-color: #075985 !important;
-            border-color: #38bdf8 !important;
-            color: #ef4444 !important;
-        }
-
-        [data-theme="dark"] .btn-reason-plus:hover {
-            background-color: #075985 !important;
-            border-color: #38bdf8 !important;
-            color: #7dd3fc !important;
-        }
-
-        [data-theme="dark"] .btn-reason-plus.active {
-            background-color: #0284c7 !important;
-            color: #ffffff !important;
         }
 
     </style>
@@ -4297,35 +4312,15 @@
     let activeReasonMenu = null;
     let activeReasonVehicle = null;
 
-    
-    
-    
-    let activeReasonBtn = null;
-
     function openInlineReasonMenu(vehicleId, btnEl, event) {
         if (event) {
             event.stopPropagation();
             event.preventDefault();
         }
 
-        // Se já estiver aberto para a mesma viatura, fecha e volta para '+'
-        if (activeReasonVehicle === vehicleId) {
-            closeInlineReasonMenu();
-            return;
-        }
-
-        // Fecha qualquer menu que estivesse aberto anteriormente
         closeInlineReasonMenu();
 
         activeReasonVehicle = vehicleId;
-        activeReasonBtn = btnEl;
-
-        // Altera ícone de '+' para '-'
-        if (btnEl) {
-            btnEl.textContent = '➖';
-            btnEl.title = 'Fechar menu';
-            btnEl.classList.add('active');
-        }
 
         const menu = document.createElement('div');
         menu.id = 'activeInlineReasonMenu';
@@ -4343,12 +4338,8 @@
             <div class="inline-reason-menu-header" style="font-size: 0.72rem; border: none; padding-top: 2px;">Clique para acrescentar:</div>
         `;
 
-        // Motivos rápidos
-        const reasonsList = (typeof customQuickReasons !== 'undefined' && Array.isArray(customQuickReasons) && customQuickReasons.length > 0)
-            ? customQuickReasons
-            : defaultQuickReasons;
-
-        reasonsList.forEach(r => {
+        // Motivos rápidos de customQuickReasons
+        customQuickReasons.forEach(r => {
             html += `
                 <button type="button" class="inline-reason-item" onclick="executeInlineReasonChoice('${vehicleId}', '${r.key}')">
                     <span>➕</span> <span>${r.label}</span>
@@ -4359,7 +4350,7 @@
         menu.innerHTML = html;
         document.body.appendChild(menu);
 
-        // Posicionar menu abaixo do botão
+        // Posicionar o menu abaixo do botão
         const rect = btnEl.getBoundingClientRect();
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
@@ -4377,12 +4368,6 @@
     }
 
     function closeInlineReasonMenu() {
-        if (activeReasonBtn) {
-            activeReasonBtn.textContent = '➕';
-            activeReasonBtn.title = 'Adicionar motivo rápido ou Limpar';
-            activeReasonBtn.classList.remove('active');
-            activeReasonBtn = null;
-        }
         if (activeReasonMenu) {
             if (activeReasonMenu.parentNode) {
                 activeReasonMenu.parentNode.removeChild(activeReasonMenu);
@@ -6587,7 +6572,7 @@ async function toggleSection(contentId, btnEl) {
 <div id="adminPasswordModal" class="modal-overlay" onclick="onAdminPasswordOverlayClick(event)">
     <div class="modal-card" style="max-width: 440px;" onclick="event.stopPropagation()">
         <div class="modal-header">
-            <div class="modal-title"><span>👮 Administrador diz:</span></div>
+            <div class="modal-title"><span>🔐 Alteração permitida apenas pelo administrador</span></div>
             <button type="button" class="modal-close" onclick="closeAdminPasswordModal(false)" title="Fechar">✖</button>
         </div>
         <div style="display: flex; flex-direction: column; gap: 12px; padding: 10px 0;">
