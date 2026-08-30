@@ -6352,10 +6352,7 @@ async function toggleSection(contentId, btnEl) {
                     <td class="col-td-data ${isHidData}">
                         <div style="display: flex; gap: 6px; align-items: center; min-width: 265px;">
                             <input type="date" class="inline-input" style="width: 115px; font-size: 0.8rem; padding: 4px 6px;" value="${formattedDate}" onchange="updateInlineField('${r.vehicle}', 'date', this.value)">
-                            <div class="input-clearable-wrapper" style="flex: 1; min-width: 135px;">
-                                <input type="text" id="inline-dataforms-${r.vehicle}" class="inline-input" style="width: 100%; font-size: 0.8rem; padding: 4px 6px;" value="${r.data_forms || ''}" title="${r.data_forms ? 'Observações: ' + r.data_forms : 'Observações...'}" placeholder="Observações..." oninput="this.title = this.value ? 'Observações: ' + this.value : 'Observações...';" onchange="updateInlineField('${r.vehicle}', 'data_forms', this.value)">
-                                <button type="button" class="btn-clear-input" onclick="clearInlineField('${r.vehicle}', 'data_forms', 'inline-dataforms-${r.vehicle}')" title="Limpar">✖</button>
-                            </div>
+                            <input type="text" id="inline-dataforms-${r.vehicle}" class="inline-input" style="flex: 1; min-width: 135px; font-size: 0.8rem; padding: 4px 6px;" value="${r.data_forms || ''}" title="${r.data_forms ? 'Observações: ' + r.data_forms : 'Observações...'}" placeholder="Observações..." oninput="this.title = this.value ? 'Observações: ' + this.value : 'Observações...';" onchange="updateInlineField('${r.vehicle}', 'data_forms', this.value)">
                         </div>
                     </td>
                     <td class="col-td-acoes ${isHidAcoes}" style="text-align: center; width: 105px;">
