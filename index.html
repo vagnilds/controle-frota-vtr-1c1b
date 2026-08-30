@@ -1916,7 +1916,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 6px 10px;
+            padding: 7px 12px;
             font-size: 0.84rem;
             font-weight: 600;
             color: var(--text-main, #0f172a);
@@ -1926,12 +1926,15 @@
             border: none;
             text-align: left;
             width: 100%;
-            transition: all 0.15s ease;
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: translateX(0);
         }
 
         .inline-reason-item:hover {
             background-color: #eff6ff;
             color: #1d4ed8;
+            transform: translateX(6px) scale(1.03);
+            box-shadow: 0 2px 6px rgba(29, 78, 216, 0.15);
         }
 
         .inline-reason-item.item-clear {
@@ -1946,12 +1949,20 @@
             background-color: #fee2e2;
             color: #dc2626;
             border-color: #fca5a5;
+            transform: translateX(6px) scale(1.03);
+            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.2);
         }
 
-        .inline-reason-divider {
-            height: 1px;
-            background-color: var(--border, #e2e8f0);
-            margin: 3px 0;
+        [data-theme="dark"] .inline-reason-item:hover {
+            background-color: #334155;
+            color: #60a5fa;
+            transform: translateX(6px) scale(1.03);
+        }
+
+        [data-theme="dark"] .inline-reason-item.item-clear:hover {
+            background-color: #7f1d1d66;
+            color: #fca5a5;
+            transform: translateX(6px) scale(1.03);
         }
 
         [data-theme="dark"] .inline-reason-menu {
@@ -2059,6 +2070,70 @@
         [data-theme="dark"] .btn-reason-plus.active {
             background-color: #0284c7 !important;
             color: #ffffff !important;
+        }
+
+    
+        /* Easter Egg no Rodapé (Ao passar o mouse em Criado por: Sd Vagner - Telemática) */
+        .footer-easter-egg {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            user-select: none;
+            font-weight: 600;
+        }
+
+        .footer-easter-egg:hover {
+            color: var(--primary, #1e3a8a);
+            transform: scale(1.02);
+        }
+
+        .footer-easter-egg .easter-egg-tooltip {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            bottom: 135%;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
+            color: #ffffff;
+            padding: 7px 16px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            white-space: nowrap;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+            z-index: 9999;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            letter-spacing: 0.3px;
+        }
+
+        .footer-easter-egg .easter-egg-tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: #1d4ed8 transparent transparent transparent;
+        }
+
+        .footer-easter-egg:hover .easter-egg-tooltip {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        [data-theme="dark"] .footer-easter-egg .easter-egg-tooltip {
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        [data-theme="dark"] .footer-easter-egg .easter-egg-tooltip::after {
+            border-color: #2563eb transparent transparent transparent;
         }
 
     </style>
@@ -2605,8 +2680,11 @@
         </div>
     </div>
 
-<footer style="text-align: center; margin-top: 10px; padding: 16px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; font-weight: 500;">
-        Criado por: Sd Vagner - Telemática
+<footer style="text-align: center; margin-top: 14px; padding: 18px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem;">
+        <div class="footer-easter-egg" title="📧 vagnerdjs@policiamilitar.sp.gov.br">
+            Criado por: Sd Vagner - Telemática
+            <span class="easter-egg-tooltip">📧 vagnerdjs@policiamilitar.sp.gov.br</span>
+        </div>
     </footer>
 </div>
 
