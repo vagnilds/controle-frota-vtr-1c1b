@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title id="pageTitle">CONTROLE DE VIATURAS - BATALHÃO - Painel da Frota</title>
+    <title id="pageTitle">CONTROLE DE VIATURAS - FROTA 1ª CIA DO 1º BPTRAN - Painel da Frota</title>
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- SheetJS (XLSX) CDN para Leitura e Exportação nativa de Planilhas Excel/CSV -->
@@ -1864,24 +1864,9 @@
         }
 
     
-        /* Container de Input com Botão de Limpar (X Vermelho em Quadrado Azul Claro) */
-        .input-clearable-wrapper {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            width: 100%;
-        }
-
-        .input-clearable-wrapper .inline-input {
-            width: 100%;
-            padding-right: 28px !important;
-            box-sizing: border-box;
-        }
-
         
 
     
-        /* Botão + (Plus) no Campo de Motivo / Observações */
         
 
         
@@ -1903,6 +1888,7 @@
         }
 
     
+        /* Botões de Ação Inline Padronizados (X e +) */
         .btn-clear-input, .btn-reason-plus {
             position: absolute;
             right: 4px;
@@ -1987,244 +1973,6 @@
             color: #ffffff !important;
         }
 
-    
-        /* Botões Seletores Customizados na Tabela */
-        .inline-select-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            padding: 5px 8px;
-            border-radius: 6px;
-            font-size: 0.82rem;
-            font-family: inherit;
-            border: 1px solid var(--border);
-            background-color: var(--card-bg, #ffffff);
-            color: var(--text-main, #0f172a);
-            cursor: pointer;
-            outline: none;
-            box-sizing: border-box;
-            white-space: nowrap;
-            text-align: left;
-            transition: all 0.15s ease;
-            user-select: none;
-        }
-
-        .inline-select-btn:hover {
-            border-color: #3b82f6;
-            box-shadow: 0 2px 6px rgba(59, 130, 246, 0.15);
-        }
-
-        .inline-select-btn.active {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
-        }
-
-        .inline-select-btn .select-btn-text {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            font-weight: 600;
-        }
-
-        .inline-select-btn .select-btn-arrow {
-            font-size: 0.7rem;
-            color: var(--text-muted, #64748b);
-            margin-left: 6px;
-            transition: transform 0.2s ease;
-        }
-
-        .inline-select-btn.active .select-btn-arrow {
-            transform: rotate(180deg);
-        }
-
-        /* Cores Específicas para o Botão de Status */
-        .inline-select-btn.status-operando {
-            background-color: #d1fae5;
-            color: #065f46;
-            border-color: #a7f3d0;
-            font-weight: 700;
-            justify-content: space-between;
-        }
-        .inline-select-btn.status-operando .select-btn-arrow { color: #065f46; }
-
-        .inline-select-btn.status-baixada {
-            background-color: #fee2e2;
-            color: #991b1b;
-            border-color: #fca5a5;
-            font-weight: 700;
-            justify-content: space-between;
-        }
-        .inline-select-btn.status-baixada .select-btn-arrow { color: #991b1b; }
-
-        .inline-select-btn.status-descarga {
-            background-color: #f3e8ff;
-            color: #6b21a8;
-            border-color: #d8b4fe;
-            font-weight: 700;
-            justify-content: space-between;
-        }
-        .inline-select-btn.status-descarga .select-btn-arrow { color: #6b21a8; }
-
-        .inline-select-btn.status-adm {
-            background-color: #e0f2fe;
-            color: #0369a1;
-            border-color: #bae6fd;
-            font-weight: 700;
-            justify-content: space-between;
-        }
-        .inline-select-btn.status-adm .select-btn-arrow { color: #0369a1; }
-
-        .inline-select-btn.status-custom {
-            background-color: #fef3c7;
-            color: #92400e;
-            border-color: #fde68a;
-            font-weight: 700;
-            justify-content: space-between;
-        }
-        .inline-select-btn.status-custom .select-btn-arrow { color: #92400e; }
-
-        /* Dark Mode dos Botões */
-        [data-theme="dark"] .inline-select-btn {
-            background-color: #0f172a;
-            border-color: #334155;
-            color: #f8fafc;
-        }
-        [data-theme="dark"] .inline-select-btn.status-operando { background-color: #064e3b; color: #6ee7b7; border-color: #059669; }
-        [data-theme="dark"] .inline-select-btn.status-baixada { background-color: #7f1d1d; color: #fca5a5; border-color: #b91c1c; }
-        [data-theme="dark"] .inline-select-btn.status-descarga { background-color: #581c87; color: #d8b4fe; border-color: #7e22ce; }
-        [data-theme="dark"] .inline-select-btn.status-adm { background-color: #0c4a6e; color: #7dd3fc; border-color: #0284c7; }
-        [data-theme="dark"] .inline-select-btn.status-custom { background-color: #78350f; color: #fde68a; border-color: #d97706; }
-
-        /* Menu Flutuante de Opções das Colunas com Salto e Mudança Sutil de Cor no Hover */
-        .column-dropdown-menu {
-            position: absolute;
-            background: var(--card-bg, #ffffff);
-            border: 1px solid var(--border, #e2e8f0);
-            border-radius: 8px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-            z-index: 99999;
-            min-width: 180px;
-            max-height: 280px;
-            overflow-y: auto;
-            padding: 6px;
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-            font-family: inherit;
-        }
-
-        .column-dropdown-header {
-            font-size: 0.76rem;
-            font-weight: 700;
-            color: var(--text-muted, #64748b);
-            padding: 4px 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid var(--border, #e2e8f0);
-            margin-bottom: 3px;
-        }
-
-        .dropdown-option-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            padding: 7px 12px;
-            font-size: 0.84rem;
-            font-weight: 600;
-            color: var(--text-main, #0f172a);
-            border-radius: 6px;
-            cursor: pointer;
-            background: transparent;
-            border: none;
-            text-align: left;
-            width: 100%;
-            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-            transform: translateX(0);
-            user-select: none;
-        }
-
-        /* O Salto Suave e a Mudança Sutil de Cor no Hover */
-        .dropdown-option-item:hover {
-            background-color: #eff6ff;
-            color: #1d4ed8;
-            transform: translateX(6px) scale(1.03);
-            box-shadow: 0 2px 6px rgba(29, 78, 216, 0.15);
-        }
-
-        .dropdown-option-item.selected {
-            font-weight: 800;
-            color: var(--primary, #1e3a8a);
-            background-color: #f1f5f9;
-        }
-
-        .dropdown-option-item.selected:hover {
-            background-color: #eff6ff;
-            color: #1d4ed8;
-        }
-
-        /* Badges de Status com Salto no Hover */
-        .dropdown-option-item.status-opt-operando:hover {
-            background-color: #d1fae5;
-            color: #065f46;
-            box-shadow: 0 2px 6px rgba(16, 185, 129, 0.2);
-        }
-        .dropdown-option-item.status-opt-baixada:hover {
-            background-color: #fee2e2;
-            color: #991b1b;
-            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.2);
-        }
-        .dropdown-option-item.status-opt-descarga:hover {
-            background-color: #f3e8ff;
-            color: #6b21a8;
-            box-shadow: 0 2px 6px rgba(168, 85, 247, 0.2);
-        }
-        .dropdown-option-item.status-opt-adm:hover {
-            background-color: #e0f2fe;
-            color: #0369a1;
-            box-shadow: 0 2px 6px rgba(14, 165, 233, 0.2);
-        }
-
-        [data-theme="dark"] .column-dropdown-menu {
-            background: #1e293b;
-            border-color: #334155;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-        }
-
-        [data-theme="dark"] .dropdown-option-item {
-            color: #f8fafc;
-        }
-
-        [data-theme="dark"] .dropdown-option-item:hover {
-            background-color: #334155;
-            color: #60a5fa;
-            transform: translateX(6px) scale(1.03);
-        }
-
-        [data-theme="dark"] .dropdown-option-item.selected {
-            background-color: #0f172a;
-            color: #60a5fa;
-        }
-
-        [data-theme="dark"] .dropdown-option-item.status-opt-operando:hover {
-            background-color: #064e3b;
-            color: #6ee7b7;
-        }
-        [data-theme="dark"] .dropdown-option-item.status-opt-baixada:hover {
-            background-color: #7f1d1d;
-            color: #fca5a5;
-        }
-        [data-theme="dark"] .dropdown-option-item.status-opt-descarga:hover {
-            background-color: #581c87;
-            color: #d8b4fe;
-        }
-        [data-theme="dark"] .dropdown-option-item.status-opt-adm:hover {
-            background-color: #0c4a6e;
-            color: #7dd3fc;
-        }
-
-    
         /* Menu Flutuante de Motivos Rápidos (Fixado e com Salto no Hover) */
         .inline-reason-menu {
             position: fixed !important;
@@ -2330,6 +2078,69 @@
             color: #fca5a5 !important;
         }
 
+        /* Easter Egg no Rodapé */
+        .footer-easter-egg {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            user-select: none;
+            font-weight: 600;
+        }
+
+        .footer-easter-egg:hover {
+            color: var(--primary, #1e3a8a);
+            transform: scale(1.02);
+        }
+
+        .footer-easter-egg .easter-egg-tooltip {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            bottom: 135%;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
+            color: #ffffff;
+            padding: 7px 16px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            white-space: nowrap;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+            z-index: 9999;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            letter-spacing: 0.3px;
+        }
+
+        .footer-easter-egg .easter-egg-tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: #1d4ed8 transparent transparent transparent;
+        }
+
+        .footer-easter-egg:hover .easter-egg-tooltip {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        [data-theme="dark"] .footer-easter-egg .easter-egg-tooltip {
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        [data-theme="dark"] .footer-easter-egg .easter-egg-tooltip::after {
+            border-color: #2563eb transparent transparent transparent;
+        }
+
     </style>
 </head>
 <body>
@@ -2338,7 +2149,7 @@
     <!-- Header com Alternador de Nível, Nuvem Online e Data/Hora -->
     <header>
         <div class="title-area">
-            <h1 id="appTitleText">🚓 CONTROLE DE VIATURAS - BATALHÃO</h1>
+            <h1 id="appTitleText">🚓 CONTROLE DE VIATURAS - FROTA 1ª CIA DO 1º BPTRAN</h1>
             <p>Painel Gerencial da Frota de Viaturas (Banco de Dados Online)</p>
             
             <div class="view-mode-selector">
@@ -2874,8 +2685,11 @@
         </div>
     </div>
 
-<footer style="text-align: center; margin-top: 10px; padding: 16px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; font-weight: 500;">
-        Criado por: Sd Vagner - Telemática
+<footer style="text-align: center; margin-top: 14px; padding: 18px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem;">
+        <div class="footer-easter-egg" title="📧 vagnerdjs@policiamilitar.sp.gov.br">
+            Criado por: Sd Vagner - Telemática
+            <span class="easter-egg-tooltip">📧 vagnerdjs@policiamilitar.sp.gov.br</span>
+        </div>
     </footer>
 </div>
 
@@ -3365,7 +3179,7 @@
             customStatuses: customStatuses || [],
             customLocais: customLocais || [],
             customQuickReasons: customQuickReasons || [],
-            appTitle: appTitle || '🚓 CONTROLE DE VIATURAS - BATALHÃO',
+            appTitle: appTitle || '🚓 CONTROLE DE VIATURAS - FROTA 1ª CIA DO 1º BPTRAN',
             lastStatusUpdate: localStorage.getItem('batalhao_vtr_last_status_update') || '',
             updatedAt: now
         };
@@ -3468,7 +3282,7 @@
             customStatuses: customStatuses || [],
             customLocais: customLocais || [],
             customQuickReasons: customQuickReasons || [],
-            appTitle: appTitle || '🚓 CONTROLE DE VIATURAS - BATALHÃO',
+            appTitle: appTitle || '🚓 CONTROLE DE VIATURAS - FROTA 1ª CIA DO 1º BPTRAN',
             lastStatusUpdate: localStorage.getItem('batalhao_vtr_last_status_update') || '',
             updatedAt: new Date().toISOString()
         };
@@ -3741,15 +3555,15 @@
         }
     }
 
-    let appTitle = localStorage.getItem('batalhao_vtr_app_title') || '🚓 CONTROLE DE VIATURAS - BATALHÃO';
+    let appTitle = localStorage.getItem('batalhao_vtr_app_title') || '🚓 CONTROLE DE VIATURAS - FROTA 1ª CIA DO 1º BPTRAN';
     function updateAppTitleDisplay() {
         document.getElementById('appTitleText').innerHTML = appTitle;
         document.getElementById('pageTitle').textContent = appTitle.replace(/<[^>]*>?/gm, '') + ' - Painel da Frota';
     }
 
-    async function editAppTitle() {
+    function editAppTitle() {
         const currentClean = appTitle.replace(/^[^a-zA-Z0-9À-ÿ_ ]+/g, '').trim();
-        const newTitle = await adminPrompt('Digite o novo nome para o sistema de controle:', currentClean);
+        const newTitle = prompt('Digite o novo nome para o sistema de controle:', currentClean);
         if (newTitle && newTitle.trim()) {
             appTitle = '🚓 ' + newTitle.trim();
             localStorage.setItem('batalhao_vtr_app_title', appTitle);
@@ -3798,8 +3612,8 @@
     }
     localStorage.setItem('batalhao_vtr_custom_cias', JSON.stringify(customCias));
 
-    async function addNewCiaPrompt() {
-        const name = await adminPrompt('Digite o nome da nova Companhia / Setor (ex: CTT, SEÇÃO ADM, 1ª Cia):');
+    function addNewCiaPrompt() {
+        const name = prompt('Digite o nome da nova Companhia / Setor (ex: CTT, SEÇÃO ADM, 1ª Cia):');
         if (!name || !name.trim()) return;
         const clean = name.trim();
         if (clean.includes('5') || clean.includes('5ª')) {
@@ -3819,12 +3633,12 @@
         showToast(`🏛️ Companhia <strong>${clean}</strong> acrescentada com sucesso!`);
     }
 
-    async function removeCia(cia) {
+    function removeCia(cia) {
         if (customCias.length <= 1) {
             alert('Você deve manter ao menos uma Companhia cadastrada.');
             return;
         }
-        if (await adminConfirm(`Deseja remover "${cia}" da lista de Companhias?`)) {
+        if (confirm(`Deseja remover "${cia}" da lista de Companhias?`)) {
             customCias = customCias.filter(c => c !== cia);
             localStorage.setItem('batalhao_vtr_custom_cias', JSON.stringify(customCias));
             populateAllCiaSelects();
@@ -3895,8 +3709,8 @@
         localStorage.setItem('batalhao_vtr_custom_models', JSON.stringify(customModels));
     }
 
-    async function addNewModelPrompt() {
-        const name = await adminPrompt('Digite o nome do novo Modelo de Viatura (ex: COROLLA, HILUX, AMAROK, TIGGO):');
+    function addNewModelPrompt() {
+        const name = prompt('Digite o nome do novo Modelo de Viatura (ex: COROLLA, HILUX, AMAROK, TIGGO):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (customModels.includes(clean)) {
@@ -3913,12 +3727,12 @@
         showToast(`🚗 Modelo <strong>${clean}</strong> acrescentado com sucesso!`);
     }
 
-    async function removeModel(model) {
+    function removeModel(model) {
         if (customModels.length <= 1) {
             alert('Você deve manter ao menos um modelo cadastrado.');
             return;
         }
-        if (await adminConfirm(`Deseja remover o modelo "${model}" da lista de opções?`)) {
+        if (confirm(`Deseja remover o modelo "${model}" da lista de opções?`)) {
             customModels = customModels.filter(m => m !== model);
             customModels = sortModelsList(customModels);
             localStorage.setItem('batalhao_vtr_custom_models', JSON.stringify(customModels));
@@ -4013,8 +3827,8 @@
         }
     }
 
-    async function addNewQuickReasonPrompt() {
-        const name = await adminPrompt('Digite o nome do novo Motivo Rápido (ex: FREIO, SUSPENSÃO, FUNILARIA):');
+    function addNewQuickReasonPrompt() {
+        const name = prompt('Digite o nome do novo Motivo Rápido (ex: FREIO, SUSPENSÃO, FUNILARIA, AR-CONDICIONADO, VISTORIA):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (customQuickReasons.some(r => r.key === clean)) {
@@ -4082,8 +3896,8 @@
         localStorage.setItem('batalhao_vtr_custom_locais', JSON.stringify(customLocais));
     }
 
-    async function addNewPelotaoPrompt() {
-        const name = await adminPrompt('Digite o nome do novo Pelotão / Setor (ex: 9º PEL, CANIL, SEÇÃO ADM):');
+    function addNewPelotaoPrompt() {
+        const name = prompt('Digite o nome do novo Pelotão / Setor (ex: 9º PEL, CANIL, SEÇÃO ADM):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (clean.includes('CIA')) {
@@ -4112,12 +3926,12 @@
         showToast(`🛡️ Pelotão <strong>${clean}</strong> acrescentado com sucesso!`);
     }
 
-    async function removePelotao(pel) {
+    function removePelotao(pel) {
         if (customPelotoes.length <= 1) {
             alert('Você deve manter ao menos um pelotão cadastrado.');
             return;
         }
-        if (await adminConfirm(`Deseja remover "${pel}" da lista de pelotões?`)) {
+        if (confirm(`Deseja remover "${pel}" da lista de pelotões?`)) {
             customPelotoes = customPelotoes.filter(p => p !== pel);
             localStorage.setItem('batalhao_vtr_custom_pelotoes', JSON.stringify(customPelotoes));
             populateAllPelotaoSelects();
@@ -4137,8 +3951,8 @@
         removePelotao(selected);
     }
 
-    async function addNewStatusPrompt() {
-        const name = await adminPrompt('Digite o nome do novo Status Operacional (ex: AGUARDANDO PEÇA, RESERVA):');
+    function addNewStatusPrompt() {
+        const name = prompt('Digite o nome do novo Status Operacional (ex: AGUARDANDO PEÇA, RESERVA, SINISTRADA):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (clean === 'LUMINOSO') {
@@ -4158,12 +3972,12 @@
         showToast(`🚥 Status <strong>${clean}</strong> acrescentado com sucesso!`);
     }
 
-    async function removeStatus(st) {
+    function removeStatus(st) {
         if (customStatuses.length <= 1) {
             alert('Você deve manter ao menos um status cadastrado.');
             return;
         }
-        if (await adminConfirm(`Deseja remover o status "${st}" da lista de opções?`)) {
+        if (confirm(`Deseja remover o status "${st}" da lista de opções?`)) {
             customStatuses = customStatuses.filter(s => s !== st);
             localStorage.setItem('batalhao_vtr_custom_statuses', JSON.stringify(customStatuses));
             populateAllStatusSelects();
@@ -4183,8 +3997,8 @@
         removeStatus(selected);
     }
 
-    async function addNewLocalPrompt() {
-        const name = await adminPrompt('Digite o nome do novo Local / Destino (ex: OFICINA CENTRAL, CONCESSIONÁRIA, EAP):');
+    function addNewLocalPrompt() {
+        const name = prompt('Digite o nome do novo Local / Destino (ex: OFICINA CENTRAL, CONCESSIONÁRIA ZONA LESTE, EAP):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (customLocais.includes(clean)) {
@@ -4207,12 +4021,12 @@
         showToast(`📍 Local <strong>${clean}</strong> acrescentado com sucesso!`);
     }
 
-    async function removeLocal(loc) {
+    function removeLocal(loc) {
         if (customLocais.length <= 1) {
             alert('Você deve manter ao menos um local cadastrado.');
             return;
         }
-        if (await adminConfirm(`Deseja remover o local "${loc}" da lista de opções?`)) {
+        if (confirm(`Deseja remover o local "${loc}" da lista de opções?`)) {
             customLocais = customLocais.filter(l => l !== loc);
             localStorage.setItem('batalhao_vtr_custom_locais', JSON.stringify(customLocais));
             populateAllLocalSelects();
@@ -4578,7 +4392,6 @@
     
     
     
-    
     let activeReasonMenu = null;
     let activeReasonVehicle = null;
     let activeReasonBtn = null;
@@ -4726,136 +4539,6 @@
     window.addEventListener('scroll', () => {
         if (activeReasonMenu) closeInlineReasonMenu();
     }, { passive: true });
-
-    // =========================================================================
-    // 👮 SISTEMA DE DIÁLOGOS PADRONIZADOS (Administrador diz:)
-    // =========================================================================
-    let adminDialogResolve = null;
-
-    function adminAlert(message) {
-        return new Promise((resolve) => {
-            const modal = document.getElementById('adminDialogModal');
-            const msgEl = document.getElementById('adminDialogMessage');
-            const inputEl = document.getElementById('adminDialogInput');
-            const cancelBtn = document.getElementById('adminDialogCancelBtn');
-            const confirmBtn = document.getElementById('adminDialogConfirmBtn');
-
-            if (msgEl) msgEl.textContent = message;
-            if (inputEl) inputEl.style.display = 'none';
-            if (cancelBtn) cancelBtn.style.display = 'none';
-            if (confirmBtn) {
-                confirmBtn.textContent = 'OK';
-                confirmBtn.className = 'btn btn-primary btn-3d';
-            }
-
-            adminDialogResolve = resolve;
-            if (modal) {
-                modal.style.display = 'flex';
-                setTimeout(() => { if (confirmBtn) confirmBtn.focus(); }, 100);
-            } else {
-                resolve(true);
-            }
-        });
-    }
-
-    function adminConfirm(message) {
-        return new Promise((resolve) => {
-            const modal = document.getElementById('adminDialogModal');
-            const msgEl = document.getElementById('adminDialogMessage');
-            const inputEl = document.getElementById('adminDialogInput');
-            const cancelBtn = document.getElementById('adminDialogCancelBtn');
-            const confirmBtn = document.getElementById('adminDialogConfirmBtn');
-
-            if (msgEl) msgEl.textContent = message;
-            if (inputEl) inputEl.style.display = 'none';
-            if (cancelBtn) {
-                cancelBtn.style.display = 'inline-flex';
-                cancelBtn.textContent = 'Cancelar';
-            }
-            if (confirmBtn) {
-                confirmBtn.textContent = 'Confirmar';
-                confirmBtn.className = 'btn btn-primary btn-3d';
-            }
-
-            adminDialogResolve = resolve;
-            if (modal) {
-                modal.style.display = 'flex';
-                setTimeout(() => { if (confirmBtn) confirmBtn.focus(); }, 100);
-            } else {
-                resolve(false);
-            }
-        });
-    }
-
-    function adminPrompt(message, defaultValue = '') {
-        return new Promise((resolve) => {
-            const modal = document.getElementById('adminDialogModal');
-            const msgEl = document.getElementById('adminDialogMessage');
-            const inputEl = document.getElementById('adminDialogInput');
-            const cancelBtn = document.getElementById('adminDialogCancelBtn');
-            const confirmBtn = document.getElementById('adminDialogConfirmBtn');
-
-            if (msgEl) msgEl.textContent = message;
-            if (inputEl) {
-                inputEl.style.display = 'block';
-                inputEl.value = defaultValue || '';
-            }
-            if (cancelBtn) {
-                cancelBtn.style.display = 'inline-flex';
-                cancelBtn.textContent = 'Cancelar';
-            }
-            if (confirmBtn) {
-                confirmBtn.textContent = 'OK';
-                confirmBtn.className = 'btn btn-primary btn-3d';
-            }
-
-            adminDialogResolve = resolve;
-            if (modal) {
-                modal.style.display = 'flex';
-                setTimeout(() => { if (inputEl) { inputEl.focus(); inputEl.select(); } }, 150);
-            } else {
-                resolve(null);
-            }
-        });
-    }
-
-    function confirmAdminDialog() {
-        const modal = document.getElementById('adminDialogModal');
-        const inputEl = document.getElementById('adminDialogInput');
-        const val = (inputEl && inputEl.style.display !== 'none') ? inputEl.value : true;
-
-        if (modal) modal.style.display = 'none';
-        if (adminDialogResolve) {
-            const cb = adminDialogResolve;
-            adminDialogResolve = null;
-            cb(val);
-        }
-    }
-
-    function closeAdminDialog(result = false) {
-        const modal = document.getElementById('adminDialogModal');
-        if (modal) modal.style.display = 'none';
-        if (adminDialogResolve) {
-            const cb = adminDialogResolve;
-            adminDialogResolve = null;
-            cb(result);
-        }
-    }
-
-    function onAdminDialogOverlayClick(e) {
-        if (e.target.id === 'adminDialogModal') {
-            closeAdminDialog(false);
-        }
-    }
-
-    // Redireciona alert nativo para Toast e modal amigável (sem cabeçalho de URL do navegador)
-    window.alert = function(msg) {
-        if (typeof showToast === 'function') {
-            showToast(msg);
-        } else if (typeof adminAlert === 'function') {
-            adminAlert(msg);
-        }
-    };
 
     function clearInlineField(vehicleId, fieldName, inputElementId) {
         const inputEl = document.getElementById(inputElementId);
@@ -5314,7 +4997,7 @@ async function toggleSection(contentId, btnEl) {
         renderDashboard();
     }
 
-    async function exportExcel() {
+    function exportExcel() {
         const filterVal = document.getElementById('filterVehicle').value;
         const filterMonth = document.getElementById('filterMonth').value;
         const filterCia = document.getElementById('filterCia').value;
@@ -5343,7 +5026,7 @@ async function toggleSection(contentId, btnEl) {
 
         if (typeof XLSX !== 'undefined') {
             const defaultExcelName = `Controle_de_Viaturas_Batalhao_${new Date().toISOString().slice(0,10)}`;
-            const userExcelName = await adminPrompt('Digite o nome do arquivo para a planilha Excel (.xlsx):', defaultExcelName);
+            const userExcelName = prompt('Digite o nome do arquivo para a planilha Excel (.xlsx):', defaultExcelName);
             if (userExcelName === null) return;
 
             let finalExcelName = userExcelName.trim() || defaultExcelName;
@@ -5404,7 +5087,7 @@ async function toggleSection(contentId, btnEl) {
         customStatuses = [...defaultStatuses];
         customLocais = [...defaultLocais];
         customQuickReasons = sortQuickReasons([...defaultQuickReasons]);
-        appTitle = '🚓 CONTROLE DE VIATURAS - BATALHÃO';
+        appTitle = '🚓 CONTROLE DE VIATURAS - FROTA 1ª CIA DO 1º BPTRAN';
         currentViewMode = 'BATALHAO';
 
         updateAppTitleDisplay();
@@ -5424,14 +5107,14 @@ async function toggleSection(contentId, btnEl) {
         showToast("⚠️ <strong>Banco de dados zerado com sucesso!</strong> O painel está novo.");
     }
 
-    async function renameCurrentVehicle() {
+    function renameCurrentVehicle() {
         const selected = document.getElementById('vehicleSelect').value;
         if (!selected) {
             alert('Nenhuma viatura selecionada para renomear.');
             return;
         }
 
-        const newName = await adminPrompt(`Digite o novo prefixo para a viatura "${selected}":`, selected);
+        const newName = prompt(`Digite o novo prefixo para a viatura "${selected}":`, selected);
         if (!newName || !newName.trim()) return;
 
         const cleanNewName = newName.trim().toUpperCase();
@@ -5708,20 +5391,20 @@ async function toggleSection(contentId, btnEl) {
     async function saveAsOriginalBaseline() {
         const ok = await requestAdminPassword("definir a base original da frota");
         if (!ok) return;
-        if (await adminConfirm('Deseja definir o estado atual de todas as viaturas como a nova BASE ORIGINAL para restaurações futuras?')) {
+        if (confirm('Deseja definir o estado atual de todas as viaturas como a nova BASE ORIGINAL para restaurações futuras?')) {
             const currentSnapshot = JSON.parse(JSON.stringify(records));
             localStorage.setItem('batalhao_vtr_custom_original_dataset', JSON.stringify(currentSnapshot));
             showToast('📌 Estado atual da frota definido como <strong>Base Original</strong>!');
         }
     }
 
-    async function clearAllData() {
+    function clearAllData() {
         const hasCustomOriginal = localStorage.getItem('batalhao_vtr_custom_original_dataset');
         const msg = hasCustomOriginal 
             ? 'Atenção: deseja restaurar a frota para o último estado salvo em "Aplicar como Original"?' 
             : 'Atenção: deseja restaurar a frota para a base inicial limpa?';
 
-        if (await adminConfirm(msg)) {
+        if (confirm(msg)) {
             if (hasCustomOriginal) {
                 records = JSON.parse(localStorage.getItem('batalhao_vtr_custom_original_dataset'));
             } else {
@@ -5736,8 +5419,8 @@ async function toggleSection(contentId, btnEl) {
         }
     }
 
-    async function deleteRecord(id) {
-        if (await adminConfirm(`Deseja excluir o registro da viatura ${id}?`)) {
+    function deleteRecord(id) {
+        if (confirm(`Deseja excluir o registro da viatura ${id}?`)) {
             records = records.filter(r => r.vehicle !== id);
             saveRecords();
             populateMonthSelect();
@@ -5748,7 +5431,7 @@ async function toggleSection(contentId, btnEl) {
         }
     }
 
-    async function exportJSON() {
+    function exportJSON() {
         const payload = {
             appTitle: appTitle,
             lastStatusUpdate: localStorage.getItem('batalhao_vtr_last_status_update') || '',
@@ -5779,7 +5462,7 @@ async function toggleSection(contentId, btnEl) {
         };
 
         const defaultName = `Controle_de_Viaturas_Batalhao_${new Date().toISOString().slice(0,10)}`;
-        const userFileName = await adminPrompt('Digite o nome do arquivo para exportar o banco de dados (.json):', defaultName);
+        const userFileName = prompt('Digite o nome do arquivo para exportar o banco de dados (.json):', defaultName);
         if (userFileName === null) return;
 
         let finalName = userFileName.trim();
@@ -5800,7 +5483,7 @@ async function toggleSection(contentId, btnEl) {
     async function triggerImport() {
         const ok = await requestAdminPassword("definir padrão e substituir o banco de dados");
         if (!ok) return;
-        if (await adminConfirm('Atenção: A substituição irá SOBRESCREVER o banco de dados atual pelo arquivo selecionado (.xlsx, .csv, .json).\n\nPara apenas mesclar/incorporar mantendo as viaturas atuais, use a opção "📥 Importar / Conectar Planilha".\n\nDeseja continuar?')) {
+        if (confirm('Atenção: A substituição irá SOBRESCREVER o banco de dados atual pelo arquivo selecionado (.xlsx, .csv, .json).\n\nPara apenas mesclar/incorporar mantendo as viaturas atuais, use a opção "📥 Importar / Conectar Planilha".\n\nDeseja continuar?')) {
             document.getElementById('importInput').click();
         }
     }
@@ -6732,34 +6415,29 @@ async function toggleSection(contentId, btnEl) {
                         </div>
                     </td>
                     <td class="col-td-cia ${isHidCia}">
-                        <button type="button" class="inline-select-btn" style="min-width: 120px; font-weight: 700; color: var(--primary);" onclick="openColumnSelectMenu('${r.vehicle}', 'cia', this, event)" title="Alterar Companhia">
-                            <span class="select-btn-text">${r.cia || 'Batalhão'}</span>
-                            <span class="select-btn-arrow">▼</span>
-                        </button>
+                        <select class="inline-input" style="width: 100%; min-width: 120px; padding: 4px 6px; font-weight: 700; color: var(--primary);" onchange="updateInlineField('${r.vehicle}', 'cia', this.value)">
+                            ${ciaOptionsHtml}
+                        </select>
                     </td>
                     <td class="col-td-modelo ${isHidModelo}">
-                        <button type="button" class="inline-select-btn" style="min-width: 155px; font-weight: 600;" onclick="openColumnSelectMenu('${r.vehicle}', 'model', this, event)" title="Alterar Modelo">
-                            <span class="select-btn-text">${r.model || 'DUSTER'}</span>
-                            <span class="select-btn-arrow">▼</span>
-                        </button>
+                        <select class="inline-input" style="width: 100%; min-width: 155px; padding: 4px 6px; font-weight: 600;" onchange="updateInlineField('${r.vehicle}', 'model', this.value)">
+                            ${modelOptionsHtml}
+                        </select>
                     </td>
                     <td class="col-td-pelotao ${isHidPelotao}">
-                        <button type="button" class="inline-select-btn" style="min-width: 105px; font-weight: 500;" onclick="openColumnSelectMenu('${r.vehicle}', 'pelotao', this, event)" title="Alterar Pelotão">
-                            <span class="select-btn-text">${r.pelotao || 'ADM'}</span>
-                            <span class="select-btn-arrow">▼</span>
-                        </button>
+                        <select class="inline-input" style="width: 100%; min-width: 105px; padding: 4px 6px; font-weight: 500;" onchange="updateInlineField('${r.vehicle}', 'pelotao', this.value)">
+                            ${pelOptionsHtml}
+                        </select>
                     </td>
                     <td class="col-td-status ${isHidStatus}" style="width: 145px; min-width: 140px;">
-                        <button type="button" id="inline-status-${r.vehicle}" class="inline-select-btn ${statusClass}" style="min-width: 130px; font-size: 0.82rem;" onclick="openColumnSelectMenu('${r.vehicle}', 'status', this, event)" title="Alterar Status Operacional">
-                            <span class="select-btn-text">${r.status || 'OPERANDO'}</span>
-                            <span class="select-btn-arrow">▼</span>
-                        </button>
+                        <select id="inline-status-${r.vehicle}" class="inline-select ${statusClass}" style="width: 100%; min-width: 130px; font-size: 0.82rem; padding: 4px 6px;" onchange="updateInlineField('${r.vehicle}', 'status', this.value)">
+                            ${statusOptionsHtml}
+                        </select>
                     </td>
                     <td class="col-td-destino ${isHidDestino}">
-                        <button type="button" class="inline-select-btn" style="min-width: 150px; font-weight: 500;" onclick="openColumnSelectMenu('${r.vehicle}', 'destino', this, event)" title="Alterar QTH da VTR">
-                            <span class="select-btn-text">${r.destino || 'BASE'}</span>
-                            <span class="select-btn-arrow">▼</span>
-                        </button>
+                        <select class="inline-input" style="width: 100%; min-width: 150px; padding: 4px 6px; font-weight: 500;" onchange="updateInlineField('${r.vehicle}', 'destino', this.value)">
+                            ${localOptionsHtml}
+                        </select>
                     </td>
                     <td class="col-td-obs ${isHidObs}" title="${r.obs ? 'Observação: ' + r.obs : 'Nenhuma observação'}">
                         <div class="input-clearable-wrapper">
@@ -6770,7 +6448,10 @@ async function toggleSection(contentId, btnEl) {
                     <td class="col-td-data ${isHidData}">
                         <div style="display: flex; gap: 6px; align-items: center; min-width: 265px;">
                             <input type="date" class="inline-input" style="width: 115px; font-size: 0.8rem; padding: 4px 6px;" value="${formattedDate}" onchange="updateInlineField('${r.vehicle}', 'date', this.value)">
-                            <input type="text" id="inline-dataforms-${r.vehicle}" class="inline-input" style="flex: 1; min-width: 135px; font-size: 0.8rem; padding: 4px 6px;" value="${r.data_forms || ''}" title="${r.data_forms ? 'Observações: ' + r.data_forms : 'Observações...'}" placeholder="Observações..." oninput="this.title = this.value ? 'Observações: ' + this.value : 'Observações...';" onchange="updateInlineField('${r.vehicle}', 'data_forms', this.value)">
+                            <div class="input-clearable-wrapper" style="flex: 1; min-width: 135px;">
+                                <input type="text" id="inline-dataforms-${r.vehicle}" class="inline-input" style="width: 100%; font-size: 0.8rem; padding: 4px 6px;" value="${r.data_forms || ''}" title="${r.data_forms ? 'Observações: ' + r.data_forms : 'Observações...'}" placeholder="Observações..." oninput="this.title = this.value ? 'Observações: ' + this.value : 'Observações...';" onchange="updateInlineField('${r.vehicle}', 'data_forms', this.value)">
+                                <button type="button" class="btn-clear-input" onclick="clearInlineField('${r.vehicle}', 'data_forms', 'inline-dataforms-${r.vehicle}')" title="Limpar">✖</button>
+                            </div>
                         </div>
                     </td>
                     <td class="col-td-acoes ${isHidAcoes}" style="text-align: center; width: 105px;">
@@ -7090,25 +6771,6 @@ async function toggleSection(contentId, btnEl) {
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-outline btn-3d" onclick="closeRowActionModal()">Fechar</button>
-        </div>
-    </div>
-</div>
-
-
-<!-- Modal Universal: Administrador diz -->
-<div id="adminDialogModal" class="modal-overlay" onclick="onAdminDialogOverlayClick(event)">
-    <div class="modal-card" style="max-width: 440px;" onclick="event.stopPropagation()">
-        <div class="modal-header">
-            <div class="modal-title"><span>👮 Administrador diz:</span></div>
-            <button type="button" class="modal-close" onclick="closeAdminDialog(false)" title="Fechar">✖</button>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 12px; padding: 12px 0;">
-            <p id="adminDialogMessage" style="font-size: 0.92rem; color: var(--text-main); line-height: 1.45; white-space: pre-wrap; word-break: break-word;"></p>
-            <input type="text" id="adminDialogInput" style="display: none; font-size: 1rem; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; width: 100%; box-sizing: border-box;" onkeydown="if(event.key==='Enter') confirmAdminDialog()">
-        </div>
-        <div class="modal-footer">
-            <button type="button" id="adminDialogCancelBtn" class="btn btn-outline btn-3d" onclick="closeAdminDialog(false)" style="display: none;">Cancelar</button>
-            <button type="button" id="adminDialogConfirmBtn" class="btn btn-primary btn-3d" onclick="confirmAdminDialog()">OK</button>
         </div>
     </div>
 </div>
