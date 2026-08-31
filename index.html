@@ -7223,6 +7223,29 @@ async function toggleSection(contentId, btnEl) {
                 const tr = document.createElement('tr');
                 const formattedDate = r.date || '';
 
+                let radioDateFormatted = '';
+                if (r.radio_data && r.radio_data.trim()) {
+                    radioDateFormatted = r.radio_data.includes('-') ? r.radio_data.split('-').reverse().join('/') : r.radio_data;
+                }
+
+                let prefixTitle = '';
+                let badgeContent = '';
+
+                if (r.placa && r.placa.trim()) {
+                    if (radioDateFormatted) {
+                        prefixTitle = `🚗 Placa: ${r.placa} | 📻 Rádio atualizado em: ${radioDateFormatted}`;
+                        badgeContent = `🚗 ${r.placa} • 📻 Rádio atualizado em: ${radioDateFormatted}`;
+                    } else {
+                        prefixTitle = `🚗 Placa: ${r.placa}`;
+                        badgeContent = `🚗 ${r.placa}`;
+                    }
+                } else if (radioDateFormatted) {
+                    prefixTitle = `📻 Rádio atualizado em: ${radioDateFormatted}`;
+                    badgeContent = `📻 Rádio atualizado em: ${radioDateFormatted}`;
+                } else {
+                    prefixTitle = 'Clique para ver se possui Placa ou dados do Rádio';
+                }
+
                 let ciaOptionsHtml = '';
                 customCias.forEach(c => {
                     ciaOptionsHtml += `<option value="${c}" ${(r.cia || 'Batalhão') === c ? 'selected' : ''}>${c}</option>`;
