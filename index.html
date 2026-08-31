@@ -1866,10 +1866,64 @@
     
         
 
-    
-        
+        .inline-reason-menu-header {
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--text-muted, #64748b);
+            padding: 4px 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border, #e2e8f0);
+            margin-bottom: 2px;
+        }
 
-        
+        .inline-reason-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--text-main, #0f172a);
+            border-radius: 6px;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            text-align: left;
+            width: 100%;
+            transition: all 0.15s ease;
+        }
+
+        .inline-reason-item:hover {
+            background-color: #eff6ff;
+            color: #1d4ed8;
+        }
+
+        .inline-reason-item.item-clear {
+            color: #ef4444;
+            font-weight: 700;
+            background-color: #fef2f2;
+            border: 1px solid #fee2e2;
+            margin-bottom: 3px;
+        }
+
+        .inline-reason-item.item-clear:hover {
+            background-color: #fee2e2;
+            color: #dc2626;
+            border-color: #fca5a5;
+        }
+
+        .inline-reason-divider {
+            height: 1px;
+            background-color: var(--border, #e2e8f0);
+            margin: 3px 0;
+        }
+
+        [data-theme="dark"] .inline-reason-menu {
+            background: #1e293b;
+            border-color: #334155;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
 
         [data-theme="dark"] .inline-reason-item:hover {
             background-color: #334155;
@@ -1888,7 +1942,24 @@
         }
 
     
-        /* Botões de Ação Inline Padronizados (X e +) */
+        /* ========================================================================= */
+        /* ✨ ESTILOS CUSTOMIZADOS: BOTÕES, HOVER LIFT E MENUS FLUTUANTES COM SALTO */
+        /* ========================================================================= */
+
+        /* 1. Botões Inline Padronizados (X e +) */
+        .input-clearable-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .input-clearable-wrapper .inline-input {
+            width: 100%;
+            padding-right: 28px !important;
+            box-sizing: border-box;
+        }
+
         .btn-clear-input, .btn-reason-plus {
             position: absolute;
             right: 4px;
@@ -1973,17 +2044,172 @@
             color: #ffffff !important;
         }
 
-        /* Menu Flutuante de Motivos Rápidos (Fixado e com Salto no Hover) */
-        .inline-reason-menu {
+        /* 2. Seletores Customizados na Tabela com Salto e Elevação (Hover Lift) */
+        .inline-select-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 5px 8px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-family: inherit;
+            border: 1px solid var(--border);
+            background-color: var(--card-bg, #ffffff);
+            color: var(--text-main, #0f172a);
+            cursor: pointer;
+            outline: none;
+            box-sizing: border-box;
+            white-space: nowrap;
+            text-align: left;
+            user-select: none;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                        background-color 0.2s ease, 
+                        border-color 0.2s ease, 
+                        box-shadow 0.2s ease;
+        }
+
+        .inline-select-btn:hover {
+            border-color: #3b82f6 !important;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.18);
+        }
+
+        .inline-select-btn.active {
+            border-color: #2563eb !important;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+        }
+
+        .inline-select-btn .select-btn-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+
+        .inline-select-btn .select-btn-arrow {
+            font-size: 0.7rem;
+            color: var(--text-muted, #64748b);
+            margin-left: 6px;
+            transition: transform 0.2s ease;
+        }
+
+        .inline-select-btn.active .select-btn-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Cores Específicas de Status */
+        .inline-select-btn.status-operando {
+            background-color: #d1fae5;
+            color: #065f46;
+            border-color: #a7f3d0;
+            font-weight: 700;
+        }
+        .inline-select-btn.status-operando:hover {
+            background-color: #a7f3d0 !important;
+            border-color: #34d399 !important;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.25);
+        }
+
+        .inline-select-btn.status-baixada {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border-color: #fca5a5;
+            font-weight: 700;
+        }
+        .inline-select-btn.status-baixada:hover {
+            background-color: #fecaca !important;
+            border-color: #f87171 !important;
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
+        }
+
+        .inline-select-btn.status-descarga {
+            background-color: #f3e8ff;
+            color: #6b21a8;
+            border-color: #d8b4fe;
+            font-weight: 700;
+        }
+        .inline-select-btn.status-descarga:hover {
+            background-color: #e9d5ff !important;
+            border-color: #c084fc !important;
+            box-shadow: 0 4px 10px rgba(168, 85, 247, 0.25);
+        }
+
+        .inline-select-btn.status-adm {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            border-color: #bae6fd;
+            font-weight: 700;
+        }
+        .inline-select-btn.status-adm:hover {
+            background-color: #bae6fd !important;
+            border-color: #38bdf8 !important;
+            box-shadow: 0 4px 10px rgba(14, 165, 233, 0.25);
+        }
+
+        .inline-select-btn.status-custom {
+            background-color: #fef3c7;
+            color: #92400e;
+            border-color: #fde68a;
+            font-weight: 700;
+        }
+        .inline-select-btn.status-custom:hover {
+            background-color: #fde68a !important;
+            border-color: #fbbf24 !important;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.25);
+        }
+
+        /* Hover Lift nos Inputs de Texto da Tabela */
+        .inline-input {
+            padding: 6px 8px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border);
+            background-color: #ffffff;
+            outline: none;
+            cursor: pointer;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                        background-color 0.2s ease, 
+                        border-color 0.2s ease, 
+                        box-shadow 0.2s ease;
+        }
+
+        .inline-input:hover {
+            border-color: #3b82f6 !important;
+            background-color: #f8fafc !important;
+            transform: translateY(-2px) scale(1.015);
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.12);
+        }
+
+        .inline-input:focus {
+            border-color: var(--primary) !important;
+            background-color: #ffffff !important;
+            transform: translateY(-2px) scale(1.015);
+            box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.2);
+        }
+
+        /* Prefixo com Deslocamento Suave no Hover */
+        .prefix-cell-wrapper {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .col-td-prefixo:hover .prefix-cell-wrapper {
+            transform: translateX(4px) scale(1.04);
+        }
+
+        /* 3. Menus Flutuantes de Opções com Salto Suave ao Mudar de Opção */
+        .column-dropdown-menu, .inline-reason-menu {
             position: fixed !important;
             background: var(--card-bg, #ffffff) !important;
             border: 1px solid var(--border, #e2e8f0) !important;
             border-radius: 8px !important;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25), 0 8px 10px -6px rgba(0, 0, 0, 0.15) !important;
+            box-shadow: 0 12px 28px -5px rgba(0, 0, 0, 0.25), 0 8px 10px -6px rgba(0, 0, 0, 0.15) !important;
             z-index: 999999 !important;
-            min-width: 230px !important;
-            max-width: 290px !important;
-            max-height: 320px !important;
+            min-width: 180px !important;
+            max-height: 300px !important;
             overflow-y: auto !important;
             padding: 6px !important;
             display: flex !important;
@@ -1992,7 +2218,12 @@
             font-family: inherit !important;
         }
 
-        .inline-reason-menu-header {
+        .inline-reason-menu {
+            min-width: 230px !important;
+            max-width: 290px !important;
+        }
+
+        .column-dropdown-header, .inline-reason-menu-header {
             font-size: 0.76rem !important;
             font-weight: 700 !important;
             color: var(--text-muted, #64748b) !important;
@@ -2003,9 +2234,10 @@
             margin-bottom: 3px !important;
         }
 
-        .inline-reason-item {
+        .dropdown-option-item, .inline-reason-item {
             display: flex !important;
             align-items: center !important;
+            justify-content: space-between !important;
             gap: 8px !important;
             padding: 7px 12px !important;
             font-size: 0.84rem !important;
@@ -2022,11 +2254,23 @@
             user-select: none !important;
         }
 
-        .inline-reason-item:hover {
+        /* Efeito de Salto para a Direita com Ampliação e Realce de Cor */
+        .dropdown-option-item:hover, .inline-reason-item:hover {
             background-color: #eff6ff !important;
             color: #1d4ed8 !important;
             transform: translateX(6px) scale(1.03) !important;
             box-shadow: 0 2px 6px rgba(29, 78, 216, 0.15) !important;
+        }
+
+        .dropdown-option-item.selected {
+            font-weight: 800 !important;
+            color: var(--primary, #1e3a8a) !important;
+            background-color: #f1f5f9 !important;
+        }
+
+        .dropdown-option-item.selected:hover {
+            background-color: #eff6ff !important;
+            color: #1d4ed8 !important;
         }
 
         .inline-reason-item.item-clear {
@@ -2035,6 +2279,7 @@
             background-color: #fef2f2 !important;
             border: 1px solid #fee2e2 !important;
             margin-bottom: 3px !important;
+            justify-content: flex-start !important;
         }
 
         .inline-reason-item.item-clear:hover {
@@ -2051,34 +2296,7 @@
             margin: 3px 0 !important;
         }
 
-        [data-theme="dark"] .inline-reason-menu {
-            background: #1e293b !important;
-            border-color: #334155 !important;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6) !important;
-        }
-
-        [data-theme="dark"] .inline-reason-item {
-            color: #f8fafc !important;
-        }
-
-        [data-theme="dark"] .inline-reason-item:hover {
-            background-color: #334155 !important;
-            color: #60a5fa !important;
-            transform: translateX(6px) scale(1.03) !important;
-        }
-
-        [data-theme="dark"] .inline-reason-item.item-clear {
-            background-color: #7f1d1d33 !important;
-            border-color: #ef444444 !important;
-            color: #f87171 !important;
-        }
-
-        [data-theme="dark"] .inline-reason-item.item-clear:hover {
-            background-color: #7f1d1d66 !important;
-            color: #fca5a5 !important;
-        }
-
-        /* Easter Egg no Rodapé */
+        /* 4. Easter Egg no Rodapé */
         .footer-easter-egg {
             position: relative;
             display: inline-block;
@@ -2132,11 +2350,43 @@
             transform: translateX(-50%) translateY(0);
         }
 
+        /* Dark Theme Support */
+        [data-theme="dark"] .inline-select-btn {
+            background-color: #0f172a;
+            border-color: #334155;
+            color: #f8fafc;
+        }
+        [data-theme="dark"] .inline-select-btn:hover {
+            border-color: #60a5fa !important;
+            box-shadow: 0 4px 10px rgba(96, 165, 250, 0.2);
+        }
+        [data-theme="dark"] .inline-input {
+            background-color: #0f172a;
+            color: #f8fafc;
+            border-color: #334155;
+        }
+        [data-theme="dark"] .inline-input:hover {
+            background-color: #1e293b !important;
+            border-color: #60a5fa !important;
+            box-shadow: 0 4px 10px rgba(96, 165, 250, 0.2);
+        }
+        [data-theme="dark"] .column-dropdown-menu, [data-theme="dark"] .inline-reason-menu {
+            background: #1e293b !important;
+            border-color: #334155 !important;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6) !important;
+        }
+        [data-theme="dark"] .dropdown-option-item, [data-theme="dark"] .inline-reason-item {
+            color: #f8fafc !important;
+        }
+        [data-theme="dark"] .dropdown-option-item:hover, [data-theme="dark"] .inline-reason-item:hover {
+            background-color: #334155 !important;
+            color: #60a5fa !important;
+            transform: translateX(6px) scale(1.03) !important;
+        }
         [data-theme="dark"] .footer-easter-egg .easter-egg-tooltip {
             background: linear-gradient(135deg, #0284c7, #2563eb);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
         }
-
         [data-theme="dark"] .footer-easter-egg .easter-egg-tooltip::after {
             border-color: #2563eb transparent transparent transparent;
         }
@@ -3561,9 +3811,9 @@
         document.getElementById('pageTitle').textContent = appTitle.replace(/<[^>]*>?/gm, '') + ' - Painel da Frota';
     }
 
-    function editAppTitle() {
+    async function editAppTitle() {
         const currentClean = appTitle.replace(/^[^a-zA-Z0-9À-ÿ_ ]+/g, '').trim();
-        const newTitle = prompt('Digite o novo nome para o sistema de controle:', currentClean);
+        const newTitle = await adminPrompt('Digite o novo nome para o sistema de controle:', currentClean);
         if (newTitle && newTitle.trim()) {
             appTitle = '🚓 ' + newTitle.trim();
             localStorage.setItem('batalhao_vtr_app_title', appTitle);
@@ -3612,8 +3862,8 @@
     }
     localStorage.setItem('batalhao_vtr_custom_cias', JSON.stringify(customCias));
 
-    function addNewCiaPrompt() {
-        const name = prompt('Digite o nome da nova Companhia / Setor (ex: CTT, SEÇÃO ADM, 1ª Cia):');
+    async function addNewCiaPrompt() {
+        const name = await adminPrompt('Digite o nome da nova Companhia / Setor (ex: CTT, SEÇÃO ADM, 1ª Cia):');
         if (!name || !name.trim()) return;
         const clean = name.trim();
         if (clean.includes('5') || clean.includes('5ª')) {
@@ -3633,12 +3883,12 @@
         showToast(`🏛️ Companhia <strong>${clean}</strong> acrescentada com sucesso!`);
     }
 
-    function removeCia(cia) {
+    async function removeCia(cia) {
         if (customCias.length <= 1) {
             alert('Você deve manter ao menos uma Companhia cadastrada.');
             return;
         }
-        if (confirm(`Deseja remover "${cia}" da lista de Companhias?`)) {
+        if (await adminConfirm(`Deseja remover "${cia}" da lista de Companhias?`)) {
             customCias = customCias.filter(c => c !== cia);
             localStorage.setItem('batalhao_vtr_custom_cias', JSON.stringify(customCias));
             populateAllCiaSelects();
@@ -3709,8 +3959,8 @@
         localStorage.setItem('batalhao_vtr_custom_models', JSON.stringify(customModels));
     }
 
-    function addNewModelPrompt() {
-        const name = prompt('Digite o nome do novo Modelo de Viatura (ex: COROLLA, HILUX, AMAROK, TIGGO):');
+    async function addNewModelPrompt() {
+        const name = await adminPrompt('Digite o nome do novo Modelo de Viatura (ex: COROLLA, HILUX, AMAROK, TIGGO):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (customModels.includes(clean)) {
@@ -3727,12 +3977,12 @@
         showToast(`🚗 Modelo <strong>${clean}</strong> acrescentado com sucesso!`);
     }
 
-    function removeModel(model) {
+    async function removeModel(model) {
         if (customModels.length <= 1) {
             alert('Você deve manter ao menos um modelo cadastrado.');
             return;
         }
-        if (confirm(`Deseja remover o modelo "${model}" da lista de opções?`)) {
+        if (await adminConfirm(`Deseja remover o modelo "${model}" da lista de opções?`)) {
             customModels = customModels.filter(m => m !== model);
             customModels = sortModelsList(customModels);
             localStorage.setItem('batalhao_vtr_custom_models', JSON.stringify(customModels));
@@ -3827,8 +4077,8 @@
         }
     }
 
-    function addNewQuickReasonPrompt() {
-        const name = prompt('Digite o nome do novo Motivo Rápido (ex: FREIO, SUSPENSÃO, FUNILARIA, AR-CONDICIONADO, VISTORIA):');
+    async function addNewQuickReasonPrompt() {
+        const name = await adminPrompt('Digite o nome do novo Motivo Rápido (ex: FREIO, SUSPENSÃO, FUNILARIA):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (customQuickReasons.some(r => r.key === clean)) {
@@ -3896,8 +4146,8 @@
         localStorage.setItem('batalhao_vtr_custom_locais', JSON.stringify(customLocais));
     }
 
-    function addNewPelotaoPrompt() {
-        const name = prompt('Digite o nome do novo Pelotão / Setor (ex: 9º PEL, CANIL, SEÇÃO ADM):');
+    async function addNewPelotaoPrompt() {
+        const name = await adminPrompt('Digite o nome do novo Pelotão / Setor (ex: 9º PEL, CANIL, SEÇÃO ADM):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (clean.includes('CIA')) {
@@ -3926,12 +4176,12 @@
         showToast(`🛡️ Pelotão <strong>${clean}</strong> acrescentado com sucesso!`);
     }
 
-    function removePelotao(pel) {
+    async function removePelotao(pel) {
         if (customPelotoes.length <= 1) {
             alert('Você deve manter ao menos um pelotão cadastrado.');
             return;
         }
-        if (confirm(`Deseja remover "${pel}" da lista de pelotões?`)) {
+        if (await adminConfirm(`Deseja remover "${pel}" da lista de pelotões?`)) {
             customPelotoes = customPelotoes.filter(p => p !== pel);
             localStorage.setItem('batalhao_vtr_custom_pelotoes', JSON.stringify(customPelotoes));
             populateAllPelotaoSelects();
@@ -3951,8 +4201,8 @@
         removePelotao(selected);
     }
 
-    function addNewStatusPrompt() {
-        const name = prompt('Digite o nome do novo Status Operacional (ex: AGUARDANDO PEÇA, RESERVA, SINISTRADA):');
+    async function addNewStatusPrompt() {
+        const name = await adminPrompt('Digite o nome do novo Status Operacional (ex: AGUARDANDO PEÇA, RESERVA):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (clean === 'LUMINOSO') {
@@ -3972,12 +4222,12 @@
         showToast(`🚥 Status <strong>${clean}</strong> acrescentado com sucesso!`);
     }
 
-    function removeStatus(st) {
+    async function removeStatus(st) {
         if (customStatuses.length <= 1) {
             alert('Você deve manter ao menos um status cadastrado.');
             return;
         }
-        if (confirm(`Deseja remover o status "${st}" da lista de opções?`)) {
+        if (await adminConfirm(`Deseja remover o status "${st}" da lista de opções?`)) {
             customStatuses = customStatuses.filter(s => s !== st);
             localStorage.setItem('batalhao_vtr_custom_statuses', JSON.stringify(customStatuses));
             populateAllStatusSelects();
@@ -3997,8 +4247,8 @@
         removeStatus(selected);
     }
 
-    function addNewLocalPrompt() {
-        const name = prompt('Digite o nome do novo Local / Destino (ex: OFICINA CENTRAL, CONCESSIONÁRIA ZONA LESTE, EAP):');
+    async function addNewLocalPrompt() {
+        const name = await adminPrompt('Digite o nome do novo Local / Destino (ex: OFICINA CENTRAL, CONCESSIONÁRIA, EAP):');
         if (!name || !name.trim()) return;
         const clean = name.trim().toUpperCase();
         if (customLocais.includes(clean)) {
@@ -4021,12 +4271,12 @@
         showToast(`📍 Local <strong>${clean}</strong> acrescentado com sucesso!`);
     }
 
-    function removeLocal(loc) {
+    async function removeLocal(loc) {
         if (customLocais.length <= 1) {
             alert('Você deve manter ao menos um local cadastrado.');
             return;
         }
-        if (confirm(`Deseja remover o local "${loc}" da lista de opções?`)) {
+        if (await adminConfirm(`Deseja remover o local "${loc}" da lista de opções?`)) {
             customLocais = customLocais.filter(l => l !== loc);
             localStorage.setItem('batalhao_vtr_custom_locais', JSON.stringify(customLocais));
             populateAllLocalSelects();
@@ -4392,9 +4642,126 @@
     
     
     
+    // =========================================================================
+    // 🔘 MENUS FLUTUANTES INTERATIVOS (COLUNAS E MOTIVOS RÁPIDOS COM SALTO)
+    // =========================================================================
+    let activeColumnDropdownMenu = null;
+    let activeColumnDropdownBtn = null;
+    let activeColumnDropdownKey = null;
+
     let activeReasonMenu = null;
     let activeReasonVehicle = null;
     let activeReasonBtn = null;
+
+    function openColumnSelectMenu(vehicleId, fieldName, btnEl, event) {
+        if (event) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+
+        const uniqueKey = `${vehicleId}_${fieldName}`;
+
+        if (activeColumnDropdownKey === uniqueKey) {
+            closeColumnSelectMenu();
+            return;
+        }
+
+        closeColumnSelectMenu();
+        closeInlineReasonMenu();
+
+        activeColumnDropdownKey = uniqueKey;
+        activeColumnDropdownBtn = btnEl;
+
+        if (btnEl) btnEl.classList.add('active');
+
+        const v = records.find(r => r.vehicle === vehicleId);
+        const currentValue = v ? (v[fieldName] || '') : '';
+
+        let optionsList = [];
+        let headerTitle = 'Opções';
+
+        if (fieldName === 'cia') {
+            optionsList = (typeof customCias !== 'undefined' && Array.isArray(customCias) && customCias.length > 0) ? customCias : defaultCias;
+            headerTitle = '🏛️ Companhia';
+        } else if (fieldName === 'model') {
+            optionsList = (typeof customModels !== 'undefined' && Array.isArray(customModels) && customModels.length > 0) ? customModels : defaultModels;
+            headerTitle = '🚗 Modelo da Viatura';
+        } else if (fieldName === 'pelotao') {
+            optionsList = (typeof customPelotoes !== 'undefined' && Array.isArray(customPelotoes) && customPelotoes.length > 0) ? customPelotoes : defaultPelotoes;
+            headerTitle = '🛡️ Pelotão';
+        } else if (fieldName === 'status') {
+            optionsList = (typeof customStatuses !== 'undefined' && Array.isArray(customStatuses) && customStatuses.length > 0) ? customStatuses : defaultStatuses;
+            headerTitle = '⚡ Status Operacional';
+        } else if (fieldName === 'destino') {
+            optionsList = [...(typeof customLocais !== 'undefined' && Array.isArray(customLocais) ? customLocais : defaultLocais)];
+            if (currentValue && !optionsList.includes(currentValue.toUpperCase())) {
+                optionsList.push(currentValue.toUpperCase());
+            }
+            headerTitle = '📍 QTH da VTR';
+        }
+
+        const menu = document.createElement('div');
+        menu.id = 'activeColumnDropdownMenu';
+        menu.className = 'column-dropdown-menu';
+
+        let html = `<div class="column-dropdown-header">${headerTitle} (${vehicleId})</div>`;
+
+        optionsList.forEach(opt => {
+            const isSelected = (opt.toLowerCase() === currentValue.toLowerCase());
+            let statusOptClass = '';
+            if (fieldName === 'status') {
+                const stLower = opt.toLowerCase();
+                if (['operando', 'baixada', 'descarga', 'adm'].includes(stLower)) {
+                    statusOptClass = `status-opt-${stLower}`;
+                }
+            }
+
+            html += `
+                <button type="button" class="dropdown-option-item ${isSelected ? 'selected' : ''} ${statusOptClass}" onclick="selectColumnOption('${vehicleId}', '${fieldName}', '${opt}')">
+                    <span>${opt}</span>
+                    ${isSelected ? '<span style="font-weight: 800;">✓</span>' : ''}
+                </button>
+            `;
+        });
+
+        menu.innerHTML = html;
+        document.body.appendChild(menu);
+
+        const rect = btnEl.getBoundingClientRect();
+        let top = rect.bottom + 4;
+        let left = rect.left;
+
+        if (left + 200 > window.innerWidth) {
+            left = window.innerWidth - 210;
+        }
+        if (left < 10) left = 10;
+        if (top + 280 > window.innerHeight) top = Math.max(10, rect.top - 290);
+
+        menu.style.top = `${top}px`;
+        menu.style.left = `${left}px`;
+        menu.style.minWidth = `${Math.max(rect.width, 170)}px`;
+
+        activeColumnDropdownMenu = menu;
+    }
+
+    function closeColumnSelectMenu() {
+        if (activeColumnDropdownBtn) {
+            activeColumnDropdownBtn.classList.remove('active');
+            activeColumnDropdownBtn = null;
+        }
+        if (activeColumnDropdownMenu) {
+            if (activeColumnDropdownMenu.parentNode) {
+                activeColumnDropdownMenu.parentNode.removeChild(activeColumnDropdownMenu);
+            }
+            activeColumnDropdownMenu = null;
+            activeColumnDropdownKey = null;
+        }
+    }
+
+    function selectColumnOption(vehicleId, fieldName, selectedValue) {
+        updateInlineField(vehicleId, fieldName, selectedValue);
+        closeColumnSelectMenu();
+    }
 
     function openInlineReasonMenu(vehicleId, btnEl, event) {
         if (event) {
@@ -4402,19 +4769,17 @@
             event.preventDefault();
         }
 
-        // Se já estiver aberto para esta mesma viatura, fecha e volta para '+'
         if (activeReasonVehicle === vehicleId) {
             closeInlineReasonMenu();
             return;
         }
 
-        // Fecha qualquer menu que estivesse aberto anteriormente
         closeInlineReasonMenu();
+        closeColumnSelectMenu();
 
         activeReasonVehicle = vehicleId;
         activeReasonBtn = btnEl;
 
-        // Altera ícone de '+' para '-'
         if (btnEl) {
             btnEl.textContent = '➖';
             btnEl.title = 'Ocultar opções';
@@ -4425,10 +4790,8 @@
         menu.id = 'activeInlineReasonMenu';
         menu.className = 'inline-reason-menu';
 
-        // Header
         let html = `<div class="inline-reason-menu-header">📋 Opções (${vehicleId})</div>`;
 
-        // Opção Limpar
         html += `
             <button type="button" class="inline-reason-item item-clear" onclick="executeInlineReasonChoice('${vehicleId}', 'CLEAR')">
                 <span>🧹</span> <span>Limpar Motivo</span>
@@ -4437,7 +4800,6 @@
             <div class="inline-reason-menu-header" style="font-size: 0.72rem; border: none; padding-top: 2px;">Clique para acrescentar:</div>
         `;
 
-        // Puxa a lista de motivos de customQuickReasons ou defaultQuickReasons
         const listToUse = (typeof customQuickReasons !== 'undefined' && Array.isArray(customQuickReasons) && customQuickReasons.length > 0)
             ? customQuickReasons
             : (typeof defaultQuickReasons !== 'undefined' ? defaultQuickReasons : []);
@@ -4457,7 +4819,6 @@
         menu.innerHTML = html;
         document.body.appendChild(menu);
 
-        // Posicionar com position: fixed usando getBoundingClientRect
         const rect = btnEl.getBoundingClientRect();
         let top = rect.bottom + 4;
         let left = rect.right - 230;
@@ -4529,14 +4890,18 @@
         closeInlineReasonMenu();
     }
 
-    // Fechar menu ao clicar fora
+    // Fechar menus flutuantes ao clicar fora
     document.addEventListener('click', (e) => {
+        if (activeColumnDropdownMenu && !activeColumnDropdownMenu.contains(e.target) && !e.target.closest('.inline-select-btn')) {
+            closeColumnSelectMenu();
+        }
         if (activeReasonMenu && !activeReasonMenu.contains(e.target) && !e.target.classList.contains('btn-reason-plus')) {
             closeInlineReasonMenu();
         }
     });
 
     window.addEventListener('scroll', () => {
+        if (activeColumnDropdownMenu) closeColumnSelectMenu();
         if (activeReasonMenu) closeInlineReasonMenu();
     }, { passive: true });
 
@@ -4552,6 +4917,135 @@
         updateInlineField(vehicleId, fieldName, '');
         showToast(`🧹 Campo limpo para a viatura <strong>${vehicleId}</strong>!`);
     }
+
+    // =========================================================================
+    // 👮 SISTEMA DE DIÁLOGOS PADRONIZADOS (Administrador diz:)
+    // =========================================================================
+    let adminDialogResolve = null;
+
+    function adminAlert(message) {
+        return new Promise((resolve) => {
+            const modal = document.getElementById('adminDialogModal');
+            const msgEl = document.getElementById('adminDialogMessage');
+            const inputEl = document.getElementById('adminDialogInput');
+            const cancelBtn = document.getElementById('adminDialogCancelBtn');
+            const confirmBtn = document.getElementById('adminDialogConfirmBtn');
+
+            if (msgEl) msgEl.textContent = message;
+            if (inputEl) inputEl.style.display = 'none';
+            if (cancelBtn) cancelBtn.style.display = 'none';
+            if (confirmBtn) {
+                confirmBtn.textContent = 'OK';
+                confirmBtn.className = 'btn btn-primary btn-3d';
+            }
+
+            adminDialogResolve = resolve;
+            if (modal) {
+                modal.style.display = 'flex';
+                setTimeout(() => { if (confirmBtn) confirmBtn.focus(); }, 100);
+            } else {
+                resolve(true);
+            }
+        });
+    }
+
+    function adminConfirm(message) {
+        return new Promise((resolve) => {
+            const modal = document.getElementById('adminDialogModal');
+            const msgEl = document.getElementById('adminDialogMessage');
+            const inputEl = document.getElementById('adminDialogInput');
+            const cancelBtn = document.getElementById('adminDialogCancelBtn');
+            const confirmBtn = document.getElementById('adminDialogConfirmBtn');
+
+            if (msgEl) msgEl.textContent = message;
+            if (inputEl) inputEl.style.display = 'none';
+            if (cancelBtn) {
+                cancelBtn.style.display = 'inline-flex';
+                cancelBtn.textContent = 'Cancelar';
+            }
+            if (confirmBtn) {
+                confirmBtn.textContent = 'Confirmar';
+                confirmBtn.className = 'btn btn-primary btn-3d';
+            }
+
+            adminDialogResolve = resolve;
+            if (modal) {
+                modal.style.display = 'flex';
+                setTimeout(() => { if (confirmBtn) confirmBtn.focus(); }, 100);
+            } else {
+                resolve(false);
+            }
+        });
+    }
+
+    function adminPrompt(message, defaultValue = '') {
+        return new Promise((resolve) => {
+            const modal = document.getElementById('adminDialogModal');
+            const msgEl = document.getElementById('adminDialogMessage');
+            const inputEl = document.getElementById('adminDialogInput');
+            const cancelBtn = document.getElementById('adminDialogCancelBtn');
+            const confirmBtn = document.getElementById('adminDialogConfirmBtn');
+
+            if (msgEl) msgEl.textContent = message;
+            if (inputEl) {
+                inputEl.style.display = 'block';
+                inputEl.value = defaultValue || '';
+            }
+            if (cancelBtn) {
+                cancelBtn.style.display = 'inline-flex';
+                cancelBtn.textContent = 'Cancelar';
+            }
+            if (confirmBtn) {
+                confirmBtn.textContent = 'OK';
+                confirmBtn.className = 'btn btn-primary btn-3d';
+            }
+
+            adminDialogResolve = resolve;
+            if (modal) {
+                modal.style.display = 'flex';
+                setTimeout(() => { if (inputEl) { inputEl.focus(); inputEl.select(); } }, 150);
+            } else {
+                resolve(null);
+            }
+        });
+    }
+
+    function confirmAdminDialog() {
+        const modal = document.getElementById('adminDialogModal');
+        const inputEl = document.getElementById('adminDialogInput');
+        const val = (inputEl && inputEl.style.display !== 'none') ? inputEl.value : true;
+
+        if (modal) modal.style.display = 'none';
+        if (adminDialogResolve) {
+            const cb = adminDialogResolve;
+            adminDialogResolve = null;
+            cb(val);
+        }
+    }
+
+    function closeAdminDialog(result = false) {
+        const modal = document.getElementById('adminDialogModal');
+        if (modal) modal.style.display = 'none';
+        if (adminDialogResolve) {
+            const cb = adminDialogResolve;
+            adminDialogResolve = null;
+            cb(result);
+        }
+    }
+
+    function onAdminDialogOverlayClick(e) {
+        if (e.target.id === 'adminDialogModal') {
+            closeAdminDialog(false);
+        }
+    }
+
+    window.alert = function(msg) {
+        if (typeof showToast === 'function') {
+            showToast(msg);
+        } else if (typeof adminAlert === 'function') {
+            adminAlert(msg);
+        }
+    };
 
     function updateInlineField(vehicleId, fieldName, value) {
         const v = records.find(r => r.vehicle === vehicleId);
@@ -4997,7 +5491,7 @@ async function toggleSection(contentId, btnEl) {
         renderDashboard();
     }
 
-    function exportExcel() {
+    async function exportExcel() {
         const filterVal = document.getElementById('filterVehicle').value;
         const filterMonth = document.getElementById('filterMonth').value;
         const filterCia = document.getElementById('filterCia').value;
@@ -5026,7 +5520,7 @@ async function toggleSection(contentId, btnEl) {
 
         if (typeof XLSX !== 'undefined') {
             const defaultExcelName = `Controle_de_Viaturas_Batalhao_${new Date().toISOString().slice(0,10)}`;
-            const userExcelName = prompt('Digite o nome do arquivo para a planilha Excel (.xlsx):', defaultExcelName);
+            const userExcelName = await adminPrompt('Digite o nome do arquivo para a planilha Excel (.xlsx):', defaultExcelName);
             if (userExcelName === null) return;
 
             let finalExcelName = userExcelName.trim() || defaultExcelName;
@@ -5107,14 +5601,14 @@ async function toggleSection(contentId, btnEl) {
         showToast("⚠️ <strong>Banco de dados zerado com sucesso!</strong> O painel está novo.");
     }
 
-    function renameCurrentVehicle() {
+    async function renameCurrentVehicle() {
         const selected = document.getElementById('vehicleSelect').value;
         if (!selected) {
             alert('Nenhuma viatura selecionada para renomear.');
             return;
         }
 
-        const newName = prompt(`Digite o novo prefixo para a viatura "${selected}":`, selected);
+        const newName = await adminPrompt(`Digite o novo prefixo para a viatura "${selected}":`, selected);
         if (!newName || !newName.trim()) return;
 
         const cleanNewName = newName.trim().toUpperCase();
@@ -5391,20 +5885,20 @@ async function toggleSection(contentId, btnEl) {
     async function saveAsOriginalBaseline() {
         const ok = await requestAdminPassword("definir a base original da frota");
         if (!ok) return;
-        if (confirm('Deseja definir o estado atual de todas as viaturas como a nova BASE ORIGINAL para restaurações futuras?')) {
+        if (await adminConfirm('Deseja definir o estado atual de todas as viaturas como a nova BASE ORIGINAL para restaurações futuras?')) {
             const currentSnapshot = JSON.parse(JSON.stringify(records));
             localStorage.setItem('batalhao_vtr_custom_original_dataset', JSON.stringify(currentSnapshot));
             showToast('📌 Estado atual da frota definido como <strong>Base Original</strong>!');
         }
     }
 
-    function clearAllData() {
+    async function clearAllData() {
         const hasCustomOriginal = localStorage.getItem('batalhao_vtr_custom_original_dataset');
         const msg = hasCustomOriginal 
             ? 'Atenção: deseja restaurar a frota para o último estado salvo em "Aplicar como Original"?' 
             : 'Atenção: deseja restaurar a frota para a base inicial limpa?';
 
-        if (confirm(msg)) {
+        if (await adminConfirm(msg)) {
             if (hasCustomOriginal) {
                 records = JSON.parse(localStorage.getItem('batalhao_vtr_custom_original_dataset'));
             } else {
@@ -5419,8 +5913,8 @@ async function toggleSection(contentId, btnEl) {
         }
     }
 
-    function deleteRecord(id) {
-        if (confirm(`Deseja excluir o registro da viatura ${id}?`)) {
+    async function deleteRecord(id) {
+        if (await adminConfirm(`Deseja excluir o registro da viatura ${id}?`)) {
             records = records.filter(r => r.vehicle !== id);
             saveRecords();
             populateMonthSelect();
@@ -5431,7 +5925,7 @@ async function toggleSection(contentId, btnEl) {
         }
     }
 
-    function exportJSON() {
+    async function exportJSON() {
         const payload = {
             appTitle: appTitle,
             lastStatusUpdate: localStorage.getItem('batalhao_vtr_last_status_update') || '',
@@ -5462,7 +5956,7 @@ async function toggleSection(contentId, btnEl) {
         };
 
         const defaultName = `Controle_de_Viaturas_Batalhao_${new Date().toISOString().slice(0,10)}`;
-        const userFileName = prompt('Digite o nome do arquivo para exportar o banco de dados (.json):', defaultName);
+        const userFileName = await adminPrompt('Digite o nome do arquivo para exportar o banco de dados (.json):', defaultName);
         if (userFileName === null) return;
 
         let finalName = userFileName.trim();
@@ -5483,7 +5977,7 @@ async function toggleSection(contentId, btnEl) {
     async function triggerImport() {
         const ok = await requestAdminPassword("definir padrão e substituir o banco de dados");
         if (!ok) return;
-        if (confirm('Atenção: A substituição irá SOBRESCREVER o banco de dados atual pelo arquivo selecionado (.xlsx, .csv, .json).\n\nPara apenas mesclar/incorporar mantendo as viaturas atuais, use a opção "📥 Importar / Conectar Planilha".\n\nDeseja continuar?')) {
+        if (await adminConfirm('Atenção: A substituição irá SOBRESCREVER o banco de dados atual pelo arquivo selecionado (.xlsx, .csv, .json).\n\nPara apenas mesclar/incorporar mantendo as viaturas atuais, use a opção "📥 Importar / Conectar Planilha".\n\nDeseja continuar?')) {
             document.getElementById('importInput').click();
         }
     }
@@ -6415,29 +6909,34 @@ async function toggleSection(contentId, btnEl) {
                         </div>
                     </td>
                     <td class="col-td-cia ${isHidCia}">
-                        <select class="inline-input" style="width: 100%; min-width: 120px; padding: 4px 6px; font-weight: 700; color: var(--primary);" onchange="updateInlineField('${r.vehicle}', 'cia', this.value)">
-                            ${ciaOptionsHtml}
-                        </select>
+                        <button type="button" class="inline-select-btn" style="min-width: 120px; font-weight: 700; color: var(--primary);" onclick="openColumnSelectMenu('${r.vehicle}', 'cia', this, event)" title="Alterar Companhia">
+                            <span class="select-btn-text">${r.cia || 'Batalhão'}</span>
+                            <span class="select-btn-arrow">▼</span>
+                        </button>
                     </td>
                     <td class="col-td-modelo ${isHidModelo}">
-                        <select class="inline-input" style="width: 100%; min-width: 155px; padding: 4px 6px; font-weight: 600;" onchange="updateInlineField('${r.vehicle}', 'model', this.value)">
-                            ${modelOptionsHtml}
-                        </select>
+                        <button type="button" class="inline-select-btn" style="min-width: 155px; font-weight: 600;" onclick="openColumnSelectMenu('${r.vehicle}', 'model', this, event)" title="Alterar Modelo">
+                            <span class="select-btn-text">${r.model || 'DUSTER'}</span>
+                            <span class="select-btn-arrow">▼</span>
+                        </button>
                     </td>
                     <td class="col-td-pelotao ${isHidPelotao}">
-                        <select class="inline-input" style="width: 100%; min-width: 105px; padding: 4px 6px; font-weight: 500;" onchange="updateInlineField('${r.vehicle}', 'pelotao', this.value)">
-                            ${pelOptionsHtml}
-                        </select>
+                        <button type="button" class="inline-select-btn" style="min-width: 105px; font-weight: 500;" onclick="openColumnSelectMenu('${r.vehicle}', 'pelotao', this, event)" title="Alterar Pelotão">
+                            <span class="select-btn-text">${r.pelotao || 'ADM'}</span>
+                            <span class="select-btn-arrow">▼</span>
+                        </button>
                     </td>
                     <td class="col-td-status ${isHidStatus}" style="width: 145px; min-width: 140px;">
-                        <select id="inline-status-${r.vehicle}" class="inline-select ${statusClass}" style="width: 100%; min-width: 130px; font-size: 0.82rem; padding: 4px 6px;" onchange="updateInlineField('${r.vehicle}', 'status', this.value)">
-                            ${statusOptionsHtml}
-                        </select>
+                        <button type="button" id="inline-status-${r.vehicle}" class="inline-select-btn ${statusClass}" style="min-width: 130px; font-size: 0.82rem;" onclick="openColumnSelectMenu('${r.vehicle}', 'status', this, event)" title="Alterar Status Operacional">
+                            <span class="select-btn-text">${r.status || 'OPERANDO'}</span>
+                            <span class="select-btn-arrow">▼</span>
+                        </button>
                     </td>
                     <td class="col-td-destino ${isHidDestino}">
-                        <select class="inline-input" style="width: 100%; min-width: 150px; padding: 4px 6px; font-weight: 500;" onchange="updateInlineField('${r.vehicle}', 'destino', this.value)">
-                            ${localOptionsHtml}
-                        </select>
+                        <button type="button" class="inline-select-btn" style="min-width: 150px; font-weight: 500;" onclick="openColumnSelectMenu('${r.vehicle}', 'destino', this, event)" title="Alterar QTH da VTR">
+                            <span class="select-btn-text">${r.destino || 'BASE'}</span>
+                            <span class="select-btn-arrow">▼</span>
+                        </button>
                     </td>
                     <td class="col-td-obs ${isHidObs}" title="${r.obs ? 'Observação: ' + r.obs : 'Nenhuma observação'}">
                         <div class="input-clearable-wrapper">
@@ -6771,6 +7270,25 @@ async function toggleSection(contentId, btnEl) {
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-outline btn-3d" onclick="closeRowActionModal()">Fechar</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Universal: Administrador diz -->
+<div id="adminDialogModal" class="modal-overlay" onclick="onAdminDialogOverlayClick(event)">
+    <div class="modal-card" style="max-width: 440px;" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <div class="modal-title"><span>👮 Administrador diz:</span></div>
+            <button type="button" class="modal-close" onclick="closeAdminDialog(false)" title="Fechar">✖</button>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: 12px 0;">
+            <p id="adminDialogMessage" style="font-size: 0.92rem; color: var(--text-main); line-height: 1.45; white-space: pre-wrap; word-break: break-word;"></p>
+            <input type="text" id="adminDialogInput" style="display: none; font-size: 1rem; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; width: 100%; box-sizing: border-box;" onkeydown="if(event.key==='Enter') confirmAdminDialog()">
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="adminDialogCancelBtn" class="btn btn-outline btn-3d" onclick="closeAdminDialog(false)" style="display: none;">Cancelar</button>
+            <button type="button" id="adminDialogConfirmBtn" class="btn btn-primary btn-3d" onclick="confirmAdminDialog()">OK</button>
         </div>
     </div>
 </div>
