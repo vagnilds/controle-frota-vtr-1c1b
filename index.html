@@ -2619,6 +2619,83 @@
             margin-top: 4px;
         }
 
+    
+        /* Easter Egg Tooltip na Placa da Viatura (Ao passar o mouse no ícone 🚗) */
+        .prefix-cell-wrapper {
+            position: relative !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 5px !important;
+            cursor: pointer !important;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+        }
+
+        .col-td-prefixo:hover .prefix-cell-wrapper {
+            transform: translateX(4px) scale(1.04) !important;
+        }
+
+        .prefix-plate-icon {
+            font-size: 0.82rem !important;
+            cursor: pointer !important;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+            display: inline-block !important;
+        }
+
+        .prefix-cell-wrapper:hover .prefix-plate-icon {
+            transform: scale(1.25) !important;
+        }
+
+        .prefix-badge-placa {
+            visibility: hidden !important;
+            opacity: 0 !important;
+            position: absolute !important;
+            bottom: 135% !important;
+            left: 0 !important;
+            transform: translateY(6px) !important;
+            background: linear-gradient(135deg, #1e3a8a, #1d4ed8) !important;
+            color: #ffffff !important;
+            font-size: 0.76rem !important;
+            font-weight: 700 !important;
+            padding: 5px 12px !important;
+            border-radius: 6px !important;
+            white-space: nowrap !important;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25) !important;
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+            pointer-events: none !important;
+            z-index: 99999 !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            letter-spacing: 0.3px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 4px !important;
+        }
+
+        .prefix-badge-placa::after {
+            content: "" !important;
+            position: absolute !important;
+            top: 100% !important;
+            left: 16px !important;
+            border-width: 5px !important;
+            border-style: solid !important;
+            border-color: #1d4ed8 transparent transparent transparent !important;
+        }
+
+        .prefix-cell-wrapper:hover .prefix-badge-placa,
+        .prefix-badge-placa.visible {
+            visibility: visible !important;
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        [data-theme="dark"] .prefix-badge-placa {
+            background: linear-gradient(135deg, #0284c7, #2563eb) !important;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6) !important;
+        }
+
+        [data-theme="dark"] .prefix-badge-placa::after {
+            border-color: #2563eb transparent transparent transparent !important;
+        }
+
     </style>
 </head>
 <body>
@@ -7431,7 +7508,7 @@ async function toggleSection(contentId, btnEl) {
                 tr.innerHTML = `
                     <td class="col-td-prefixo ${isHidPrefix}" onclick="handlePrefixClick('${r.vehicle}', event)" title="${prefixTitle}">
                         <div class="prefix-cell-wrapper">
-                            <span class="prefix-title">${r.vehicle} ${r.placa ? '<span class="prefix-plate-icon" title="Placa cadastrada">🚗</span>' : ''} ${(r.radio_modelo || r.radio_patrimonio || r.radio_data) ? '<span class="prefix-radio-icon" title="Rádio cadastrado">📻</span>' : ''}</span>
+                            <span class="prefix-title">${r.vehicle} ${r.placa ? '<span class="prefix-plate-icon" title="Placa cadastrada">🚗</span>' : ''}</span>
                             ${(r.placa || radioDateFormatted) ? `<span class="prefix-badge-placa" id="badge-placa-${r.vehicle}">${badgeContent}</span>` : ''}
                         </div>
                     </td>
