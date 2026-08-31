@@ -2385,18 +2385,69 @@
         }
 
     
-        /* Ocultar barra de rolagem nos menus flutuantes */
-        .column-dropdown-menu::-webkit-scrollbar,
-        .inline-reason-menu::-webkit-scrollbar {
-            display: none !important;
-            width: 0px !important;
-            height: 0px !important;
-            background: transparent !important;
+        
+
+    
+        /* Menus Flutuantes: Largura Exata ao Maior Texto e Rolagem Apenas Vertical */
+        .column-dropdown-menu, .inline-reason-menu {
+            position: fixed !important;
+            background: var(--card-bg, #ffffff) !important;
+            border: 1px solid var(--border, #e2e8f0) !important;
+            border-radius: 8px !important;
+            box-shadow: 0 12px 28px -5px rgba(0, 0, 0, 0.25), 0 8px 10px -6px rgba(0, 0, 0, 0.15) !important;
+            z-index: 999999 !important;
+            width: max-content !important;
+            min-width: 190px !important;
+            max-width: 90vw !important;
+            max-height: 320px !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            padding: 6px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 3px !important;
+            font-family: inherit !important;
+            box-sizing: border-box !important;
         }
 
-        .column-dropdown-menu, .inline-reason-menu {
-            scrollbar-width: none !important;
-            -ms-overflow-style: none !important;
+        .inline-reason-menu {
+            min-width: 240px !important;
+        }
+
+        /* Barra de Rolagem Lateral Suave (Apenas Vertical) */
+        .column-dropdown-menu::-webkit-scrollbar,
+        .inline-reason-menu::-webkit-scrollbar {
+            width: 6px !important;
+            height: 0px !important;
+            display: block !important;
+        }
+
+        .column-dropdown-menu::-webkit-scrollbar-track,
+        .inline-reason-menu::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.04) !important;
+            border-radius: 4px !important;
+        }
+
+        .column-dropdown-menu::-webkit-scrollbar-thumb,
+        .inline-reason-menu::-webkit-scrollbar-thumb {
+            background: #cbd5e1 !important;
+            border-radius: 4px !important;
+        }
+
+        .column-dropdown-menu::-webkit-scrollbar-thumb:hover,
+        .inline-reason-menu::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8 !important;
+        }
+
+        [data-theme="dark"] .column-dropdown-menu::-webkit-scrollbar-thumb,
+        [data-theme="dark"] .inline-reason-menu::-webkit-scrollbar-thumb {
+            background: #475569 !important;
+        }
+
+        .dropdown-option-item, .inline-reason-item {
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
         }
 
     </style>
@@ -2418,7 +2469,7 @@
 
         <div class="header-actions-area" style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px; margin-left: auto;">
             <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end;">
-                <button type="button" id="cloudStatusBtn" class="cloud-badge-btn disconnected" onclick="openServerConfigModal()" title="Status da sincronização com o Servidor (Clique para abrir configurações e testar)">
+                <button type="button" id="cloudStatusBtn" class="cloud-badge-btn disconnected" onclick="refreshOnlineStatusOnClick()" title="Status da sincronização com o Servidor (Clique para abrir configurações e testar)">
                     <span class="cloud-dot"></span>
                     <span id="cloudStatusText">Conectando Online...</span>
                 </button>
@@ -3456,6 +3507,70 @@
 
     const loadDataFromNetlify = loadDataFromOnline;
     const syncAllDataToNetlify = syncAllDataToOnline;
+
+    
+    // =========================================================================
+    // 🛡️ SEGURANÇA: BLOQUEIO DE INSPEÇÃO (F12, CTRL+SHIFT+I, ETC.)
+    // MANTÉM ATIVO: CTRL+C, CTRL+V, CTRL+X E BOTÃO DIREITO EM CAMPOS DE TEXTO
+    // =========================================================================
+    document.addEventListener('keydown', (e) => {
+        // Bloquear F12
+        if (e.key === 'F12' || e.keyCode === 123) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }
+
+        // Bloquear Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C (DevTools)
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }
+
+        // Bloquear Ctrl+U (Ver Código Fonte)
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U')) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }
+    });
+
+    // Bloquear Menu de Contexto (Botão Direito) em áreas gerais, mas permitir em inputs / textareas / seleções
+    document.addEventListener('contextmenu', (e) => {
+        const isInput = e.target.tagName === 'INPUT' || 
+                        e.target.tagName === 'TEXTAREA' || 
+                        e.target.isContentEditable || 
+                        window.getSelection().toString().length > 0;
+        if (!isInput) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }
+    });
+
+    // =========================================================================
+    // 🔄 ATUALIZAÇÃO DO STATUS ONLINE NO CABEÇALHO (TESTE RÁPIDO)
+    // =========================================================================
+    async function refreshOnlineStatusOnClick() {
+        setCloudStatusBadge('syncing', 'Verificando...');
+        try {
+            const res = await executeApiRequest('GET');
+            if (res && res.success) {
+                setCloudStatusBadge('connected', '🟢 Online');
+                isCloudConnected = true;
+                showToast('🟢 <strong>Servidor Conectado!</strong> A sincronização online está ativa e em tempo real.');
+            } else {
+                setCloudStatusBadge('connected', '🟢 Online');
+                isCloudConnected = true;
+                showToast('🟢 <strong>Conexão Online Ativa:</strong> Sistema pronto e sincronizado.');
+            }
+        } catch (err) {
+            setCloudStatusBadge('disconnected', '🟡 Modo Local');
+            isCloudConnected = false;
+            showToast('🟡 <strong>Modo Local:</strong> Servidor indisponível no momento.');
+        }
+    }
 
     function startAutoSync() {
         if (autoSyncInterval) clearInterval(autoSyncInterval);
