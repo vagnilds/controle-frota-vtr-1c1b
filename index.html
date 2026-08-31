@@ -2513,6 +2513,112 @@
             color: #60a5fa !important;
         }
 
+    
+        /* Estilos Compactos e Ergonômicos para o Modal de Edição */
+        .modal-card {
+            background: #ffffff;
+            border-radius: 12px;
+            max-width: 660px;
+            width: 100%;
+            padding: 16px 20px;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.15);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 92vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .modal-card .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 8px 12px;
+        }
+
+        .modal-card .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            margin-bottom: 0;
+        }
+
+        .modal-card .form-group label {
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .modal-card input, .modal-card select {
+            padding: 5px 8px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            font-size: 0.84rem;
+            height: 32px;
+            box-sizing: border-box;
+            background-color: var(--card-bg, #ffffff);
+            color: var(--text-main, #0f172a);
+        }
+
+        .modal-accordion-card {
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background-color: var(--bg);
+            overflow: hidden;
+            margin-top: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .modal-accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 10px;
+            background-color: #f1f5f9;
+            cursor: pointer;
+            user-select: none;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--primary);
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .modal-accordion-header:hover {
+            background-color: #e2e8f0;
+        }
+
+        .modal-accordion-content {
+            padding: 8px 10px;
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border);
+            animation: fadeInMenu 0.2s ease-out;
+        }
+
+        .form-grid-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 10px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border);
+            margin-top: 4px;
+        }
+
     </style>
 </head>
 <body>
@@ -3068,22 +3174,58 @@
 <!-- Modal de Edição Completa -->
 <div id="editModal" class="modal-overlay" onclick="onModalOverlayClick(event)">
     <div class="modal-card">
-        <div class="modal-header"><div class="modal-title"><span>✏️ Editar Viatura:</span> <span id="modalVehiclePrefix" style="color: var(--primary); text-decoration: underline;">--</span></div><button class="modal-close" onclick="closeEditModal()" title="Fechar">✖</button></div>
+        <div class="modal-header">
+            <div class="modal-title">
+                <span>✏️ Editar Viatura:</span>
+                <span id="modalVehiclePrefix" style="color: var(--primary); text-decoration: underline;">--</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <button type="submit" form="modalEditForm" class="btn btn-primary btn-3d btn-sm" style="padding: 5px 14px; font-weight: 700; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 4px;" title="Salvar Alterações">💾 Salvar</button>
+                <button type="button" class="modal-close" onclick="closeEditModal()" title="Fechar">✖</button>
+            </div>
+        </div>
         <form id="modalEditForm" onsubmit="saveModalEdit(event)">
             <input type="hidden" id="modalVehicleId">
             <div class="form-grid">
-                <div class="form-group"><label for="modalPrefixInput">Prefixo da Viatura *</label><input type="text" id="modalPrefixInput" placeholder="Ex: T-1104" required style="font-weight: 700;"></div>
-                <div class="form-group"><label for="modalCia">Companhia (Cia) <span class="label-btn-add" onclick="addNewCiaPrompt()">+ Criar</span></label><select id="modalCia"></select></div>
-                <div class="form-group"><label for="modalModel">Modelo <span class="label-btn-add" onclick="addNewModelPrompt()">+ Criar</span></label><select id="modalModel"></select></div>
-                <div class="form-group"><label for="modalPelotao">Pelotão <span class="label-btn-add" onclick="addNewPelotaoPrompt()">+ Criar</span></label><select id="modalPelotao"></select></div>
-                <div class="form-group"><label for="modalStatus">Situação Operacional (Status) * <span class="label-btn-add" onclick="addNewStatusPrompt()">+ Criar</span></label><select id="modalStatus" required onchange="onModalStatusChange()"></select></div>
-                <div class="form-group"><label for="modalLocation">QTH da VTR (Destino) * <span class="label-btn-add" onclick="addNewLocalPrompt()">+ Criar</span></label><select id="modalLocation" required></select></div>
-                <div class="form-group"><label for="modalDate">Data do Registro *</label><input type="date" id="modalDate" required></div>
-                <div class="form-group full"><label for="modalObs">Motivo da Baixa / Observações</label><input type="text" id="modalObs" placeholder="Ex: Sistema de Arrefecimento, Motor, Arranque, Embreagem, Câmbio, Rádio, Luminosos"></div>
-                <div class="form-group full"><label for="modalDataForms">Referência Forms / Texto</label><input type="text" id="modalDataForms" placeholder="Ex: 29/07 ou 07/07/2026 E 29/07"></div>
+                <div class="form-group">
+                    <label for="modalPrefixInput">Prefixo da Viatura *</label>
+                    <input type="text" id="modalPrefixInput" placeholder="Ex: T-1104" required style="font-weight: 700;">
+                </div>
+                <div class="form-group">
+                    <label for="modalCia">Companhia (Cia) <span class="label-btn-add" onclick="addNewCiaPrompt()">+ Criar</span></label>
+                    <select id="modalCia"></select>
+                </div>
+                <div class="form-group">
+                    <label for="modalModel">Modelo <span class="label-btn-add" onclick="addNewModelPrompt()">+ Criar</span></label>
+                    <select id="modalModel"></select>
+                </div>
+                <div class="form-group">
+                    <label for="modalPelotao">Pelotão <span class="label-btn-add" onclick="addNewPelotaoPrompt()">+ Criar</span></label>
+                    <select id="modalPelotao"></select>
+                </div>
+                <div class="form-group">
+                    <label for="modalStatus">Situação Operacional (Status) * <span class="label-btn-add" onclick="addNewStatusPrompt()">+ Criar</span></label>
+                    <select id="modalStatus" required onchange="onModalStatusChange()"></select>
+                </div>
+                <div class="form-group">
+                    <label for="modalLocation">QTH da VTR (Destino) * <span class="label-btn-add" onclick="addNewLocalPrompt()">+ Criar</span></label>
+                    <select id="modalLocation" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="modalDate">Data do Registro *</label>
+                    <input type="date" id="modalDate" required>
+                </div>
+                <div class="form-group full">
+                    <label for="modalObs">Motivo da Baixa / Observações</label>
+                    <input type="text" id="modalObs" placeholder="Ex: Sistema de Arrefecimento, Motor, Arranque, Embreagem, Câmbio, Rádio, Luminosos">
+                </div>
+                <div class="form-group full">
+                    <label for="modalDataForms">Referência Forms / Texto</label>
+                    <input type="text" id="modalDataForms" placeholder="Ex: 29/07 ou 07/07/2026 E 29/07">
+                </div>
                 
                 <!-- Submenu: Viatura & Rádio -->
-                <div class="form-group full" style="margin-top: 6px;">
+                <div class="form-group full" style="margin-top: 4px;">
                     <!-- Item 1: VIATURA (Placa e Patrimônio) -->
                     <div class="modal-accordion-card" id="accordionViaturaCard">
                         <div class="modal-accordion-header" onclick="toggleModalAccordion('accordionViaturaContent', 'accordionViaturaArrow')" title="Clique para expandir/recolher dados da Viatura (Placa e Patrimônio)">
@@ -3131,8 +3273,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
                 </div>
             </div>
             <div class="modal-footer">
