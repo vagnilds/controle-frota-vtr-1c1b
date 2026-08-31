@@ -2262,16 +2262,9 @@
             box-shadow: 0 2px 6px rgba(29, 78, 216, 0.15) !important;
         }
 
-        .dropdown-option-item.selected {
-            font-weight: 800 !important;
-            color: var(--primary, #1e3a8a) !important;
-            background-color: #f1f5f9 !important;
-        }
+        
 
-        .dropdown-option-item.selected:hover {
-            background-color: #eff6ff !important;
-            color: #1d4ed8 !important;
-        }
+        
 
         .inline-reason-item.item-clear {
             color: #ef4444 !important;
@@ -2389,6 +2382,21 @@
         }
         [data-theme="dark"] .footer-easter-egg .easter-egg-tooltip::after {
             border-color: #2563eb transparent transparent transparent;
+        }
+
+    
+        /* Ocultar barra de rolagem nos menus flutuantes */
+        .column-dropdown-menu::-webkit-scrollbar,
+        .inline-reason-menu::-webkit-scrollbar {
+            display: none !important;
+            width: 0px !important;
+            height: 0px !important;
+            background: transparent !important;
+        }
+
+        .column-dropdown-menu, .inline-reason-menu {
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
         }
 
     </style>
@@ -3563,7 +3571,11 @@
                 if (Array.isArray(data.customStatuses)) { customStatuses = data.customStatuses; localStorage.setItem('batalhao_vtr_custom_statuses', JSON.stringify(customStatuses)); }
                 if (Array.isArray(data.customLocais)) { customLocais = data.customLocais; localStorage.setItem('batalhao_vtr_custom_locais', JSON.stringify(customLocais)); }
                 if (Array.isArray(data.customQuickReasons)) { customQuickReasons = data.customQuickReasons; localStorage.setItem('batalhao_vtr_custom_quick_reasons', JSON.stringify(customQuickReasons)); }
-                if (data.appTitle) { appTitle = data.appTitle; localStorage.setItem('batalhao_vtr_app_title', appTitle); updateAppTitleDisplay(); }
+                if (data.appTitle) { 
+                    appTitle = data.appTitle.includes('BATALHÃO') ? OFFICIAL_APP_TITLE : data.appTitle; 
+                    localStorage.setItem('batalhao_vtr_app_title', appTitle); 
+                    updateAppTitleDisplay(); 
+                }
                 if (data.lastStatusUpdate) {
                     const el = document.getElementById('lastStatusUpdateText');
                     if (el) el.textContent = data.lastStatusUpdate;
@@ -3805,7 +3817,13 @@
         }
     }
 
-    let appTitle = localStorage.getItem('batalhao_vtr_app_title') || '🚓 CONTROLE DE VIATURAS - FROTA 1ª CIA DO 1º BPTRAN';
+    const OFFICIAL_APP_TITLE = '🚓 CONTROLE DE VIATURAS - FROTA 1ª CIA DO 1º BPTRAN';
+    let savedTitle = localStorage.getItem('batalhao_vtr_app_title');
+    if (!savedTitle || savedTitle.includes('BATALHÃO')) {
+        savedTitle = OFFICIAL_APP_TITLE;
+        localStorage.setItem('batalhao_vtr_app_title', savedTitle);
+    }
+    let appTitle = savedTitle;
     function updateAppTitleDisplay() {
         document.getElementById('appTitleText').innerHTML = appTitle;
         document.getElementById('pageTitle').textContent = appTitle.replace(/<[^>]*>?/gm, '') + ' - Painel da Frota';
@@ -4717,9 +4735,8 @@
             }
 
             html += `
-                <button type="button" class="dropdown-option-item ${isSelected ? 'selected' : ''} ${statusOptClass}" onclick="selectColumnOption('${vehicleId}', '${fieldName}', '${opt}')">
+                <button type="button" class="dropdown-option-item ${statusOptClass}" onclick="selectColumnOption('${vehicleId}', '${fieldName}', '${opt}')">
                     <span>${opt}</span>
-                    ${isSelected ? '<span style="font-weight: 800;">✓</span>' : ''}
                 </button>
             `;
         });
