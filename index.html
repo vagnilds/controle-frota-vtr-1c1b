@@ -3124,9 +3124,15 @@
                                     <label for="modalRadioPatrimonio">🔢 <strong>PATRIMÔNIO DO RÁDIO:</strong></label>
                                     <input type="text" id="modalRadioPatrimonio" placeholder="Ex: 987654321">
                                 </div>
+                                <div class="form-group" style="grid-column: span 2;">
+                                    <label for="modalRadioData">🕒 <strong>ÚLTIMA ATUALIZAÇÃO DO RÁDIO:</strong></label>
+                                    <input type="date" id="modalRadioData" class="inline-input" style="width: 100%;" title="Data da última atualização ou conferência do rádio">
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -5881,6 +5887,7 @@ async function toggleSection(contentId, btnEl) {
                     "Patrimônio da Viatura": r.patrimonio_vtr || '-',
                     "Modelo do Rádio": r.radio_modelo || '-',
                     "Patrimônio do Rádio": r.radio_patrimonio || '-',
+                "Última Atualização do Rádio": (r.radio_data ? r.radio_data.split('-').reverse().join('/') : '-'),
                     "Companhia / Setor": r.cia || 'Batalhão',
                     "Modelo": r.model || '-',
                     "Pelotão": r.pelotao || '-',
@@ -6075,23 +6082,33 @@ async function toggleSection(contentId, btnEl) {
         const v = records.find(r => r.vehicle === vehicleId);
         if (!v) return;
 
-        if (v.placa && v.placa.trim()) {
+        let radioDateFormatted = '';
+        if (v.radio_data && v.radio_data.trim()) {
+            radioDateFormatted = v.radio_data.includes('-') ? v.radio_data.split('-').reverse().join('/') : v.radio_data;
+        }
+
+        if (v.placa || radioDateFormatted) {
             const badge = document.getElementById(`badge-placa-${v.vehicle}`);
             if (badge) {
                 const isVisible = badge.classList.toggle('visible');
                 if (isVisible) {
-                    let info = `🚗 <strong>${v.vehicle}</strong> — Placa: <strong>${v.placa}</strong>`;
-                    if (v.patrimonio_vtr) info += ` | Patrimônio: <strong>${v.patrimonio_vtr}</strong>`;
+                    let info = `🚗 <strong>${v.vehicle}</strong>`;
+                    if (v.placa) info += ` — Placa: <strong>${v.placa}</strong>`;
+                    if (v.patrimonio_vtr) info += ` (Patr: <strong>${v.patrimonio_vtr}</strong>)`;
+                    if (radioDateFormatted) info += ` | 📻 Rádio atualizado em: <strong>${radioDateFormatted}</strong>`;
                     if (v.radio_modelo || v.radio_patrimonio) {
                         info += `<br>📻 Rádio: <strong>${v.radio_modelo || '-'}</strong> (Patr: <strong>${v.radio_patrimonio || '-'}</strong>)`;
                     }
                     showToast(info);
                 }
             } else {
-                showToast(`🚗 <strong>${v.vehicle}</strong> — Placa: <strong>${v.placa}</strong>`);
+                let info = `🚗 <strong>${v.vehicle}</strong>`;
+                if (v.placa) info += ` — Placa: <strong>${v.placa}</strong>`;
+                if (radioDateFormatted) info += ` | 📻 Rádio atualizado em: <strong>${radioDateFormatted}</strong>`;
+                showToast(info);
             }
         } else {
-            showToast(`ℹ️ <strong>${v.vehicle}</strong>: Nenhuma placa cadastrada. Clique no botão <strong>✏️ Mais</strong> para cadastrar.`);
+            showToast(`ℹ️ <strong>${v.vehicle}</strong>: Nenhuma placa ou atualização de rádio cadastrada. Clique no botão <strong>✏️ Editar</strong> para cadastrar.`);
         }
     }
 
@@ -6118,6 +6135,7 @@ async function toggleSection(contentId, btnEl) {
         // Submenu: Modelo e Patrimônio do Rádio
         document.getElementById('modalRadioModelo').value = v.radio_modelo || '';
         document.getElementById('modalRadioPatrimonio').value = v.radio_patrimonio || '';
+        document.getElementById('modalRadioData').value = v.radio_data || '';
 
         // Se houver dados cadastrados, expandir a seção correspondente
         const vtrContent = document.getElementById('accordionViaturaContent');
@@ -6135,7 +6153,7 @@ async function toggleSection(contentId, btnEl) {
         const radioContent = document.getElementById('accordionRadioContent');
         const radioArrow = document.getElementById('accordionRadioArrow');
         if (radioContent) {
-            if (v.radio_modelo || v.radio_patrimonio) {
+            if (v.radio_modelo || v.radio_patrimonio || v.radio_data) {
                 radioContent.style.display = 'block';
                 if (radioArrow) radioArrow.classList.add('open');
             } else {
@@ -6201,6 +6219,7 @@ async function toggleSection(contentId, btnEl) {
         // Submenu: Modelo e Patrimônio do Rádio
         v.radio_modelo = document.getElementById('modalRadioModelo').value.trim();
         v.radio_patrimonio = document.getElementById('modalRadioPatrimonio').value.trim();
+        v.radio_data = document.getElementById('modalRadioData').value.trim();
 
         saveRecords();
         updateStatusTimestamp();
@@ -6295,7 +6314,8 @@ async function toggleSection(contentId, btnEl) {
                 placa: (r.placa || '').toString().trim().toUpperCase(),
                 patrimonio_vtr: (r.patrimonio_vtr || '').toString().trim(),
                 radio_modelo: (r.radio_modelo || '').toString().trim(),
-                radio_patrimonio: (r.radio_patrimonio || '').toString().trim()
+                radio_patrimonio: (r.radio_patrimonio || '').toString().trim(),
+                    radio_data: (r.radio_data || '').toString().trim()
             }))
         };
 
@@ -7246,10 +7266,10 @@ async function toggleSection(contentId, btnEl) {
                 const isHidAcoes = hiddenColumns.includes('acoes') ? 'col-hidden' : '';
 
                 tr.innerHTML = `
-                    <td class="col-td-prefixo ${isHidPrefix}" onclick="handlePrefixClick('${r.vehicle}', event)" title="${r.placa ? '🚗 Placa: ' + r.placa + ' (Clique para exibir/ocultar)' : 'Clique para ver se possui Placa'}">
+                    <td class="col-td-prefixo ${isHidPrefix}" onclick="handlePrefixClick('${r.vehicle}', event)" title="${prefixTitle}">
                         <div class="prefix-cell-wrapper">
-                            <span class="prefix-title">${r.vehicle} ${r.placa ? '<span class="prefix-plate-icon" title="Placa cadastrada">🚗</span>' : ''}</span>
-                            ${r.placa ? `<span class="prefix-badge-placa" id="badge-placa-${r.vehicle}">🚗 ${r.placa}</span>` : ''}
+                            <span class="prefix-title">${r.vehicle} ${r.placa ? '<span class="prefix-plate-icon" title="Placa cadastrada">🚗</span>' : ''} ${(r.radio_modelo || r.radio_patrimonio || r.radio_data) ? '<span class="prefix-radio-icon" title="Rádio cadastrado">📻</span>' : ''}</span>
+                            ${(r.placa || radioDateFormatted) ? `<span class="prefix-badge-placa" id="badge-placa-${r.vehicle}">${badgeContent}</span>` : ''}
                         </div>
                     </td>
                     <td class="col-td-cia ${isHidCia}">
