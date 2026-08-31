@@ -2450,6 +2450,69 @@
             text-overflow: ellipsis !important;
         }
 
+    
+        /* Menu de Contexto Customizado (Copiar e Colar Seguro - Sem opção Inspecionar) */
+        .custom-context-menu {
+            position: fixed !important;
+            background: var(--card-bg, #ffffff) !important;
+            border: 1px solid var(--border, #e2e8f0) !important;
+            border-radius: 8px !important;
+            box-shadow: 0 12px 28px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.15) !important;
+            z-index: 9999999 !important;
+            min-width: 170px !important;
+            padding: 6px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 3px !important;
+            font-family: inherit !important;
+            user-select: none !important;
+        }
+
+        .custom-context-item {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 12px !important;
+            padding: 7px 12px !important;
+            font-size: 0.84rem !important;
+            font-weight: 600 !important;
+            color: var(--text-main, #0f172a) !important;
+            border-radius: 6px !important;
+            cursor: pointer !important;
+            background: transparent !important;
+            border: none !important;
+            text-align: left !important;
+            width: 100% !important;
+            transition: all 0.15s ease !important;
+        }
+
+        .custom-context-item:hover {
+            background-color: #eff6ff !important;
+            color: #1d4ed8 !important;
+            transform: translateX(4px) scale(1.02) !important;
+        }
+
+        .custom-context-item .shortcut-hint {
+            font-size: 0.72rem !important;
+            color: var(--text-muted, #64748b) !important;
+            font-weight: 500 !important;
+        }
+
+        [data-theme="dark"] .custom-context-menu {
+            background: #1e293b !important;
+            border-color: #334155 !important;
+            box-shadow: 0 12px 28px -5px rgba(0, 0, 0, 0.7) !important;
+        }
+
+        [data-theme="dark"] .custom-context-item {
+            color: #f8fafc !important;
+        }
+
+        [data-theme="dark"] .custom-context-item:hover {
+            background-color: #334155 !important;
+            color: #60a5fa !important;
+        }
+
     </style>
 </head>
 <body>
@@ -3510,9 +3573,13 @@
 
     
     // =========================================================================
-    // 🛡️ SEGURANÇA: BLOQUEIO DE INSPEÇÃO (F12, CTRL+SHIFT+I, ETC.)
-    // MANTÉM ATIVO: CTRL+C, CTRL+V, CTRL+X E BOTÃO DIREITO EM CAMPOS DE TEXTO
+    
     // =========================================================================
+    // 🛡️ SEGURANÇA TOTAL: BLOQUEIO DE INSPEÇÃO (F12, CTRL+SHIFT+I, ETC.)
+    // MENU DE CONTEXTO CUSTOMIZADO COM COPIAR E COLAR (SEM OPÇÃO INSPECIONAR)
+    // =========================================================================
+    let targetContextMenuInput = null;
+
     document.addEventListener('keydown', (e) => {
         // Bloquear F12
         if (e.key === 'F12' || e.keyCode === 123) {
@@ -3536,20 +3603,146 @@
         }
     });
 
-    // Bloquear Menu de Contexto (Botão Direito) em áreas gerais, mas permitir em inputs / textareas / seleções
+    // Bloqueia 100% o menu nativo do navegador para impedir 'Inspecionar' em qualquer elemento
     document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
         const isInput = e.target.tagName === 'INPUT' || 
                         e.target.tagName === 'TEXTAREA' || 
                         e.target.isContentEditable || 
-                        window.getSelection().toString().length > 0;
-        if (!isInput) {
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
+                        (window.getSelection && window.getSelection().toString().length > 0);
+
+        if (isInput) {
+            openCustomContextMenu(e, e.target);
+        } else {
+            closeCustomContextMenu();
+        }
+        return false;
+    });
+
+    function openCustomContextMenu(e, inputEl) {
+        closeCustomContextMenu();
+        targetContextMenuInput = inputEl;
+
+        const menu = document.createElement('div');
+        menu.id = 'customContextMenu';
+        menu.className = 'custom-context-menu';
+
+        let html = `
+            <button type="button" class="custom-context-item" onclick="execCustomCopy(event)">
+                <span>📄 Copiar</span> <span class="shortcut-hint">Ctrl+C</span>
+            </button>
+            <button type="button" class="custom-context-item" onclick="execCustomPaste(event)">
+                <span>📋 Colar</span> <span class="shortcut-hint">Ctrl+V</span>
+            </button>
+            <button type="button" class="custom-context-item" onclick="execCustomCut(event)">
+                <span>✂️ Recortar</span> <span class="shortcut-hint">Ctrl+X</span>
+            </button>
+        `;
+
+        menu.innerHTML = html;
+        document.body.appendChild(menu);
+
+        let top = e.clientY;
+        let left = e.clientX;
+
+        if (left + 180 > window.innerWidth) left = window.innerWidth - 190;
+        if (top + 140 > window.innerHeight) top = window.innerHeight - 150;
+
+        menu.style.top = `${top}px`;
+        menu.style.left = `${left}px`;
+    }
+
+    function closeCustomContextMenu() {
+        const menu = document.getElementById('customContextMenu');
+        if (menu && menu.parentNode) {
+            menu.parentNode.removeChild(menu);
+        }
+        targetContextMenuInput = null;
+    }
+
+    async function execCustomCopy(e) {
+        if (e) e.stopPropagation();
+        try {
+            let textToCopy = '';
+            if (window.getSelection && window.getSelection().toString()) {
+                textToCopy = window.getSelection().toString();
+            } else if (targetContextMenuInput && typeof targetContextMenuInput.value !== 'undefined') {
+                const start = targetContextMenuInput.selectionStart;
+                const end = targetContextMenuInput.selectionEnd;
+                if (start !== undefined && end !== undefined && start !== end) {
+                    textToCopy = targetContextMenuInput.value.substring(start, end);
+                } else {
+                    textToCopy = targetContextMenuInput.value;
+                }
+            }
+            if (textToCopy) {
+                await navigator.clipboard.writeText(textToCopy);
+                showToast('📄 Texto copiado!');
+            }
+        } catch (err) {
+            document.execCommand('copy');
+        }
+        closeCustomContextMenu();
+    }
+
+    async function execCustomPaste(e) {
+        if (e) e.stopPropagation();
+        try {
+            const text = await navigator.clipboard.readText();
+            if (targetContextMenuInput && typeof targetContextMenuInput.value !== 'undefined') {
+                const start = targetContextMenuInput.selectionStart || 0;
+                const end = targetContextMenuInput.selectionEnd || 0;
+                const current = targetContextMenuInput.value;
+                targetContextMenuInput.value = current.substring(0, start) + text + current.substring(end);
+                targetContextMenuInput.focus();
+                targetContextMenuInput.dispatchEvent(new Event('input', { bubbles: true }));
+                targetContextMenuInput.dispatchEvent(new Event('change', { bubbles: true }));
+                showToast('📋 Texto colado!');
+            }
+        } catch (err) {
+            if (targetContextMenuInput) {
+                targetContextMenuInput.focus();
+                document.execCommand('paste');
+            }
+        }
+        closeCustomContextMenu();
+    }
+
+    function execCustomCut(e) {
+        if (e) e.stopPropagation();
+        try {
+            if (targetContextMenuInput && typeof targetContextMenuInput.value !== 'undefined') {
+                const start = targetContextMenuInput.selectionStart || 0;
+                const end = targetContextMenuInput.selectionEnd || 0;
+                if (start !== end) {
+                    const cutText = targetContextMenuInput.value.substring(start, end);
+                    navigator.clipboard.writeText(cutText);
+                    targetContextMenuInput.value = targetContextMenuInput.value.substring(0, start) + targetContextMenuInput.value.substring(end);
+                    targetContextMenuInput.focus();
+                    targetContextMenuInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    targetContextMenuInput.dispatchEvent(new Event('change', { bubbles: true }));
+                    showToast('✂️ Texto recortado!');
+                }
+            }
+        } catch (err) {
+            document.execCommand('cut');
+        }
+        closeCustomContextMenu();
+    }
+
+    document.addEventListener('click', (e) => {
+        const menu = document.getElementById('customContextMenu');
+        if (menu && !menu.contains(e.target)) {
+            closeCustomContextMenu();
         }
     });
 
-    // =========================================================================
+    window.addEventListener('scroll', () => {
+        closeCustomContextMenu();
+    }, { passive: true });
+
     // 🔄 ATUALIZAÇÃO DO STATUS ONLINE NO CABEÇALHO (TESTE RÁPIDO)
     // =========================================================================
     async function refreshOnlineStatusOnClick() {
