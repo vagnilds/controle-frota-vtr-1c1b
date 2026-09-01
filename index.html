@@ -2696,6 +2696,34 @@
             border-color: #2563eb transparent transparent transparent !important;
         }
 
+    
+        /* Input de Data Clean: Oculta caracteres quando vazio mantendo o ícone do mini-calendário */
+        input[type="date"].inline-date-input {
+            color: transparent;
+            cursor: pointer;
+        }
+
+        input[type="date"].inline-date-input.has-val,
+        input[type="date"].inline-date-input:focus {
+            color: var(--text-main, #0f172a) !important;
+        }
+
+        input[type="date"].inline-date-input::-webkit-calendar-picker-indicator {
+            opacity: 0.75;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        input[type="date"].inline-date-input:hover::-webkit-calendar-picker-indicator {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        [data-theme="dark"] input[type="date"].inline-date-input.has-val,
+        [data-theme="dark"] input[type="date"].inline-date-input:focus {
+            color: #f8fafc !important;
+        }
+
     </style>
 </head>
 <body>
@@ -5471,6 +5499,7 @@
         const inputEl = document.getElementById(inputElementId);
         if (inputEl) {
             inputEl.value = '';
+            inputEl.classList.remove('has-val');
             if (fieldName === 'obs') {
                 inputEl.title = 'Motivo da baixa / Observações...';
                 if (inputEl.closest('td')) inputEl.closest('td').title = 'Nenhuma observação';
@@ -7544,18 +7573,18 @@ async function toggleSection(contentId, btnEl) {
                     </td>
                     <td class="col-td-obs ${isHidObs}" title="${r.obs ? 'Observação: ' + r.obs : 'Nenhuma observação'}">
                         <div class="input-clearable-wrapper">
-                            <input type="text" id="inline-obs-${r.vehicle}" class="inline-input" style="width: 100%; min-width: 220px;" value="${r.obs || ''}" title="${r.obs ? 'Observação: ' + r.obs : 'Motivo da baixa / Observações...'}" placeholder="Motivo / Observações..." oninput="this.title = this.value ? 'Observação: ' + this.value : 'Motivo da baixa / Observações...'; this.closest('td').title = this.title;" onchange="updateInlineField('${r.vehicle}', 'obs', this.value)">
+                            <input type="text" id="inline-obs-${r.vehicle}" class="inline-input" style="width: 100%; min-width: 220px;" value="${r.obs || ''}" title="${r.obs ? 'Observação: ' + r.obs : 'Motivo da baixa / Observações...'}" placeholder="" oninput="this.title = this.value ? 'Observação: ' + this.value : 'Motivo da baixa / Observações...'; this.closest('td').title = this.title;" onchange="updateInlineField('${r.vehicle}', 'obs', this.value)">
                             <button type="button" class="btn-reason-plus" onclick="openInlineReasonMenu('${r.vehicle}', this, event)" title="Adicionar motivo rápido ou Limpar">➕</button>
                         </div>
                     </td>
                     <td class="col-td-data ${isHidData}">
                         <div style="display: flex; gap: 6px; align-items: center; min-width: 280px;">
                             <div class="input-clearable-wrapper" style="width: 135px; min-width: 130px;">
-                                <input type="date" id="inline-date-${r.vehicle}" class="inline-input" style="width: 100%; font-size: 0.8rem; padding: 4px 6px; padding-right: 24px !important;" value="${formattedDate}" title="${formattedDate ? 'Data: ' + formattedDate : 'Selecione a data...'}" onchange="updateInlineField('${r.vehicle}', 'date', this.value)">
+                                <input type="date" id="inline-date-${r.vehicle}" class="inline-input inline-date-input ${formattedDate ? 'has-val' : ''}" style="width: 100%; font-size: 0.8rem; padding: 4px 6px; padding-right: 24px !important;" value="${formattedDate}" title="${formattedDate ? 'Data: ' + formattedDate : 'Selecione a data...'}" oninput="this.classList.toggle('has-val', Boolean(this.value));" onchange="this.classList.toggle('has-val', Boolean(this.value)); updateInlineField('${r.vehicle}', 'date', this.value)">
                                 <button type="button" class="btn-clear-input" onclick="clearInlineField('${r.vehicle}', 'date', 'inline-date-${r.vehicle}')" title="Limpar Data">✖</button>
                             </div>
                             <div class="input-clearable-wrapper" style="flex: 1; min-width: 135px;">
-                                <input type="text" id="inline-dataforms-${r.vehicle}" class="inline-input" style="width: 100%; font-size: 0.8rem; padding: 4px 6px;" value="${r.data_forms || ''}" title="${r.data_forms ? 'Observações: ' + r.data_forms : 'Observações...'}" placeholder="Observações..." oninput="this.title = this.value ? 'Observações: ' + this.value : 'Observações...';" onchange="updateInlineField('${r.vehicle}', 'data_forms', this.value)">
+                                <input type="text" id="inline-dataforms-${r.vehicle}" class="inline-input" style="width: 100%; font-size: 0.8rem; padding: 4px 6px;" value="${r.data_forms || ''}" title="${r.data_forms ? 'Observações: ' + r.data_forms : 'Observações...'}" placeholder="" oninput="this.title = this.value ? 'Observações: ' + this.value : 'Observações...';" onchange="updateInlineField('${r.vehicle}', 'data_forms', this.value)">
                                 <button type="button" class="btn-clear-input" onclick="clearInlineField('${r.vehicle}', 'data_forms', 'inline-dataforms-${r.vehicle}')" title="Limpar Observação">✖</button>
                             </div>
                         </div>
